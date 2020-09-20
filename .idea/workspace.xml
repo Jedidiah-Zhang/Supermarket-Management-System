@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="" />
+    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/default.ini" beforeDir="false" afterPath="$PROJECT_DIR$/docs/default.ini" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,6 +89,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
@@ -93,6 +100,7 @@
   </component>
   <component name="JupyterTrust" id="d38a7977-990b-40ec-9160-bbfcac4bd6be" />
   <component name="ProjectId" id="1Yg2hQoAxrvSETuKp643AVE4qbl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -101,6 +109,7 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -327,6 +336,7 @@
       <workItem from="1599637688291" duration="23320000" />
       <workItem from="1600024015311" duration="4040000" />
       <workItem from="1600084563873" duration="58664000" />
+      <workItem from="1600621123864" duration="230000" />
     </task>
     <servers />
   </component>
@@ -342,26 +352,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="469" y="230" key="#SQL_Resolution_Scopes/0.0.1920.1080@0.0.1920.1080" timestamp="1599137859140" />
-    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599138261758">
+    <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600621189930">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599138261758" />
-    <state width="1876" height="341" key="GridCell.Tab.0.bottom" timestamp="1600524218171">
+    <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600621189930" />
+    <state width="1876" height="151" key="GridCell.Tab.0.bottom" timestamp="1600621386886">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="341" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
-    <state width="1876" height="341" key="GridCell.Tab.0.center" timestamp="1600524218171">
+    <state width="1876" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600621386886" />
+    <state width="1876" height="151" key="GridCell.Tab.0.center" timestamp="1600621386885">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="341" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
-    <state width="1876" height="341" key="GridCell.Tab.0.left" timestamp="1600524218171">
+    <state width="1876" height="151" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600621386885" />
+    <state width="1876" height="151" key="GridCell.Tab.0.left" timestamp="1600621386885">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="341" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
-    <state width="1876" height="341" key="GridCell.Tab.0.right" timestamp="1600524218171">
+    <state width="1876" height="151" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600621386885" />
+    <state width="1876" height="151" key="GridCell.Tab.0.right" timestamp="1600621386886">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="341" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
+    <state width="1876" height="151" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600621386886" />
     <state width="1876" height="341" key="GridCell.Tab.1.bottom" timestamp="1600524218172">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -410,7 +420,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IA$main.coverage" NAME="main Coverage Results" MODIFIED="1597671456097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$sale_window.coverage" NAME="sale_window Coverage Results" MODIFIED="1597669740787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
-    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1600415721857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1600621386873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window.coverage" NAME="login_window Coverage Results" MODIFIED="1586030278229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
     <SUITE FILE_PATH="coverage/IA$test.coverage" NAME="test Coverage Results" MODIFIED="1597670028543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window__1_.coverage" NAME="login_window (1) Coverage Results" MODIFIED="1583413185950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
