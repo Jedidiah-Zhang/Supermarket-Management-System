@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/IA$login_window.coverage" NAME="login_window Coverage Results" MODIFIED="1581767574518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IA$main.coverage" NAME="main Coverage Results" MODIFIED="1581767242525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IA$login_window__1_.coverage" NAME="login_window Coverage Results" MODIFIED="1581846210401" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
+    <SUITE FILE_PATH="coverage/IA$sale_window.coverage" NAME="sale_window Coverage Results" MODIFIED="1582147108007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="shop: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="shop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="bills: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="shop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="goods: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="shop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="items: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="shop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="members: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="shop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="purchase: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JupyterTrust" id="d38a7977-990b-40ec-9160-bbfcac4bd6be" />
+  <component name="ProjectId" id="1Yg2hQoAxrvSETuKp643AVE4qbl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="login_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="IA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/login_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="login_window" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="IA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/login_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="IA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sale_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="IA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/sale_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="IA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.login_window" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.sale_window" />
+      <item itemvalue="Python.test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.sale_window" />
+        <item itemvalue="Python.login_window" />
+        <item itemvalue="Python.login_window" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@79c71ae4" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@7f32ee0c" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\yanzh\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="" />
+      <created>1581688270033</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581688270033</updated>
+      <workItem from="1581688271673" duration="49611000" />
+      <workItem from="1583350052230" duration="150000" />
+      <workItem from="1583350742852" duration="81000" />
+      <workItem from="1583350832366" duration="25000" />
+      <workItem from="1583352548392" duration="36000" />
+      <workItem from="1583412960481" duration="299000" />
+      <workItem from="1583449060301" duration="2302000" />
+      <workItem from="1583485418496" duration="172000" />
+      <workItem from="1583485616908" duration="114000" />
+      <workItem from="1583485751382" duration="42000" />
+      <workItem from="1583485813399" duration="428000" />
+      <workItem from="1583486382138" duration="40000" />
+      <workItem from="1583486443176" duration="30000" />
+      <workItem from="1583486495464" duration="584000" />
+      <workItem from="1583487257025" duration="1261000" />
+      <workItem from="1583503127931" duration="5305000" />
+      <workItem from="1583578713031" duration="1399000" />
+      <workItem from="1583786379375" duration="5378000" />
+      <workItem from="1584006352485" duration="2243000" />
+      <workItem from="1584039359022" duration="2491000" />
+      <workItem from="1584041881734" duration="1331000" />
+      <workItem from="1584083137926" duration="3989000" />
+      <workItem from="1584526607280" duration="694000" />
+      <workItem from="1584527317556" duration="5689000" />
+      <workItem from="1585295620322" duration="4204000" />
+      <workItem from="1586003635138" duration="7000000" />
+      <workItem from="1586342054479" duration="5667000" />
+      <workItem from="1586599759049" duration="7878000" />
+      <workItem from="1586708942521" duration="12623000" />
+      <workItem from="1587029509436" duration="2462000" />
+      <workItem from="1587384572644" duration="2306000" />
+      <workItem from="1587451572490" duration="3036000" />
+      <workItem from="1587713181937" duration="5000" />
+      <workItem from="1588146806698" duration="8303000" />
+      <workItem from="1588593391520" duration="598000" />
+      <workItem from="1589102981259" duration="14602000" />
+      <workItem from="1589358484846" duration="4472000" />
+      <workItem from="1589536946108" duration="2569000" />
+      <workItem from="1590566541667" duration="8610000" />
+      <workItem from="1590847067680" duration="2996000" />
+      <workItem from="1591775604598" duration="1856000" />
+      <workItem from="1592134083367" duration="1134000" />
+      <workItem from="1592549815067" duration="4150000" />
+      <workItem from="1592984810974" duration="5224000" />
+      <workItem from="1593334722762" duration="43926000" />
+      <workItem from="1595508914144" duration="1937000" />
+      <workItem from="1597136890160" duration="2950000" />
+      <workItem from="1597313513475" duration="777000" />
+      <workItem from="1597666686620" duration="7181000" />
+      <workItem from="1598990628462" duration="1685000" />
+      <workItem from="1599051189429" duration="39785000" />
+      <workItem from="1599637688291" duration="23320000" />
+      <workItem from="1600024015311" duration="4040000" />
+      <workItem from="1600084563873" duration="58664000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="563" y="220" key="#Notifications" timestamp="1599076691019">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="563" y="220" key="#Notifications/0.0.1920.1080@0.0.1920.1080" timestamp="1599076691019" />
+    <state x="469" y="230" key="#SQL_Resolution_Scopes" timestamp="1599137859140">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="469" y="230" key="#SQL_Resolution_Scopes/0.0.1920.1080@0.0.1920.1080" timestamp="1599137859140" />
+    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599138261758">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599138261758" />
+    <state width="1876" height="341" key="GridCell.Tab.0.bottom" timestamp="1600524218171">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
+    <state width="1876" height="341" key="GridCell.Tab.0.center" timestamp="1600524218171">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
+    <state width="1876" height="341" key="GridCell.Tab.0.left" timestamp="1600524218171">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
+    <state width="1876" height="341" key="GridCell.Tab.0.right" timestamp="1600524218171">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
+    <state width="1876" height="341" key="GridCell.Tab.1.bottom" timestamp="1600524218172">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218172" />
+    <state width="1876" height="341" key="GridCell.Tab.1.center" timestamp="1600524218171">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
+    <state width="1876" height="341" key="GridCell.Tab.1.left" timestamp="1600524218171">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218171" />
+    <state width="1876" height="341" key="GridCell.Tab.1.right" timestamp="1600524218172">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="341" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218172" />
+    <state x="154" y="102" width="998" height="783" key="SettingsEditor" timestamp="1600377466368">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="154" y="102" width="998" height="783" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1600377466368" />
+    <state width="200" height="523" key="SqlResolveConfigurable" timestamp="1594140198570">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="200" height="523" key="SqlResolveConfigurable/0.0.1920.1080@0.0.1920.1080" timestamp="1594140198570" />
+    <state x="681" y="281" width="540" height="540" key="StructurePopup" timestamp="1594306132331">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="681" y="281" width="540" height="540" key="StructurePopup/0.0.1920.1080@0.0.1920.1080" timestamp="1594306132331" />
+    <state x="817" y="416" width="341" height="264" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1599203221587">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="817" y="416" width="341" height="264" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1080@0.0.1920.1080" timestamp="1599203221587" />
+    <state x="734" y="351" width="451" height="376" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1600382763179">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="734" y="351" width="451" height="376" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600382763179" />
+    <state x="396" y="162" width="901" height="730" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1600411094542">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="396" y="162" width="901" height="730" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600411094542" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600417308262">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1600417308262" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/IA$main.coverage" NAME="main Coverage Results" MODIFIED="1597671456097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IA$sale_window.coverage" NAME="sale_window Coverage Results" MODIFIED="1597669740787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
+    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1600415721857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IA$login_window.coverage" NAME="login_window Coverage Results" MODIFIED="1586030278229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
+    <SUITE FILE_PATH="coverage/IA$test.coverage" NAME="test Coverage Results" MODIFIED="1597670028543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/IA$login_window__1_.coverage" NAME="login_window (1) Coverage Results" MODIFIED="1583413185950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
+  </component>
+</project>
