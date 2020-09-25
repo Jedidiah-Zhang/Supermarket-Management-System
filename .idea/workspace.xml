@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="" />
+    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/default.ini" beforeDir="false" afterPath="$PROJECT_DIR$/docs/default.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +82,9 @@
     </expand>
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="SupermarketManagement" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -112,7 +119,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="login_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -333,11 +340,39 @@
       <workItem from="1600024015311" duration="4040000" />
       <workItem from="1600084563873" duration="58664000" />
       <workItem from="1600621123864" duration="1219000" />
+      <workItem from="1600849804514" duration="1216000" />
+      <workItem from="1601034991092" duration="916000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="WindowStateProjectService">
     <state x="563" y="220" key="#Notifications" timestamp="1599076691019">
@@ -352,22 +387,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600621189930" />
-    <state width="1876" height="151" key="GridCell.Tab.0.bottom" timestamp="1600622396080">
+    <state x="558" y="46" key="CommitChangelistDialog2" timestamp="1601035284702">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600622396080" />
-    <state width="1876" height="151" key="GridCell.Tab.0.center" timestamp="1600622396079">
+    <state x="558" y="46" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1601035284702" />
+    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog" timestamp="1600850121288">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="151" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600622396079" />
-    <state width="1876" height="151" key="GridCell.Tab.0.left" timestamp="1600622396079">
+    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600850121287" />
+    <state width="1876" height="151" key="GridCell.Tab.0.bottom" timestamp="1601035550439">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="151" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600622396079" />
-    <state width="1876" height="151" key="GridCell.Tab.0.right" timestamp="1600622396080">
+    <state width="1876" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1601035550439" />
+    <state width="1876" height="151" key="GridCell.Tab.0.center" timestamp="1601035550439">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="151" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600622396080" />
+    <state width="1876" height="151" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1601035550439" />
+    <state width="1876" height="151" key="GridCell.Tab.0.left" timestamp="1601035550439">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="151" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1601035550439" />
+    <state width="1876" height="151" key="GridCell.Tab.0.right" timestamp="1601035550439">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="151" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1601035550439" />
     <state width="1876" height="341" key="GridCell.Tab.1.bottom" timestamp="1600524218172">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -384,10 +427,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1876" height="341" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218172" />
-    <state x="111" y="206" width="998" height="783" key="SettingsEditor" timestamp="1600622340355">
+    <state x="111" y="206" width="998" height="783" key="SettingsEditor" timestamp="1600850286057">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="111" y="206" width="998" height="783" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1600622340355" />
+    <state x="111" y="206" width="998" height="783" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1600850286057" />
     <state width="200" height="523" key="SqlResolveConfigurable" timestamp="1594140198570">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -416,7 +459,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IA$main.coverage" NAME="main Coverage Results" MODIFIED="1597671456097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$sale_window.coverage" NAME="sale_window Coverage Results" MODIFIED="1597669740787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
-    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1600621386873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1601035550428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window.coverage" NAME="login_window Coverage Results" MODIFIED="1586030278229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
     <SUITE FILE_PATH="coverage/IA$test.coverage" NAME="test Coverage Results" MODIFIED="1597670028543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window__1_.coverage" NAME="login_window (1) Coverage Results" MODIFIED="1583413185950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />

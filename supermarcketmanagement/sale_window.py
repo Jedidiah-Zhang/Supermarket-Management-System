@@ -61,23 +61,23 @@ class Info:
 
         label_ordernum = tk.Label(master,
                                   text=_("Order Number: "),
-                                  font=("Arial Unicode MS", 12))
+                                  font=(font, 13))
         label_salesperson = tk.Label(master,
                                      text=_("Salesperson: "),
-                                     font=("Arial Unicode MS", 12))
+                                     font=(font, 13))
         label_staffcode = tk.Label(master,
                                    text=_("Staff Code: "),
-                                   font=("Arial Unicode MS", 12))
+                                   font=(font, 13))
         label_note = tk.Label(master,
                               text=_("Note: "),
-                              font=("Arial Unicode MS", 12))
+                              font=(font, 13))
         label_date = tk.Label(master,
                               text=_("Date: "),
-                              font=("Arial Unicode MS", 12))
+                              font=(font, 13))
         self.date.set(strftime("%d-%m-%Y", localtime()))
         label_date1 = tk.Label(master,
                                textvariable=self.date,
-                               font=("Arial Unicode MS", 12))
+                               font=(font, 13))
         cursor.execute("""
         SELECT MAX(`Bill ID`) as `Bill ID`
         FROM shop.bills
@@ -89,18 +89,18 @@ class Info:
             self.order_number.set(str(num+1))
         label_ordernum2 = tk.Label(master,
                                    textvariable=self.order_number,
-                                   font=("Arial Unicode MS", 12))
+                                   font=(font, 12))
         self.name.set(user[1] + " " + user[2])
         label_salesperson2 = tk.Label(master,
                                       textvariable=self.name,
-                                      font=("Arial Unicode MS", 12))
+                                      font=(font, 12))
         self.staff_code.set(user[0])
         label_staffcode2 = tk.Label(master,
                                     textvariable=self.staff_code,
-                                    font=("Arial Unicode MS", 12))
+                                    font=(font, 12))
         entry_note = tk.Entry(master,
                               width=60,
-                              font=("Arial Unicode MS", 12))
+                              font=(font, 12))
 
         label_ordernum.grid(row=0, column=0, padx=10, pady=10, sticky="W")
         label_salesperson.grid(row=1, column=0, padx=10, pady=5, sticky="W")
@@ -186,26 +186,26 @@ class Sale:
     def __init__(self, master, total, LST, INFO):
         label_total = tk.Label(master,
                                text=_("Total:"),
-                               font=("Arial Unicode MS", 20))
+                               font=(font, 20))
 
         total.set("0")
         label_number = tk.Label(master,
                                 textvariable=total,
-                                font=("Arial Unicode MS", 20))
+                                font=(font, 20))
         label_pay = tk.Label(master,
                              text=_("Payment:"),
-                             font=("Arial Unicode MS", 20))
+                             font=(font, 20))
         entry_pay = tk.Entry(master,
                              width=10,
-                             font=("Arial Unicode MS", 20))
+                             font=(font, 20))
         label_change = tk.Label(master,
                                 text=_("Change:"),
-                                font=("Arial Unicode MS", 20))
+                                font=(font, 20))
         change = tk.StringVar()
         change.set("0")
         label_change_num = tk.Label(master,
                                     textvariable=change,
-                                    font=("Arial Unicode MS", 20))
+                                    font=(font, 20))
         button_confirm = tk.Button(master,
                                    text=_("Confirm"),
                                    font=(font, 17),
@@ -296,16 +296,16 @@ class Sale:
 class Entry:
     def __init__(self, master, Good):
         frame_top = tk.Frame(master)
-        label_search = tk.Label(frame_top, text=_("Search："), font=("Arial Unicode MS", 20))
-        self.entry_search = tk.Entry(frame_top, font=("Arial Unicode MS", 20))
+        label_search = tk.Label(frame_top, text=_("Search："), font=(font, 20))
+        self.entry_search = tk.Entry(frame_top, font=(font, 20))
         self.check = [tk.BooleanVar(), tk.BooleanVar()]
         self.check[0].set(1)
         checkbutton_id = tk.Checkbutton(master,
                                         var=self.check[0],
-                                        text="ID", font=("Arial Unicode MS", 12))
+                                        text="ID", font=(font, 12))
         checkbutton_name = tk.Checkbutton(master,
                                           var=self.check[1],
-                                          text=_("Name"), font=("Arial Unicode MS", 12))
+                                          text=_("Name"), font=(font, 12))
 
         frame_top.pack(side="top", fill="both", expand=True)
         label_search.pack(side="left", padx=20)
