@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="">
+    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="备选列表增加滚动条">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" afterDir="false" />
     </list>
@@ -93,6 +93,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -340,7 +341,7 @@
       <workItem from="1600084563873" duration="58664000" />
       <workItem from="1600621123864" duration="1219000" />
       <workItem from="1600849804514" duration="1216000" />
-      <workItem from="1601034991092" duration="2097000" />
+      <workItem from="1601034991092" duration="2349000" />
     </task>
     <task id="LOCAL-00001" summary="销售界面字体统一">
       <created>1601036095849</created>
@@ -349,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601036095849</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="备选列表增加滚动条">
+      <created>1601037290827</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601037290827</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +388,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="销售界面字体统一" />
-    <option name="LAST_COMMIT_MESSAGE" value="销售界面字体统一" />
+    <MESSAGE value="备选列表增加滚动条" />
+    <option name="LAST_COMMIT_MESSAGE" value="备选列表增加滚动条" />
   </component>
   <component name="WindowStateProjectService">
     <state x="563" y="220" key="#Notifications" timestamp="1599076691019">
@@ -395,30 +404,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600621189930" />
-    <state x="558" y="46" key="CommitChangelistDialog2" timestamp="1601036094223">
+    <state x="558" y="46" key="CommitChangelistDialog2" timestamp="1601037462443">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="558" y="46" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1601036094223" />
-    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog" timestamp="1600850121288">
+    <state x="558" y="46" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1601037462443" />
+    <state x="93" y="137" width="1736" height="896" key="DiffContextDialog" timestamp="1601037444551">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600850121287" />
-    <state width="1876" height="143" key="GridCell.Tab.0.bottom" timestamp="1601037229754">
+    <state x="93" y="137" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1601037444551" />
+    <state width="1876" height="143" key="GridCell.Tab.0.bottom" timestamp="1601037334523">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1601037229754" />
-    <state width="1876" height="143" key="GridCell.Tab.0.center" timestamp="1601037229753">
+    <state width="1876" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
+    <state width="1876" height="143" key="GridCell.Tab.0.center" timestamp="1601037334523">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1601037229753" />
-    <state width="1876" height="143" key="GridCell.Tab.0.left" timestamp="1601037229753">
+    <state width="1876" height="143" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
+    <state width="1876" height="143" key="GridCell.Tab.0.left" timestamp="1601037334523">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1601037229753" />
-    <state width="1876" height="143" key="GridCell.Tab.0.right" timestamp="1601037229754">
+    <state width="1876" height="143" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
+    <state width="1876" height="143" key="GridCell.Tab.0.right" timestamp="1601037334523">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1601037229754" />
+    <state width="1876" height="143" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
     <state width="1876" height="341" key="GridCell.Tab.1.bottom" timestamp="1600524218172">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -459,6 +468,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="396" y="162" width="901" height="730" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600411094542" />
+    <state x="751" y="451" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601037299903">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="751" y="451" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1601037299903" />
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600417308262">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
