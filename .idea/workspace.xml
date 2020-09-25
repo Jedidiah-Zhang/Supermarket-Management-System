@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="备选列表增加滚动条">
+    <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +119,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="login_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -341,7 +341,8 @@
       <workItem from="1600084563873" duration="58664000" />
       <workItem from="1600621123864" duration="1219000" />
       <workItem from="1600849804514" duration="1216000" />
-      <workItem from="1601034991092" duration="2349000" />
+      <workItem from="1601034991092" duration="4751000" />
+      <workItem from="1601071207780" duration="269000" />
     </task>
     <task id="LOCAL-00001" summary="销售界面字体统一">
       <created>1601036095849</created>
@@ -357,7 +358,28 @@
       <option name="project" value="LOCAL" />
       <updated>1601037290827</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="initial commit">
+      <created>1601037501410</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1601037501410</updated>
+    </task>
+    <task id="LOCAL-00004" summary="备选列表增加滚动条">
+      <created>1601037583845</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1601037583845</updated>
+    </task>
+    <task id="LOCAL-00005" summary="更新需求库">
+      <created>1601071348488</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1601071348488</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,8 +410,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="销售界面字体统一" />
+    <MESSAGE value="initial commit" />
     <MESSAGE value="备选列表增加滚动条" />
-    <option name="LAST_COMMIT_MESSAGE" value="备选列表增加滚动条" />
+    <MESSAGE value="更新需求库" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新需求库" />
   </component>
   <component name="WindowStateProjectService">
     <state x="563" y="220" key="#Notifications" timestamp="1599076691019">
@@ -404,30 +428,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600621189930" />
-    <state x="558" y="46" key="CommitChangelistDialog2" timestamp="1601037500339">
+    <state x="558" y="46" key="CommitChangelistDialog2" timestamp="1601071347261">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="558" y="46" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1601037500339" />
+    <state x="558" y="46" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1601071347261" />
     <state x="93" y="137" width="1736" height="896" key="DiffContextDialog" timestamp="1601037444551">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="93" y="137" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1601037444551" />
-    <state width="1876" height="143" key="GridCell.Tab.0.bottom" timestamp="1601037334523">
+    <state width="1876" height="143" key="GridCell.Tab.0.bottom" timestamp="1601070534465">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
-    <state width="1876" height="143" key="GridCell.Tab.0.center" timestamp="1601037334523">
+    <state width="1876" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534465" />
+    <state width="1876" height="143" key="GridCell.Tab.0.center" timestamp="1601070534464">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
-    <state width="1876" height="143" key="GridCell.Tab.0.left" timestamp="1601037334523">
+    <state width="1876" height="143" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534464" />
+    <state width="1876" height="143" key="GridCell.Tab.0.left" timestamp="1601070534464">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
-    <state width="1876" height="143" key="GridCell.Tab.0.right" timestamp="1601037334523">
+    <state width="1876" height="143" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534464" />
+    <state width="1876" height="143" key="GridCell.Tab.0.right" timestamp="1601070534465">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1601037334523" />
+    <state width="1876" height="143" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534465" />
     <state width="1876" height="341" key="GridCell.Tab.1.bottom" timestamp="1600524218172">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -444,10 +468,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1876" height="341" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600524218172" />
-    <state x="111" y="206" width="998" height="783" key="SettingsEditor" timestamp="1600850286057">
+    <state x="111" y="206" width="998" height="783" key="SettingsEditor" timestamp="1601071456714">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="111" y="206" width="998" height="783" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1600850286057" />
+    <state x="111" y="206" width="998" height="783" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1601071456714" />
     <state width="200" height="523" key="SqlResolveConfigurable" timestamp="1594140198570">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -480,7 +504,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IA$main.coverage" NAME="main Coverage Results" MODIFIED="1597671456097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$sale_window.coverage" NAME="sale_window Coverage Results" MODIFIED="1597669740787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
-    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1601037229743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1601065833410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window.coverage" NAME="login_window Coverage Results" MODIFIED="1586030278229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
     <SUITE FILE_PATH="coverage/IA$test.coverage" NAME="test Coverage Results" MODIFIED="1597670028543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window__1_.coverage" NAME="login_window (1) Coverage Results" MODIFIED="1583413185950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
