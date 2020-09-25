@@ -358,6 +358,10 @@ class Goods:
         self.price = []
         self.discount = []
 
+        self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.alternative_table.yview)
+        self.VScroll.place(relx=0.978, rely=0.025, relwidth=0.02, relheight=0.958)
+        self.alternative_table.configure(yscrollcommand=self.VScroll.set)
+
         self.alternative_table.bind("<Double-1>", lambda event: self._get_row(LST))
 
     def _get_row(self, LST):  # 双击行
