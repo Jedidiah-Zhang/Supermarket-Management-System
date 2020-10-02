@@ -4,7 +4,7 @@
 @Time    : 20/09/10 10:18
 @Author  : Jedidiah
 @Contact : yanzhe_zhang@qq.com
-@File    : admin_window.py
+@File    : selection_window.py
 @Software: PyCharm
 """
 
