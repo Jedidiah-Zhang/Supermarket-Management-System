@@ -10,7 +10,7 @@
 
 import tkinter as tk
 from supermarcketmanagement import sale_window, login_window, \
-    stock_window, admin_window, registration_window, input_window
+    stock_window, selection_window, registration_window, input_window
 
 
 def login():
@@ -47,7 +47,7 @@ def admin(username):
     root_window = tk.Tk()
     root_window.title(_("Select"))
     root_window.resizable(False, False)
-    admin_window.Admin(root_window, username)
+    selection_window.Admin(root_window, username)
     root_window.mainloop()
 
 
@@ -55,7 +55,7 @@ def employee(username):
     root_window = tk.Tk()
     root_window.title(_("Select"))
     root_window.resizable(False, False)
-    admin_window.Employee(root_window, username)
+    selection_window.Employee(root_window, username)
     root_window.mainloop()
 
 
