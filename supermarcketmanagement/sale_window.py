@@ -38,11 +38,11 @@ class SalespersonBase(main.SetMenu):
         frame_entry = tk.LabelFrame(master, text="", font=(font, 14))
         frame_goods = tk.Frame(master)
 
-        INFO = Info(frame_info, self.user)
-        LST = List(frame_list, total)
-        Sale(frame_sale, total, LST, INFO)
-        Good = Goods(frame_goods, LST)
-        Entry(frame_entry, Good)
+        self.INFO = Info(frame_info, self.user)
+        self.LST = List(frame_list, total)
+        self.SALE = Sale(frame_sale, total, self.LST, self.INFO)
+        self.GOOD = Goods(frame_goods, self.LST)
+        self.ENTRY = Entry(frame_entry, self.GOOD)
 
         frame_list.pack(side="right", fill="both", expand=True)
         frame_top.pack(expand=True, fill="both")
