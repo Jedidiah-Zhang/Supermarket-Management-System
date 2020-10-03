@@ -10,6 +10,7 @@
 
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
+from _tkinter import TclError
 import pandas as pd
 from time import strftime, localtime
 import main
@@ -87,7 +88,7 @@ class Purchase(main.SetMenu):
                     else:
                         self.tree.insert("", "end",
                                          values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
-                except:
+                except tk.TclError:
                     pass
                 self.tree.update()
 
@@ -126,7 +127,7 @@ class Purchase(main.SetMenu):
                     ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}')
                     """.format(maximum, row[1], row[5], row[3], round(row[3]*1.25, 2), row[0], row[2]))
                     CONNECTION.commit()
-                except:
+                except TclError:
                     CONNECTION.rollback()
             else:
                 ID = ID[0][0]
