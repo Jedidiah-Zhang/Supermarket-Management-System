@@ -30,6 +30,7 @@
           <option value="supermarcketmanagement.admin_window._" />
           <option value="supermarcketmanagement.registration_window._" />
           <option value="supermarcketmanagement.input_window._" />
+          <option value="supermarcketmanagement.selection_window._" />
         </list>
       </option>
     </inspection_tool>

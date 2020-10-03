@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd3e9839-4999-4b78-92d6-f8b7db402cef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/supermarcketmanagement/sale_window.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,7 +343,11 @@
       <workItem from="1600621123864" duration="1219000" />
       <workItem from="1600849804514" duration="1216000" />
       <workItem from="1601034991092" duration="4751000" />
-      <workItem from="1601071207780" duration="269000" />
+      <workItem from="1601071207780" duration="4004000" />
+      <workItem from="1601304793707" duration="610000" />
+      <workItem from="1601535961008" duration="8199000" />
+      <workItem from="1601623975956" duration="4375000" />
+      <workItem from="1601755162366" duration="1828000" />
     </task>
     <task id="LOCAL-00001" summary="销售界面字体统一">
       <created>1601036095849</created>
@@ -379,7 +384,42 @@
       <option name="project" value="LOCAL" />
       <updated>1601071348488</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="更新需求库">
+      <created>1601071624745</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1601071624745</updated>
+    </task>
+    <task id="LOCAL-00007" summary="更改文件名">
+      <created>1601658199590</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1601658199590</updated>
+    </task>
+    <task id="LOCAL-00008" summary="统一为类变量">
+      <created>1601658238187</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1601658238187</updated>
+    </task>
+    <task id="LOCAL-00009" summary="更改文件名">
+      <created>1601658256338</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1601658256338</updated>
+    </task>
+    <task id="LOCAL-00010" summary="规范方法，变量名">
+      <created>1601756991972</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1601756991972</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +453,10 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="备选列表增加滚动条" />
     <MESSAGE value="更新需求库" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新需求库" />
+    <MESSAGE value="统一为类变量" />
+    <MESSAGE value="更改文件名" />
+    <MESSAGE value="规范方法，变量名" />
+    <option name="LAST_COMMIT_MESSAGE" value="规范方法，变量名" />
   </component>
   <component name="WindowStateProjectService">
     <state x="563" y="220" key="#Notifications" timestamp="1599076691019">
@@ -428,30 +471,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1600621189930" />
-    <state x="558" y="46" key="CommitChangelistDialog2" timestamp="1601071347261">
+    <state x="727" y="93" key="CommitChangelistDialog2" timestamp="1601757227361">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="558" y="46" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1601071347261" />
+    <state x="727" y="93" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1601757227361" />
     <state x="93" y="137" width="1736" height="896" key="DiffContextDialog" timestamp="1601037444551">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="93" y="137" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1601037444551" />
-    <state width="1876" height="143" key="GridCell.Tab.0.bottom" timestamp="1601070534465">
+    <state width="1876" height="143" key="GridCell.Tab.0.bottom" timestamp="1601757207044">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534465" />
-    <state width="1876" height="143" key="GridCell.Tab.0.center" timestamp="1601070534464">
+    <state width="1876" height="143" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1601757207044" />
+    <state width="1876" height="143" key="GridCell.Tab.0.center" timestamp="1601757207044">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534464" />
-    <state width="1876" height="143" key="GridCell.Tab.0.left" timestamp="1601070534464">
+    <state width="1876" height="143" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1601757207044" />
+    <state width="1876" height="143" key="GridCell.Tab.0.left" timestamp="1601757207043">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534464" />
-    <state width="1876" height="143" key="GridCell.Tab.0.right" timestamp="1601070534465">
+    <state width="1876" height="143" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1601757207043" />
+    <state width="1876" height="143" key="GridCell.Tab.0.right" timestamp="1601757207044">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1876" height="143" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1601070534465" />
+    <state width="1876" height="143" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1601757207044" />
     <state width="1876" height="341" key="GridCell.Tab.1.bottom" timestamp="1600524218172">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -504,7 +547,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IA$main.coverage" NAME="main Coverage Results" MODIFIED="1597671456097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$sale_window.coverage" NAME="sale_window Coverage Results" MODIFIED="1597669740787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
-    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1601065833410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SupermarketManagement$main.coverage" NAME="main Coverage Results" MODIFIED="1601757207035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window.coverage" NAME="login_window Coverage Results" MODIFIED="1586030278229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
     <SUITE FILE_PATH="coverage/IA$test.coverage" NAME="test Coverage Results" MODIFIED="1597670028543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IA$login_window__1_.coverage" NAME="login_window (1) Coverage Results" MODIFIED="1583413185950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bin" />
