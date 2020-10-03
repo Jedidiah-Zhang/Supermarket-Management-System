@@ -21,24 +21,24 @@ class Admin:
                                width=15,
                                text=_("Registration"),
                                font=(FONT, 20),
-                               command=lambda: self._open_reg(master, username))
+                               command=lambda: self.__open_reg(master, username))
 
         stock_button = tk.Button(master,
                                  width=15,
                                  text=_("Inventory"),
                                  font=(FONT, 20),
-                                 command=lambda: self._open_stock(master, username))
+                                 command=lambda: self.__open_stock(master, username))
 
         reg_button.pack()
         stock_button.pack()
 
     @staticmethod
-    def _open_stock(master, username):
+    def __open_stock(master, username):
         master.destroy()
         opener.stock(username)
 
     @staticmethod
-    def _open_reg(master, username):
+    def __open_reg(master, username):
         master.destroy()
         opener.reg(username)
 
@@ -49,23 +49,23 @@ class Employee:
                                     width=15,
                                     text=_("Purchase"),
                                     font=(FONT, 20),
-                                    command=lambda: self._open_input(master, username))
+                                    command=lambda: self.__open_input(master, username))
 
         cashier_button = tk.Button(master,
                                    width=15,
                                    text=_("Cashier"),
                                    font=(FONT, 20),
-                                   command=lambda: self._open_sale(master, username))
+                                   command=lambda: self.__open_sale(master, username))
 
         purchase_button.pack()
         cashier_button.pack()
 
     @staticmethod
-    def _open_sale(master, username):
+    def __open_sale(master, username):
         master.destroy()
         opener.sale(username)
 
     @staticmethod
-    def _open_input(master, username):
+    def __open_input(master, username):
         master.destroy()
         opener.purchase(username)

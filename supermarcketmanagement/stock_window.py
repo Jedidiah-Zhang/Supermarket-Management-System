@@ -51,12 +51,12 @@ class StockManagement(main.SetMenu, main.TreeView):
                                  width=12,
                                  text=_("Alter"),
                                  font=(FONT, 16),
-                                 command=lambda: self._alter_row(self.tree.selection()))
+                                 command=lambda: self.__alter_row(self.tree.selection()))
         analyze_button = tk.Button(master,
                                    width=12,
                                    text=_("Analyze"),
                                    font=(FONT, 16),
-                                   command=self._analyze)
+                                   command=self.__analyze)
         heading = [_("ID"), _("Description"), _("Stock"), _("Buying Price"),
                    _("Selling Price"), _("External ID"), _("Supplier")]
         width = [200, 300, 90, 90, 90, 173, 200]
@@ -85,15 +85,15 @@ class StockManagement(main.SetMenu, main.TreeView):
         self.VScroll.place(relx=0.98, rely=0.15, relwidth=0.02, relheight=0.828)
         self.tree.configure(yscrollcommand=self.VScroll.set)
 
-        self.id_entry.bind("<KeyRelease>", lambda event: self._search())
-        self.desc_entry.bind("<KeyRelease>", lambda event: self._search())
-        self.ex_id_entry.bind("<KeyRelease>", lambda event: self._search())
-        self.supplier_entry.bind("<KeyRelease>", lambda event: self._search())
+        self.id_entry.bind("<KeyRelease>", lambda event: self.__search())
+        self.desc_entry.bind("<KeyRelease>", lambda event: self.__search())
+        self.ex_id_entry.bind("<KeyRelease>", lambda event: self.__search())
+        self.supplier_entry.bind("<KeyRelease>", lambda event: self.__search())
 
-        self._search()
+        self.__search()
         self.top = None
 
-    def _search(self):
+    def __search(self):
         children = self.tree.get_children()
         for item in children:
             self.tree.delete(item)
@@ -115,9 +115,9 @@ class StockManagement(main.SetMenu, main.TreeView):
             self.tree.insert("", "end", values=each)
         self.tree.update()
 
-    def _alter_row(self, row):
+    def __alter_row(self, row):
         if self.top is None and row != ():
-            self._create_toplevel(row)
+            self.__create_toplevel(row)
         elif row == ():
             pass
         else:
@@ -127,16 +127,16 @@ class StockManagement(main.SetMenu, main.TreeView):
                     self.top.focus_set()
             except tk.TclError:
                 self.top = None
-                self._create_toplevel(row)
+                self.__create_toplevel(row)
                 pass
 
-    def _create_toplevel(self, row):
+    def __create_toplevel(self, row):
         self.top = tk.Toplevel()
         self.top.geometry("620x250")
         self.top.title(_("Alter"))
         self.A_window = Alter(self.top, self.tree.item(row[0], "values"))
 
-    def _analyze(self):
+    def __analyze(self):
         pass
 
 
@@ -168,12 +168,12 @@ class Alter:
                                   width=15,
                                   text=_("Delete Row"),
                                   font=(FONT, 16),
-                                  command=lambda: self._delete(master))
+                                  command=lambda: self.__delete(master))
         confirm_button = tk.Button(master,
                                    width=15,
                                    text=_("Confirm Change"),
                                    font=(FONT, 16),
-                                   command=lambda: self._confirm(master))
+                                   command=lambda: self.__confirm(master))
         desc_label.grid(row=0, column=0, padx=20, pady=20, sticky="E")
         stock_label.grid(row=1, column=0, padx=20, sticky="E")
         sell_label.grid(row=2, column=0, padx=20, pady=20, sticky="E")
@@ -183,11 +183,11 @@ class Alter:
         delete_button.grid(row=3, column=0, columnspan=2, padx=80, sticky="W")
         confirm_button.grid(row=3, column=1, padx=40, sticky="E")
 
-        self.desc_entry.bind("<Button-3>", self._entry_clear)
-        self.stock_entry.bind("<Button-3>", self._entry_clear)
-        self.stock_entry.bind("<KeyRelease>", self._num_only)
-        self.sell_entry.bind("<Button-3>", self._entry_clear)
-        self.sell_entry.bind("<KeyRelease>", self._num_only)
+        self.desc_entry.bind("<Button-3>", self.__entry_clear)
+        self.stock_entry.bind("<Button-3>", self.__entry_clear)
+        self.stock_entry.bind("<KeyRelease>", self.__num_only)
+        self.sell_entry.bind("<Button-3>", self.__entry_clear)
+        self.sell_entry.bind("<KeyRelease>", self.__num_only)
 
     def values(self, values):
         self.values = values
@@ -199,18 +199,18 @@ class Alter:
         self.sell_entry.insert(0, values[4])
 
     @staticmethod
-    def _num_only(event):
+    def __num_only(event):
         try:
             float(event.widget.get())
         except ValueError:
             event.widget.delete(event.widget.index(tk.INSERT) - 1)
 
     @staticmethod
-    def _entry_clear(event):
+    def __entry_clear(event):
         event.widget.delete(0, "end")
         event.widget.focus()
 
-    def _delete(self, master):
+    def __delete(self, master):
         try:
             CURSOR.execute("""
             DELETE FROM shop.goods
@@ -221,7 +221,7 @@ class Alter:
         except:
             CONNECTION.rollback()
 
-    def _confirm(self, master):
+    def __confirm(self, master):
         try:
             CURSOR.execute("""
             UPDATE shop.goods

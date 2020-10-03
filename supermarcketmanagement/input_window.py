@@ -35,12 +35,12 @@ class Purchase(main.SetMenu, main.TreeView):
                                     width=25,
                                     text=_("Purchase Form File"),
                                     font=(FONT, 16),
-                                    command=self.read_file)
+                                    command=self.__read_file)
         confirm_button = tk.Button(master,
                                    width=10,
                                    text=_("Confirm"),
                                    font=(FONT, 16),
-                                   command=self.confirm)
+                                   command=self.__confirm)
         heading = ["Product Description", "Product ID", "External ID", "Amount", "Supplier", "Price"]
         width = [240, 140, 140, 80, 140, 100]
         self.tree = ttk.Treeview(master,
@@ -62,7 +62,7 @@ class Purchase(main.SetMenu, main.TreeView):
         self.VScroll.place(relx=0.98, rely=0.145, relwidth=0.02, relheight=0.828)
         self.tree.configure(yscrollcommand=self.VScroll.set)
 
-    def read_file(self):
+    def __read_file(self):
         filename = tk.filedialog.askopenfilename()
         if filename != "":
             self.data = pd.read_excel(filename).values
@@ -92,7 +92,7 @@ class Purchase(main.SetMenu, main.TreeView):
                     pass
                 self.tree.update()
 
-    def confirm(self):
+    def __confirm(self):
         CURSOR.execute("""
                     SELECT MAX(`Product ID`)
                     FROM shop.purchase
@@ -127,7 +127,7 @@ class Purchase(main.SetMenu, main.TreeView):
                     ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}')
                     """.format(maximum, row[1], row[5], row[3], round(row[3] * 1.25, 2), row[0], row[2]))
                     CONNECTION.commit()
-                except TclError:
+                except:
                     CONNECTION.rollback()
             else:
                 ID = ID[0][0]
