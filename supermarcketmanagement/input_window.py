@@ -22,7 +22,7 @@ CURSOR.execute("USE shop")
 FONT = main.FONT
 
 
-class Purchase(main.SetMenu):
+class Purchase(main.SetMenu, main.TreeView):
     def __init__(self, master, username):
         super().__init__(master, username)
         self.data = None
@@ -51,7 +51,8 @@ class Purchase(main.SetMenu):
         for i in range(len(heading)):
             self.tree.column(heading[i], width=width[i], anchor="center")
             self.tree.heading(heading[i], text=heading[i])
-
+        for col in heading:
+            self.tree.heading(col, text=col, command=lambda _col=col: self.treeview_sort_column(self.tree, _col, False))
         self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.tree.yview)
 
         name_label.grid(row=0, column=0, padx=10, sticky="E")
@@ -83,13 +84,13 @@ class Purchase(main.SetMenu):
                 try:
                     if ID == ():
                         self.tree.insert("", "end",
-                                         values=(row[1], maximum+1, row[0], row[5], row[2], row[3]))
+                                         values=(row[1], maximum + 1, row[0], row[5], row[2], row[3]))
                         maximum += 1
                     else:
                         self.tree.insert("", "end",
                                          values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
                 except tk.TclError:
-                    pass
+                    print("Interrupt")
                 self.tree.update()
 
     def confirm(self):
@@ -125,7 +126,7 @@ class Purchase(main.SetMenu):
                     `Selling Price`, `external id`, supplier)
                     VALUE
                     ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}')
-                    """.format(maximum, row[1], row[5], row[3], round(row[3]*1.25, 2), row[0], row[2]))
+                    """.format(maximum, row[1], row[5], row[3], round(row[3] * 1.25, 2), row[0], row[2]))
                     CONNECTION.commit()
                 except TclError:
                     CONNECTION.rollback()
@@ -151,10 +152,9 @@ class Purchase(main.SetMenu):
                     UPDATE shop.goods
                     SET Stock = {0}
                     WHERE `Product ID` = {1}
-                    """.format(stock+row[5], ID))
+                    """.format(stock + row[5], ID))
                     CONNECTION.commit()
                 except:
                     CONNECTION.rollback()
 
         tk.messagebox.showinfo(_("Info"), _("Done"))
-

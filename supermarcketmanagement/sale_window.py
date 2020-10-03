@@ -81,7 +81,7 @@ class Info:
         if num is None:
             self.order_number.set("1")
         else:
-            self.order_number.set(str(num+1))
+            self.order_number.set(str(num + 1))
         label_ordernum2 = tk.Label(master,
                                    textvariable=self.order_number,
                                    font=(FONT, 12))
@@ -109,18 +109,22 @@ class Info:
         label_date1.grid(row=0, column=3)
 
 
-class List:
+class List(main.TreeView):
     def __init__(self, master, total):
+        super().__init__()
         self.total = total
-        columns = (_("Product Description"), _("Product ID"), _("Price"), _("Discount"), _("Quantity"), _("Subtotal"))
+        heading = (_("Product Description"), _("Product ID"), _("Price"), _("Discount"), _("Quantity"), _("Subtotal"))
         col_width = (200, 100, 80, 50, 50, 80)
         self.table = ttk.Treeview(master,
                                   height=40,
                                   show="headings",
-                                  columns=columns)
-        for i, each in enumerate(columns):
-            self.table.column(each, width=col_width[i], anchor="center")  # 列，不显示
-            self.table.heading(each, text=each)  # 显示表头
+                                  columns=heading)
+        for i, each in enumerate(heading):
+            self.table.column(each, width=col_width[i], anchor="center")
+            self.table.heading(each, text=each)
+        for col in heading:
+            self.table.heading(col, text=col,
+                               command=lambda _col=col: self.treeview_sort_column(self.table, _col, False))
         self.products = {
             "description": [],
             "id": [],
@@ -153,6 +157,7 @@ class List:
                 int(e.widget.get())
             except ValueError:
                 e.widget.delete(e.widget.index(tk.INSERT) - 1)
+
         row = self.table.identify_row(event.y)
         if row != "":
             set_window = tk.Toplevel(master)
@@ -267,10 +272,10 @@ class Sale:
                     UPDATE shop.goods
                     SET Stock = {0}
                     WHERE `Product ID` = {1}
-                    """.format(stock-row[4], row[1]))
+                    """.format(stock - row[4], row[1]))
                     CURSOR.execute(query_items[:-2])
                     CONNECTION.commit()
-                INFO.order_number.set(str(int(INFO.order_number.get())+1))
+                INFO.order_number.set(str(int(INFO.order_number.get()) + 1))
                 tk.messagebox.showinfo(_("Info"), _("Success"))
             except:
                 CONNECTION.rollback()
@@ -337,17 +342,22 @@ class Entry:
             Good.add_row(each[1], each[0], each[4], each[8])
 
 
-class Goods:
+class Goods(main.TreeView):
     def __init__(self, master, LST):
-        columns = (_("Product Description"), _("Product ID"), _("Price"), _("Discount"))
+        super().__init__()
+        heading = (_("Product Description"), _("Product ID"), _("Price"), _("Discount"))
         self.alternative_table = tk.ttk.Treeview(master,
                                                  height=40,
                                                  show="headings",
-                                                 columns=columns)
+                                                 columns=heading)
         width = (200, 100, 80, 50)
-        for i, each in enumerate(columns):
+        for i, each in enumerate(heading):
             self.alternative_table.column(each, width=width[i], anchor="center")
             self.alternative_table.heading(each, text=each)
+        for col in heading:
+            self.alternative_table.heading(col, text=col,
+                                           command=lambda _col=col: self.treeview_sort_column(self.alternative_table,
+                                                                                              _col, False))
         self.alternative_table.pack(fill="both")
         self.description = []
         self.good_id = []

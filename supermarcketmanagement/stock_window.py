@@ -19,7 +19,7 @@ CURSOR.execute("USE shop")
 FONT = main.FONT
 
 
-class StockManagement(main.SetMenu):
+class StockManagement(main.SetMenu, main.TreeView):
     def __init__(self, master, username):
         super().__init__(master, username)
 
@@ -67,6 +67,8 @@ class StockManagement(main.SetMenu):
         for i in range(len(heading)):
             self.tree.column(heading[i], width=width[i], anchor="center")
             self.tree.heading(heading[i], text=heading[i])
+        for col in heading:
+            self.tree.heading(col, text=col, command=lambda _col=col: self.treeview_sort_column(self.tree, _col, False))
         self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.tree.yview)
 
         id_label.grid(row=0, column=0, sticky="W", padx=5, pady=10)

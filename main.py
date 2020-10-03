@@ -236,6 +236,18 @@ class Account:
         root.destroy()
 
 
+class TreeView:
+    def __init__(self):
+        pass
+
+    def treeview_sort_column(self, tv, col, reverse):
+        L = [(tv.set(k, col), k) for k in tv.get_children('')]
+        L.sort(reverse=reverse)
+        for index, (val, k) in enumerate(L):
+            tv.move(k, '', index)
+        tv.heading(col, command=lambda: self.treeview_sort_column(tv, col, not reverse))
+
+
 if __name__ == "__main__":
     if not CONFIG.getboolean("DEFAULT", "REMEMBER"):
         opener.login()

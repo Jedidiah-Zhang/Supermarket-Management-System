@@ -12,11 +12,12 @@ import tkinter as tk
 from tkinter import messagebox
 import main
 
-CONFIG = main.CONFIG
 DEFAULT = "Default"
 CONNECTION = main.CONNECTION
 CURSOR = main.CURSOR
 CURSOR.execute("USE shop")
+
+FONT = main.FONT
 
 
 class Registration(main.SetMenu):
@@ -25,43 +26,43 @@ class Registration(main.SetMenu):
 
         welcome_label = tk.Label(master,
                                  text=_("Registration"),
-                                 font=(CONFIG["DEFAULT"]["font"], 20))
+                                 font=(FONT, 20))
         first_name_label = tk.Label(master,
                                     text=_("First Name: "),
-                                    font=(CONFIG["DEFAULT"]["font"], 14))
+                                    font=(FONT, 14))
         last_name_label = tk.Label(master,
                                    text=_("Last Name: "),
-                                   font=(CONFIG["DEFAULT"]["font"], 14))
+                                   font=(FONT, 14))
         username_label = tk.Label(master,
                                   text=_("Username: "),
-                                  font=(CONFIG["DEFAULT"]["font"], 14))
+                                  font=(FONT, 14))
         address_label = tk.Label(master,
                                  text=_("Address: "),
-                                 font=(CONFIG["DEFAULT"]["font"], 14))
+                                 font=(FONT, 14))
         email_label = tk.Label(master,
                                text=_("Email: "),
-                               font=(CONFIG["DEFAULT"]["font"], 14))
+                               font=(FONT, 14))
 
         self.first_name_entry = tk.Entry(master,
                                          width=50,
                                          bd=1,
-                                         font=(CONFIG["DEFAULT"]["font"], 14))
+                                         font=(FONT, 14))
         self.last_name_entry = tk.Entry(master,
                                         width=50,
                                         bd=1,
-                                        font=(CONFIG["DEFAULT"]["font"], 14))
+                                        font=(FONT, 14))
         self.username_entry = tk.Entry(master,
                                        width=50,
                                        bd=1,
-                                       font=(CONFIG["DEFAULT"]["font"], 14))
+                                       font=(FONT, 14))
         self.address_entry = tk.Entry(master,
                                       width=50,
                                       bd=1,
-                                      font=(CONFIG["DEFAULT"]["font"], 14))
+                                      font=(FONT, 14))
         self.email_entry = tk.Entry(master,
                                     width=50,
                                     bd=1,
-                                    font=(CONFIG["DEFAULT"]["font"], 14))
+                                    font=(FONT, 14))
         self.admin = tk.BooleanVar()
         self.admin.set(0)
         employee_radiobutton = tk.Radiobutton(master,
@@ -74,11 +75,11 @@ class Registration(main.SetMenu):
                                            value=1)
         password_label = tk.Label(master,
                                   text=_("*Password will be set as default: ") + DEFAULT,
-                                  font=(CONFIG["DEFAULT"]["font"], 12))
+                                  font=(FONT, 12))
         confirm_button = tk.Button(master,
                                    text=_("Confirm"),
                                    width=15,
-                                   font=(CONFIG["DEFAULT"]["font"], 14),
+                                   font=(FONT, 14),
                                    command=self.__confirm)
 
         welcome_label.grid(row=0, column=0, padx=10, pady=10)
