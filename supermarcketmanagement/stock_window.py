@@ -89,8 +89,8 @@ class StockManagement(main.SetMenu, main.TreeView):
         self.desc_entry.bind("<KeyRelease>", lambda event: self._search())
         self.ex_id_entry.bind("<KeyRelease>", lambda event: self._search())
         self.supplier_entry.bind("<KeyRelease>", lambda event: self._search())
-        self.tree.bind("<Enter>", lambda event: self._search())
 
+        self._search()
         self.top = None
 
     def _search(self):
