@@ -10,7 +10,6 @@
 
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
-from _tkinter import TclError
 import pandas as pd
 from time import strftime, localtime
 import main
@@ -89,8 +88,8 @@ class Purchase(main.SetMenu, main.TreeView):
                     else:
                         self.tree.insert("", "end",
                                          values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
-                except tk.TclError:
-                    print("Interrupt")
+                except:
+                    pass
                 self.tree.update()
 
     def confirm(self):
