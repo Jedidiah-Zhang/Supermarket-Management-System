@@ -12,7 +12,7 @@ import tkinter as tk
 from tkinter import messagebox
 import main
 
-DEFAULT = "Default"
+DEFAULT = main.CONFIG["DEFAULT"]["default_pass"]
 CONNECTION = main.CONNECTION
 CURSOR = main.CURSOR
 CURSOR.execute("USE shop")
