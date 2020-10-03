@@ -67,19 +67,29 @@ class Purchase(main.SetMenu):
             self.data = pd.read_excel(filename).values
             CURSOR.execute("""
             SELECT MAX(`Product ID`)
-            FROM shop.purchase
+            FROM shop.goods
             """)
             maximum = CURSOR.fetchall()[0][0]
             if maximum is None:
                 maximum = 0
             for row in self.data:
+                CURSOR.execute("""
+                SELECT `Product ID`
+                FROM shop.goods
+                WHERE  `External ID` = {0} and Supplier = '{1}'
+                """.format(row[0], row[2]))
+                ID = CURSOR.fetchall()
                 try:
-                    self.tree.insert("", "end",
-                                     values=(row[1], maximum+1, row[0], row[5], row[2], row[3]))
-                    maximum += 1
-                    self.tree.update()
+                    if ID == ():
+                        self.tree.insert("", "end",
+                                         values=(row[1], maximum+1, row[0], row[5], row[2], row[3]))
+                        maximum += 1
+                    else:
+                        self.tree.insert("", "end",
+                                         values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
                 except:
                     pass
+                self.tree.update()
 
     def confirm(self):
         CURSOR.execute("""
@@ -93,8 +103,8 @@ class Purchase(main.SetMenu):
             CURSOR.execute("""
             SELECT `Product ID`
             FROM shop.goods
-            WHERE `External ID` = {0}
-            """.format(row[0]))
+            WHERE `External ID` = {0} and Supplier = '{1}'
+            """.format(row[0], row[2]))
             ID = CURSOR.fetchall()
             if ID == ():
                 try:
