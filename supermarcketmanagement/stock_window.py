@@ -12,14 +12,11 @@ import tkinter as tk
 from tkinter import ttk
 import main
 
-cursor = main.cursor
-connection = main.connection
-cursor.execute("USE shop")
+CURSOR = main.CURSOR
+CONNECTION = main.CONNECTION
+CURSOR.execute("USE shop")
 
-cfg = main.cfg
-config = main.config
-languages = main.languages
-fonts = main.fonts
+FONT = main.FONT
 
 
 class StockManagement(main.SetMenu):
@@ -28,37 +25,37 @@ class StockManagement(main.SetMenu):
 
         id_label = tk.Label(master,
                             text=_("Good ID: "),
-                            font=(config["DEFAULT"]["font"], 16))
+                            font=(FONT, 16))
         self.id_entry = tk.Entry(master,
                                  width=40,
-                                 font=(config["DEFAULT"]["font"], 12))
+                                 font=(FONT, 12))
         desc_label = tk.Label(master,
                               text=_("Good Name: "),
-                              font=(config["DEFAULT"]["font"], 16))
+                              font=(FONT, 16))
         self.desc_entry = tk.Entry(master,
                                    width=40,
-                                   font=(config["DEFAULT"]["font"], 12))
+                                   font=(FONT, 12))
         ex_id_label = tk.Label(master,
                                text=_("External ID: "),
-                               font=(config["DEFAULT"]["font"], 16))
+                               font=(FONT, 16))
         self.ex_id_entry = tk.Entry(master,
                                     width=25,
-                                    font=(config["DEFAULT"]["font"], 12))
+                                    font=(FONT, 12))
         supplier_label = tk.Label(master,
                                   text=_("Supplier: "),
-                                  font=(config["DEFAULT"]["font"], 16))
+                                  font=(FONT, 16))
         self.supplier_entry = tk.Entry(master,
                                        width=25,
-                                       font=(config["DEFAULT"]["font"], 12))
+                                       font=(FONT, 12))
         alter_button = tk.Button(master,
                                  width=12,
                                  text=_("Alter"),
-                                 font=(config["DEFAULT"]["font"], 16),
+                                 font=(FONT, 16),
                                  command=lambda: self._alter_row(self.tree.selection()))
         analyze_button = tk.Button(master,
                                    width=12,
                                    text=_("Analyze"),
-                                   font=(config["DEFAULT"]["font"], 16),
+                                   font=(FONT, 16),
                                    command=self._analyze)
         heading = [_("ID"), _("Description"), _("Stock"), _("Buying Price"),
                    _("Selling Price"), _("External ID"), _("Supplier")]
@@ -99,7 +96,7 @@ class StockManagement(main.SetMenu):
         for item in children:
             self.tree.delete(item)
         quests = [self.id_entry.get(), self.desc_entry.get(), self.ex_id_entry.get(), self.supplier_entry.get()]
-        cursor.execute("""
+        CURSOR.execute("""
         SELECT `Product ID`, `Product Description`, Stock, 
         `Buying Price`, `Selling Price`, `External ID`, Supplier
         FROM shop.goods
@@ -111,7 +108,7 @@ class StockManagement(main.SetMenu):
                    "%" + quests[1] + "%" if quests[1] is not None else "%",
                    "%" + quests[2] + "%" if quests[2] is not None else "%",
                    "%" + quests[3] + "%" if quests[3] is not None else "%"))
-        output = cursor.fetchall()
+        output = CURSOR.fetchall()
         for each in output:
             self.tree.insert("", "end", values=each)
         self.tree.update()
@@ -146,34 +143,34 @@ class Alter:
         self.values = values
         desc_label = tk.Label(master,
                               text=_("Product Description: "),
-                              font=(config["DEFAULT"]["font"], 16))
+                              font=(FONT, 16))
         stock_label = tk.Label(master,
                                text=_("Stock: "),
-                               font=(config["DEFAULT"]["font"], 16))
+                               font=(FONT, 16))
         sell_label = tk.Label(master,
                               text=_("Selling Price: "),
-                              font=(config["DEFAULT"]["font"], 16))
+                              font=(FONT, 16))
         self.desc_entry = tk.Entry(master,
                                    width=40,
-                                   font=(config["DEFAULT"]["font"], 13))
+                                   font=(FONT, 13))
         self.desc_entry.insert(0, values[1])
         self.stock_entry = tk.Entry(master,
                                     width=40,
-                                    font=(config["DEFAULT"]["font"], 13))
+                                    font=(FONT, 13))
         self.stock_entry.insert(0, values[2])
         self.sell_entry = tk.Entry(master,
                                    width=40,
-                                   font=(config["DEFAULT"]["font"], 13))
+                                   font=(FONT, 13))
         self.sell_entry.insert(0, values[4])
         delete_button = tk.Button(master,
                                   width=15,
                                   text=_("Delete Row"),
-                                  font=(config["DEFAULT"]["font"], 16),
+                                  font=(FONT, 16),
                                   command=lambda: self._delete(master))
         confirm_button = tk.Button(master,
                                    width=15,
                                    text=_("Confirm Change"),
-                                   font=(config["DEFAULT"]["font"], 16),
+                                   font=(FONT, 16),
                                    command=lambda: self._confirm(master))
         desc_label.grid(row=0, column=0, padx=20, pady=20, sticky="E")
         stock_label.grid(row=1, column=0, padx=20, sticky="E")
@@ -213,23 +210,23 @@ class Alter:
 
     def _delete(self, master):
         try:
-            cursor.execute("""
+            CURSOR.execute("""
             DELETE FROM shop.goods
             WHERE `Product ID` = {0}
             """.format(self.values[0]))
-            connection.commit()
+            CONNECTION.commit()
             master.destroy()
         except:
-            connection.rollback()
+            CONNECTION.rollback()
 
     def _confirm(self, master):
         try:
-            cursor.execute("""
+            CURSOR.execute("""
             UPDATE shop.goods
             SET `Product Description` = '{0}', Stock = {1}, `Selling Price` = {2}
             WHERE `Product ID` = {3}
             """.format(self.desc_entry.get(), self.stock_entry.get(), self.sell_entry.get(), self.values[0]))
-            connection.commit()
+            CONNECTION.commit()
             master.destroy()
         except:
-            connection.rollback()
+            CONNECTION.rollback()

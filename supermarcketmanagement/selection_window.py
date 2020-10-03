@@ -12,7 +12,7 @@ import tkinter as tk
 from supermarcketmanagement import opener
 import main
 
-config = main.config
+FONT = main.FONT
 
 
 class Admin:
@@ -20,13 +20,13 @@ class Admin:
         reg_button = tk.Button(master,
                                width=15,
                                text=_("Registration"),
-                               font=(config["DEFAULT"]["font"], 20),
+                               font=(FONT, 20),
                                command=lambda: self._open_reg(master, username))
 
         stock_button = tk.Button(master,
                                  width=15,
                                  text=_("Inventory"),
-                                 font=(config["DEFAULT"]["font"], 20),
+                                 font=(FONT, 20),
                                  command=lambda: self._open_stock(master, username))
 
         reg_button.pack()
@@ -48,13 +48,13 @@ class Employee:
         purchase_button = tk.Button(master,
                                     width=15,
                                     text=_("Purchase"),
-                                    font=(config["DEFAULT"]["font"], 20),
+                                    font=(FONT, 20),
                                     command=lambda: self._open_input(master, username))
 
         cashier_button = tk.Button(master,
                                    width=15,
                                    text=_("Cashier"),
-                                   font=(config["DEFAULT"]["font"], 20),
+                                   font=(FONT, 20),
                                    command=lambda: self._open_sale(master, username))
 
         purchase_button.pack()

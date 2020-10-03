@@ -14,18 +14,18 @@ import hashlib
 from supermarcketmanagement import opener
 import main
 
-cursor = main.cursor
-cursor.execute("USE shop")
+CURSOR = main.CURSOR
+CURSOR.execute("USE shop")
 
-cfg = main.cfg
-config = main.config
+CFG = main.CFG
+CONFIG = main.CONFIG
 
 
 class LoginWindow:
     def __init__(self, master):
         label_welcome = tk.Label(master,
                                  text=_("Login"),
-                                 font=(config["DEFAULT"]["font"], 16))
+                                 font=(CONFIG["DEFAULT"]["font"], 16))
         label_username = tk.Label(master,
                                   text=_("Username: "))
         label_password = tk.Label(master,
@@ -38,7 +38,7 @@ class LoginWindow:
         button_confirm = tk.Button(master,
                                    width=10,
                                    text=_("LOGIN"),
-                                   command=lambda: self._login(master))
+                                   command=lambda: self.__login(master))
 
         self.rem = tk.IntVar()
         checkbutton_remember = tk.Checkbutton(master,
@@ -55,30 +55,30 @@ class LoginWindow:
         button_confirm.grid(row=3, column=2, sticky="SE", pady=20)
         checkbutton_remember.grid(row=3, column=1, sticky="WN")
 
-        self.entry_username.bind("<Return>", lambda event: self._next())
-        self.entry_password.bind("<Return>", lambda event: self._login(master))
+        self.entry_username.bind("<Return>", lambda event: self.__next())
+        self.entry_password.bind("<Return>", lambda event: self.__login(master))
 
         self.entry_username.focus()
 
-    def _next(self):
+    def __next(self):
         self.entry_password.focus()
 
-    def _login(self, master):
+    def __login(self, master):
         username = self.entry_username.get()
         password_sha = hashlib.sha256(self.entry_password.get().encode('utf-8')).hexdigest()
-        cursor.execute("""
+        CURSOR.execute("""
         SELECT * 
         FROM shop.members
         WHERE `Username` = '{0}'
         """.format(username))
-        user = cursor.fetchall()
+        user = CURSOR.fetchall()
         if user:
             user = user[0]
             if user[4] == password_sha:
-                config["ACCOUNTS"]["USERNAME"] = username
+                CONFIG["ACCOUNTS"]["USERNAME"] = username
                 if self.rem.get() == 1:
-                    config["DEFAULT"]["REMEMBER"] = "True"
-                    config.write(open(cfg, "w"))
+                    CONFIG["DEFAULT"]["REMEMBER"] = "True"
+                    CONFIG.write(open(CFG, "w"))
                 master.destroy()
                 if user[7] == 0:
                     opener.employee(username)

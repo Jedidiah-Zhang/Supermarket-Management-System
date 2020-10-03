@@ -12,11 +12,11 @@ import tkinter as tk
 from tkinter import messagebox
 import main
 
-config = main.config
-default = "Default"
-connection = main.connection
-cursor = main.cursor
-cursor.execute("USE shop")
+CONFIG = main.CONFIG
+DEFAULT = "Default"
+CONNECTION = main.CONNECTION
+CURSOR = main.CURSOR
+CURSOR.execute("USE shop")
 
 
 class Registration(main.SetMenu):
@@ -25,43 +25,43 @@ class Registration(main.SetMenu):
 
         welcome_label = tk.Label(master,
                                  text=_("Registration"),
-                                 font=(config["DEFAULT"]["font"], 20))
+                                 font=(CONFIG["DEFAULT"]["font"], 20))
         first_name_label = tk.Label(master,
                                     text=_("First Name: "),
-                                    font=(config["DEFAULT"]["font"], 14))
+                                    font=(CONFIG["DEFAULT"]["font"], 14))
         last_name_label = tk.Label(master,
                                    text=_("Last Name: "),
-                                   font=(config["DEFAULT"]["font"], 14))
+                                   font=(CONFIG["DEFAULT"]["font"], 14))
         username_label = tk.Label(master,
                                   text=_("Username: "),
-                                  font=(config["DEFAULT"]["font"], 14))
+                                  font=(CONFIG["DEFAULT"]["font"], 14))
         address_label = tk.Label(master,
                                  text=_("Address: "),
-                                 font=(config["DEFAULT"]["font"], 14))
+                                 font=(CONFIG["DEFAULT"]["font"], 14))
         email_label = tk.Label(master,
                                text=_("Email: "),
-                               font=(config["DEFAULT"]["font"], 14))
+                               font=(CONFIG["DEFAULT"]["font"], 14))
 
         self.first_name_entry = tk.Entry(master,
                                          width=50,
                                          bd=1,
-                                         font=(config["DEFAULT"]["font"], 14))
+                                         font=(CONFIG["DEFAULT"]["font"], 14))
         self.last_name_entry = tk.Entry(master,
                                         width=50,
                                         bd=1,
-                                        font=(config["DEFAULT"]["font"], 14))
+                                        font=(CONFIG["DEFAULT"]["font"], 14))
         self.username_entry = tk.Entry(master,
                                        width=50,
                                        bd=1,
-                                       font=(config["DEFAULT"]["font"], 14))
+                                       font=(CONFIG["DEFAULT"]["font"], 14))
         self.address_entry = tk.Entry(master,
                                       width=50,
                                       bd=1,
-                                      font=(config["DEFAULT"]["font"], 14))
+                                      font=(CONFIG["DEFAULT"]["font"], 14))
         self.email_entry = tk.Entry(master,
                                     width=50,
                                     bd=1,
-                                    font=(config["DEFAULT"]["font"], 14))
+                                    font=(CONFIG["DEFAULT"]["font"], 14))
         self.admin = tk.BooleanVar()
         self.admin.set(0)
         employee_radiobutton = tk.Radiobutton(master,
@@ -73,13 +73,13 @@ class Registration(main.SetMenu):
                                            variable=self.admin,
                                            value=1)
         password_label = tk.Label(master,
-                                  text=_("*Password will be set as default: ") + default,
-                                  font=(config["DEFAULT"]["font"], 12))
+                                  text=_("*Password will be set as default: ") + DEFAULT,
+                                  font=(CONFIG["DEFAULT"]["font"], 12))
         confirm_button = tk.Button(master,
                                    text=_("Confirm"),
                                    width=15,
-                                   font=(config["DEFAULT"]["font"], 14),
-                                   command=self._confirm)
+                                   font=(CONFIG["DEFAULT"]["font"], 14),
+                                   command=self.__confirm)
 
         welcome_label.grid(row=0, column=0, padx=10, pady=10)
         first_name_label.grid(row=1, column=0, padx=20, pady=10, sticky="E")
@@ -97,16 +97,16 @@ class Registration(main.SetMenu):
         password_label.grid(row=7, column=0, columnspan=2, padx=40, sticky="W")
         confirm_button.grid(row=7, column=1, padx=40, pady=20, sticky="E")
 
-    def _confirm(self):
+    def __confirm(self):
         try:
-            cursor.execute("""
+            CURSOR.execute("""
             INSERT INTO shop.members
             (`First Name`, `Last Name`, Username, Address, Email, Admin)
             VALUE 
             ('{0}', '{1}', '{2}', '{3}', '{4}', {5})
             """.format(self.first_name_entry.get(), self.last_name_entry.get(),
                        self.username_entry.get(), self.address_entry.get(), self.email_entry.get(), self.admin.get()))
-            connection.commit()
+            CONNECTION.commit()
             self.first_name_entry.delete(0, "end")
             self.last_name_entry.delete(0, "end")
             self.username_entry.delete(0, "end")
@@ -114,5 +114,5 @@ class Registration(main.SetMenu):
             self.email_entry.delete(0, "end")
             tk.messagebox.showinfo(_("Info"), _("Account Created"))
         except:
-            connection.rollback()
+            CONNECTION.rollback()
             tk.messagebox.showwarning(_("Warning"), _("Error: Check details entered."))

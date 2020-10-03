@@ -14,12 +14,11 @@ import pandas as pd
 from time import strftime, localtime
 import main
 
-cursor = main.cursor
-connection = main.connection
-cursor.execute("USE shop")
+CURSOR = main.CURSOR
+CONNECTION = main.CONNECTION
+CURSOR.execute("USE shop")
 
-cfg = main.cfg
-config = main.config
+FONT = main.FONT
 
 
 class Purchase(main.SetMenu):
@@ -28,19 +27,19 @@ class Purchase(main.SetMenu):
         self.data = None
         name_label = tk.Label(master,
                               text=_("Principal: "),
-                              font=(config["DEFAULT"]["font"], 16))
+                              font=(FONT, 16))
         name_label2 = tk.Label(master,
                                text=self.user[1] + " " + self.user[2],
-                               font=(config["DEFAULT"]["font"], 16))
+                               font=(FONT, 16))
         purchase_button = tk.Button(master,
                                     width=25,
                                     text=_("Purchase Form File"),
-                                    font=(config["DEFAULT"]["font"], 16),
+                                    font=(FONT, 16),
                                     command=self.read_file)
         confirm_button = tk.Button(master,
                                    width=10,
                                    text=_("Confirm"),
-                                   font=(config["DEFAULT"]["font"], 16),
+                                   font=(FONT, 16),
                                    command=self.confirm)
         heading = ["Product Description", "Product ID", "External ID", "Amount", "Supplier", "Price"]
         width = [240, 140, 140, 80, 140, 100]
@@ -66,11 +65,11 @@ class Purchase(main.SetMenu):
         filename = tk.filedialog.askopenfilename()
         if filename != "":
             self.data = pd.read_excel(filename).values
-            cursor.execute("""
+            CURSOR.execute("""
             SELECT MAX(`Product ID`)
             FROM shop.purchase
             """)
-            maximum = cursor.fetchall()[0][0]
+            maximum = CURSOR.fetchall()[0][0]
             if maximum is None:
                 maximum = 0
             for row in self.data:
@@ -83,24 +82,24 @@ class Purchase(main.SetMenu):
                     pass
 
     def confirm(self):
-        cursor.execute("""
+        CURSOR.execute("""
                     SELECT MAX(`Product ID`)
                     FROM shop.purchase
                     """)
-        maximum = cursor.fetchall()[0][0]
+        maximum = CURSOR.fetchall()[0][0]
         if maximum is None:
             maximum = 0
         for row in self.data:
-            cursor.execute("""
+            CURSOR.execute("""
             SELECT `Product ID`
             FROM shop.goods
             WHERE `External ID` = {0}
             """.format(row[0]))
-            ID = cursor.fetchall()
+            ID = CURSOR.fetchall()
             if ID == ():
                 try:
                     maximum += 1
-                    cursor.execute("""
+                    CURSOR.execute("""
                     INSERT INTO shop.purchase
                     (`Product Description`, `Product ID`, `External ID`, `Principal ID`, 
                     Supplier, Datetime, Amount, Price)
@@ -108,21 +107,21 @@ class Purchase(main.SetMenu):
                     ('{0}', {1}, {2}, {3}, '{4}', '{5}', {6}, {7})
                     """.format(row[1], maximum, row[0], self.user[0], row[2],
                                strftime("%Y-%m-%d %H:%M:%S", localtime()), row[5], row[3]))
-                    connection.commit()
-                    cursor.execute("""
+                    CONNECTION.commit()
+                    CURSOR.execute("""
                     INSERT INTO shop.goods
                     (`product id`, `product description`, Stock, `Buying Price`, 
                     `Selling Price`, `external id`, supplier)
                     VALUE
                     ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}')
                     """.format(maximum, row[1], row[5], row[3], round(row[3]*1.25, 2), row[0], row[2]))
-                    connection.commit()
+                    CONNECTION.commit()
                 except:
-                    connection.rollback()
+                    CONNECTION.rollback()
             else:
                 ID = ID[0][0]
                 try:
-                    cursor.execute("""
+                    CURSOR.execute("""
                     INSERT INTO shop.purchase
                     (`Product Description`, `Product ID`, `External ID`, `Principal ID`, 
                     Supplier, Datetime, Amount, Price)
@@ -130,21 +129,21 @@ class Purchase(main.SetMenu):
                     ('{0}', {1}, {2}, {3}, '{4}', '{5}', {6}, {7})
                     """.format(row[1], ID, row[0], self.user[0], row[2],
                                strftime("%Y-%m-%d %H:%M:%S", localtime()), row[5], row[3]))
-                    connection.commit()
-                    cursor.execute("""
+                    CONNECTION.commit()
+                    CURSOR.execute("""
                     SELECT Stock
                     FROM shop.goods
                     WHERE `Product ID` = {0}
                     """.format(ID))
-                    stock = cursor.fetchall()[0][0]
-                    cursor.execute("""
+                    stock = CURSOR.fetchall()[0][0]
+                    CURSOR.execute("""
                     UPDATE shop.goods
                     SET Stock = {0}
                     WHERE `Product ID` = {1}
                     """.format(stock+row[5], ID))
-                    connection.commit()
+                    CONNECTION.commit()
                 except:
-                    connection.rollback()
+                    CONNECTION.rollback()
 
         tk.messagebox.showinfo(_("Info"), _("Done"))
 
