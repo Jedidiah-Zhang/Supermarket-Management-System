@@ -242,7 +242,10 @@ class TreeView:
 
     def treeview_sort_column(self, tv, col, reverse):
         L = [(tv.set(k, col), k) for k in tv.get_children('')]
-        L.sort(key=lambda t: int(t[0]), reverse=reverse)
+        try:
+            L.sort(key=lambda t: int(t[0]), reverse=reverse)
+        except ValueError:
+            L.sort(reverse=reverse)
         for index, (val, k) in enumerate(L):
             tv.move(k, '', index)
         tv.heading(col, command=lambda: self.treeview_sort_column(tv, col, not reverse))
