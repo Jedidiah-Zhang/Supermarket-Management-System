@@ -85,15 +85,15 @@ class StockManagement(main.SetMenu, main.TreeView):
         self.VScroll.place(relx=0.98, rely=0.15, relwidth=0.02, relheight=0.828)
         self.tree.configure(yscrollcommand=self.VScroll.set)
 
-        self.id_entry.bind("<KeyRelease>", lambda event: self.__search())
-        self.desc_entry.bind("<KeyRelease>", lambda event: self.__search())
-        self.ex_id_entry.bind("<KeyRelease>", lambda event: self.__search())
-        self.supplier_entry.bind("<KeyRelease>", lambda event: self.__search())
+        self.id_entry.bind("<KeyRelease>", lambda event: self.search())
+        self.desc_entry.bind("<KeyRelease>", lambda event: self.search())
+        self.ex_id_entry.bind("<KeyRelease>", lambda event: self.search())
+        self.supplier_entry.bind("<KeyRelease>", lambda event: self.search())
 
-        self.__search()
+        self.search()
         self.top = None
 
-    def __search(self):
+    def search(self):
         children = self.tree.get_children()
         for item in children:
             self.tree.delete(item)
@@ -123,12 +123,11 @@ class StockManagement(main.SetMenu, main.TreeView):
         else:
             try:
                 if "normal" == self.top.state():
-                    self.A_window.values(self.tree.item(row[0], "values"))
+                    self.A_window.set_values(self.tree.item(row[0], "values"))
                     self.top.focus_set()
             except tk.TclError:
                 self.top = None
                 self.__create_toplevel(row)
-                pass
 
     def __create_toplevel(self, row):
         self.top = tk.Toplevel()
@@ -168,12 +167,12 @@ class Alter:
                                   width=15,
                                   text=_("Delete Row"),
                                   font=(FONT, 16),
-                                  command=lambda: self.__delete(master))
+                                  command=self.__delete)
         confirm_button = tk.Button(master,
                                    width=15,
                                    text=_("Confirm Change"),
                                    font=(FONT, 16),
-                                   command=lambda: self.__confirm(master))
+                                   command=self.__confirm)
         desc_label.grid(row=0, column=0, padx=20, pady=20, sticky="E")
         stock_label.grid(row=1, column=0, padx=20, sticky="E")
         sell_label.grid(row=2, column=0, padx=20, pady=20, sticky="E")
@@ -189,13 +188,13 @@ class Alter:
         self.sell_entry.bind("<Button-3>", self.__entry_clear)
         self.sell_entry.bind("<KeyRelease>", self.__num_only)
 
-    def values(self, values):
+    def set_values(self, values: tuple):
         self.values = values
         self.desc_entry.delete(0, "end")
         self.desc_entry.insert(0, values[1])
         self.stock_entry.delete(0, "end")
         self.stock_entry.insert(0, values[2])
-        self.stock_entry.delete(0, "end")
+        self.sell_entry.delete(0, "end")
         self.sell_entry.insert(0, values[4])
 
     @staticmethod
@@ -210,18 +209,20 @@ class Alter:
         event.widget.delete(0, "end")
         event.widget.focus()
 
-    def __delete(self, master):
+    def __delete(self):
         try:
             CURSOR.execute("""
             DELETE FROM shop.goods
             WHERE `Product ID` = {0}
             """.format(self.values[0]))
             CONNECTION.commit()
-            master.destroy()
+            self.desc_entry.delete(0, "end")
+            self.stock_entry.delete(0, "end")
+            self.sell_entry.delete(0, "end")
         except:
             CONNECTION.rollback()
 
-    def __confirm(self, master):
+    def __confirm(self):
         try:
             CURSOR.execute("""
             UPDATE shop.goods
@@ -229,6 +230,8 @@ class Alter:
             WHERE `Product ID` = {3}
             """.format(self.desc_entry.get(), self.stock_entry.get(), self.sell_entry.get(), self.values[0]))
             CONNECTION.commit()
-            master.destroy()
+            self.desc_entry.delete(0, "end")
+            self.stock_entry.delete(0, "end")
+            self.sell_entry.delete(0, "end")
         except:
             CONNECTION.rollback()
