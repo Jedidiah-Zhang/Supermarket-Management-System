@@ -89,6 +89,7 @@ class StockManagement(main.SetMenu, main.TreeView):
         self.desc_entry.bind("<KeyRelease>", lambda event: self.search())
         self.ex_id_entry.bind("<KeyRelease>", lambda event: self.search())
         self.supplier_entry.bind("<KeyRelease>", lambda event: self.search())
+        master.bind("<FocusIn>", lambda event: self.search())
 
         self.search()
         self.A_window = None
