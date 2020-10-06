@@ -91,7 +91,7 @@ class StockManagement(main.SetMenu, main.TreeView):
         self.supplier_entry.bind("<KeyRelease>", lambda event: self.search())
 
         self.search()
-        self.top = None
+        self.A_window = None
 
     def search(self):
         children = self.tree.get_children()
@@ -116,59 +116,68 @@ class StockManagement(main.SetMenu, main.TreeView):
         self.tree.update()
 
     def __alter_row(self, row):
-        if self.top is None and row != ():
+        if self.A_window is None and row != ():
             self.__create_toplevel(row)
         elif row == ():
             pass
         else:
             try:
-                if "normal" == self.top.state():
+                if "normal" == self.A_window.state():
                     self.A_window.set_values(self.tree.item(row[0], "values"))
-                    self.top.focus_set()
+                    self.A_window.focus_set()
             except tk.TclError:
-                self.top = None
+                self.A_window = None
                 self.__create_toplevel(row)
 
     def __create_toplevel(self, row):
-        self.top = tk.Toplevel()
-        self.top.geometry("620x250")
-        self.top.title(_("Alter"))
-        self.A_window = Alter(self.top, self.tree.item(row[0], "values"))
+        self.A_window = Alter(self.tree.item(row[0], "values"))
 
     def __analyze(self):
         pass
 
 
-class Alter:
-    def __init__(self, master, values):
+class Alter(tk.Toplevel):
+    _instance = None
+
+    def __new__(cls, *args, **kw):
+        # Singleton Pattern
+        if cls._instance is None:
+            cls._instance = object.__new__(cls)
+        return cls._instance
+
+    def __init__(self, values, **kw):
+        super().__init__(**kw)
+        self.title(_("Alter"))
+        self.geometry("620x250")
         self.values = values
-        desc_label = tk.Label(master,
+
+        desc_label = tk.Label(self,
                               text=_("Product Description: "),
                               font=(FONT, 16))
-        stock_label = tk.Label(master,
+        stock_label = tk.Label(self,
                                text=_("Stock: "),
                                font=(FONT, 16))
-        sell_label = tk.Label(master,
+        sell_label = tk.Label(self,
                               text=_("Selling Price: "),
                               font=(FONT, 16))
-        self.desc_entry = tk.Entry(master,
+        self.desc_entry = tk.Entry(self,
                                    width=40,
                                    font=(FONT, 13))
         self.desc_entry.insert(0, values[1])
-        self.stock_entry = tk.Entry(master,
+        self.stock_entry = tk.Entry(self,
                                     width=40,
                                     font=(FONT, 13))
         self.stock_entry.insert(0, values[2])
-        self.sell_entry = tk.Entry(master,
+        self.sell_entry = tk.Entry(self,
                                    width=40,
                                    font=(FONT, 13))
         self.sell_entry.insert(0, values[4])
-        delete_button = tk.Button(master,
+        delete_button = tk.Button(self,
                                   width=15,
                                   text=_("Delete Row"),
                                   font=(FONT, 16),
                                   command=self.__delete)
-        confirm_button = tk.Button(master,
+        confirm_button = tk.Button(self,
                                    width=15,
                                    text=_("Confirm Change"),
                                    font=(FONT, 16),
@@ -235,3 +244,8 @@ class Alter:
             self.sell_entry.delete(0, "end")
         except:
             CONNECTION.rollback()
+
+
+class Analysis(tk.Toplevel):
+    def __init__(self, **kw):
+        super().__init__(**kw)

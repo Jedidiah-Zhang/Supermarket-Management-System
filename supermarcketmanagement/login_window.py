@@ -80,10 +80,7 @@ class LoginWindow:
                     CONFIG["DEFAULT"]["REMEMBER"] = "True"
                     CONFIG.write(open(CFG, "w"))
                 master.destroy()
-                if user[7] == 0:
-                    opener.employee(username)
-                else:
-                    opener.admin(username)
+                opener.SelectionFactory(user[7], username)
             else:
                 tk.messagebox.showwarning(_("Warning"), _("Password does not match."))
         else:
