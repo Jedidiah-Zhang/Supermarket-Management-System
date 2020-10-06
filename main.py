@@ -88,10 +88,7 @@ class SetMenu:
     @staticmethod
     def _back(master, info):
         master.destroy()
-        if info[7] == 1:
-            opener.admin(info[3])
-        else:
-            opener.employee(info[3])
+        opener.SelectionFactory(info[7], info[3])
 
 
 class Account:
@@ -262,7 +259,4 @@ if __name__ == "__main__":
         WHERE `Username` = '{0}'
         """.format(username))
         user = CURSOR.fetchall()[0]
-        if user[7]:
-            opener.admin(username)
-        else:
-            opener.employee(username)
+        opener.SelectionFactory(user[7], username)

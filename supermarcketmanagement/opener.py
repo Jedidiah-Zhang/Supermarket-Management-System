@@ -13,6 +13,22 @@ from supermarcketmanagement import sale_window, login_window, \
     stock_window, selection_window, registration_window, input_window
 
 
+class SelectionFactory:
+    def __new__(cls, Authorization, username):
+        if Authorization:
+            root_window = tk.Tk()
+            root_window.title(_("Select"))
+            root_window.resizable(False, False)
+            selection_window.Admin(root_window, username)
+            root_window.mainloop()
+        else:
+            root_window = tk.Tk()
+            root_window.title(_("Select"))
+            root_window.resizable(False, False)
+            selection_window.Employee(root_window, username)
+            root_window.mainloop()
+
+
 def login():
     root_window = tk.Tk()
     root_window.title(_("Login"))
@@ -40,22 +56,6 @@ def stock(username):
     root_window.geometry("1143x620")
     root_window.resizable(False, False)
     stock_window.StockManagement(root_window, username)
-    root_window.mainloop()
-
-
-def admin(username):
-    root_window = tk.Tk()
-    root_window.title(_("Select"))
-    root_window.resizable(False, False)
-    selection_window.Admin(root_window, username)
-    root_window.mainloop()
-
-
-def employee(username):
-    root_window = tk.Tk()
-    root_window.title(_("Select"))
-    root_window.resizable(False, False)
-    selection_window.Employee(root_window, username)
     root_window.mainloop()
 
 
