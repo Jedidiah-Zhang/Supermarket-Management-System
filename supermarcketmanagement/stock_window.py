@@ -138,14 +138,6 @@ class StockManagement(main.SetMenu, main.TreeView):
 
 
 class Alter(tk.Toplevel):
-    _instance = None
-
-    def __new__(cls, *args, **kw):
-        # Singleton Pattern
-        if cls._instance is None:
-            cls._instance = object.__new__(cls)
-        return cls._instance
-
     def __init__(self, values, **kw):
         super().__init__(**kw)
         self.title(_("Alter"))
