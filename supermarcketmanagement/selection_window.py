@@ -8,24 +8,21 @@
 @Software: PyCharm
 """
 
-import tkinter as tk
-from supermarcketmanagement import opener
-import main
 
-FONT = main.FONT
+from main import *
 
 
 class Admin:
     def __init__(self, master, username):
         reg_button = tk.Button(master,
                                width=15,
-                               text=_("Registration"),
+                               text=t("Registration"),
                                font=(FONT, 20),
                                command=lambda: self.__open_reg(master, username))
 
         stock_button = tk.Button(master,
                                  width=15,
-                                 text=_("Inventory"),
+                                 text=t("Inventory"),
                                  font=(FONT, 20),
                                  command=lambda: self.__open_stock(master, username))
 
@@ -47,13 +44,13 @@ class Employee:
     def __init__(self, master, username):
         purchase_button = tk.Button(master,
                                     width=15,
-                                    text=_("Purchase"),
+                                    text=t("Purchase"),
                                     font=(FONT, 20),
                                     command=lambda: self.__open_input(master, username))
 
         cashier_button = tk.Button(master,
                                    width=15,
-                                   text=_("Cashier"),
+                                   text=t("Cashier"),
                                    font=(FONT, 20),
                                    command=lambda: self.__open_sale(master, username))
 

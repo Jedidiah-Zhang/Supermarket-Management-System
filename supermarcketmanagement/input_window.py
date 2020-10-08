@@ -8,40 +8,33 @@
 @Software: PyCharm
 """
 
-import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import pandas as pd
 from time import strftime, localtime
-import main
-
-CURSOR = main.CURSOR
-CONNECTION = main.CONNECTION
-CURSOR.execute("USE shop")
-
-FONT = main.FONT
+from main import *
 
 
-class Purchase(main.SetMenu, main.TreeView):
+class Purchase(SetMenu, TreeView):
     def __init__(self, master, username):
         super().__init__(master, username)
         self.data = None
         name_label = tk.Label(master,
-                              text=_("Principal: "),
+                              text=t("Purchasing Agent: "),
                               font=(FONT, 16))
         name_label2 = tk.Label(master,
                                text=self.user[1] + " " + self.user[2],
                                font=(FONT, 16))
         purchase_button = tk.Button(master,
                                     width=25,
-                                    text=_("Purchase Form File"),
+                                    text=t("Purchase Form File"),
                                     font=(FONT, 16),
                                     command=self.__read_file)
         confirm_button = tk.Button(master,
                                    width=10,
-                                   text=_("Confirm"),
+                                   text=t("Confirm"),
                                    font=(FONT, 16),
                                    command=self.__confirm)
-        heading = ["Product Description", "Product ID", "External ID", "Amount", "Supplier", "Price"]
+        heading = [t("Product Description"), t("Product ID"), t("External ID"), t("Amount"), t("Supplier"), t("Price")]
         width = [240, 140, 140, 80, 140, 100]
         self.tree = ttk.Treeview(master,
                                  height=100,
@@ -156,4 +149,4 @@ class Purchase(main.SetMenu, main.TreeView):
                 except:
                     CONNECTION.rollback()
 
-        tk.messagebox.showinfo(_("Info"), _("Done"))
+        tk.messagebox.showinfo(t("Info"), t("Done"))

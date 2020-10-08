@@ -8,28 +8,19 @@
 @Software: PyCharm
 """
 
-import tkinter as tk
 from tkinter import messagebox
-import hashlib
-from supermarcketmanagement import opener
-import main
-
-CURSOR = main.CURSOR
-CURSOR.execute("USE shop")
-
-CFG = main.CFG
-CONFIG = main.CONFIG
+from main import *
 
 
 class LoginWindow:
     def __init__(self, master):
         label_welcome = tk.Label(master,
-                                 text=_("Login"),
-                                 font=(CONFIG["DEFAULT"]["font"], 16))
+                                 text=t("Login"),
+                                 font=(FONT, 16))
         label_username = tk.Label(master,
-                                  text=_("Username: "))
+                                  text=t("Username: "))
         label_password = tk.Label(master,
-                                  text=_("Password: "))
+                                  text=t("Password: "))
         self.entry_username = tk.Entry(master,
                                        width=35)
         self.entry_password = tk.Entry(master,
@@ -37,12 +28,12 @@ class LoginWindow:
                                        show="*")
         button_confirm = tk.Button(master,
                                    width=10,
-                                   text=_("LOGIN"),
+                                   text=t("LOGIN"),
                                    command=lambda: self.__login(master))
 
         self.rem = tk.IntVar()
         checkbutton_remember = tk.Checkbutton(master,
-                                              text=_("Remember Me"),
+                                              text=t("Remember Me"),
                                               variable=self.rem,
                                               onvalue=1,
                                               offvalue=0)
@@ -82,6 +73,6 @@ class LoginWindow:
                 master.destroy()
                 opener.SelectionFactory(user[7], username)
             else:
-                tk.messagebox.showwarning(_("Warning"), _("Password does not match."))
+                tk.messagebox.showwarning(t("Warning"), t("Password does not match."))
         else:
-            tk.messagebox.showwarning(_("Warning"), _("Username does not exist."))
+            tk.messagebox.showwarning(t("Warning"), t("Username does not exist."))

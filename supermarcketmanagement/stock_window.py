@@ -8,57 +8,50 @@
 @Software: PyCharm
 """
 
-import tkinter as tk
 from tkinter import ttk
-import main
-
-CURSOR = main.CURSOR
-CONNECTION = main.CONNECTION
-CURSOR.execute("USE shop")
-
-FONT = main.FONT
+from main import *
 
 
-class StockManagement(main.SetMenu, main.TreeView):
+class StockManagement(SetMenu, TreeView):
     def __init__(self, master, username):
         super().__init__(master, username)
 
         id_label = tk.Label(master,
-                            text=_("Good ID: "),
+                            text=t("Good ID: "),
                             font=(FONT, 16))
         self.id_entry = tk.Entry(master,
                                  width=40,
                                  font=(FONT, 12))
         desc_label = tk.Label(master,
-                              text=_("Good Name: "),
+                              text=t("Good Name: "),
                               font=(FONT, 16))
         self.desc_entry = tk.Entry(master,
                                    width=40,
                                    font=(FONT, 12))
         ex_id_label = tk.Label(master,
-                               text=_("External ID: "),
+                               text=t("External ID: "),
                                font=(FONT, 16))
         self.ex_id_entry = tk.Entry(master,
                                     width=25,
                                     font=(FONT, 12))
         supplier_label = tk.Label(master,
-                                  text=_("Supplier: "),
+                                  text=t("Supplier: "),
                                   font=(FONT, 16))
         self.supplier_entry = tk.Entry(master,
                                        width=25,
                                        font=(FONT, 12))
         alter_button = tk.Button(master,
                                  width=12,
-                                 text=_("Alter"),
+                                 text=t("Alter"),
                                  font=(FONT, 16),
                                  command=lambda: self.__alter_row(self.tree.selection()))
         analyze_button = tk.Button(master,
                                    width=12,
-                                   text=_("Analyze"),
+                                   text=t("Analyze"),
                                    font=(FONT, 16),
                                    command=self.__analyze)
-        heading = [_("ID"), _("Description"), _("Stock"), _("Buying Price"),
-                   _("Selling Price"), _("External ID"), _("Supplier")]
+        heading = [t("ID"), t("Description"), t("Stock"), t("Buying Price"),
+                   t("Selling Price"), t("External ID"), t("Supplier")]
         width = [200, 300, 90, 90, 90, 173, 200]
         self.tree = ttk.Treeview(master,
                                  height=100,
@@ -140,18 +133,18 @@ class StockManagement(main.SetMenu, main.TreeView):
 class Alter(tk.Toplevel):
     def __init__(self, values, **kw):
         super().__init__(**kw)
-        self.title(_("Alter"))
+        self.title(t("Alter"))
         self.geometry("620x250")
         self.values = values
 
         desc_label = tk.Label(self,
-                              text=_("Product Description: "),
+                              text=t("Product Description: "),
                               font=(FONT, 16))
         stock_label = tk.Label(self,
-                               text=_("Stock: "),
+                               text=t("Stock: "),
                                font=(FONT, 16))
         sell_label = tk.Label(self,
-                              text=_("Selling Price: "),
+                              text=t("Selling Price: "),
                               font=(FONT, 16))
         self.desc_entry = tk.Entry(self,
                                    width=40,
@@ -167,12 +160,12 @@ class Alter(tk.Toplevel):
         self.sell_entry.insert(0, values[4])
         delete_button = tk.Button(self,
                                   width=15,
-                                  text=_("Delete Row"),
+                                  text=t("Delete Row"),
                                   font=(FONT, 16),
                                   command=self.__delete)
         confirm_button = tk.Button(self,
                                    width=15,
-                                   text=_("Confirm Change"),
+                                   text=t("Confirm Changes"),
                                    font=(FONT, 16),
                                    command=self.__confirm)
         desc_label.grid(row=0, column=0, padx=20, pady=20, sticky="E")

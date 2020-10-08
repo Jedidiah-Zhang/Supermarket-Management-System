@@ -8,39 +8,33 @@
 @Software: PyCharm
 """
 
-import tkinter as tk
 from tkinter import messagebox
-import main
+from main import *
 
-DEFAULT = main.CONFIG["DEFAULT"]["default_pass"]
-CONNECTION = main.CONNECTION
-CURSOR = main.CURSOR
-CURSOR.execute("USE shop")
-
-FONT = main.FONT
+DEFAULT = CONFIG["DEFAULT"]["default_pass"]
 
 
-class Registration(main.SetMenu):
+class Registration(SetMenu):
     def __init__(self, master, username):
         super().__init__(master, username)
 
         welcome_label = tk.Label(master,
-                                 text=_("Registration"),
+                                 text=t("Registration"),
                                  font=(FONT, 20))
         first_name_label = tk.Label(master,
-                                    text=_("First Name: "),
+                                    text=t("First Name: "),
                                     font=(FONT, 14))
         last_name_label = tk.Label(master,
-                                   text=_("Last Name: "),
+                                   text=t("Last Name: "),
                                    font=(FONT, 14))
         username_label = tk.Label(master,
-                                  text=_("Username: "),
+                                  text=t("Username: "),
                                   font=(FONT, 14))
         address_label = tk.Label(master,
-                                 text=_("Address: "),
+                                 text=t("Address: "),
                                  font=(FONT, 14))
         email_label = tk.Label(master,
-                               text=_("Email: "),
+                               text=t("Email: "),
                                font=(FONT, 14))
 
         self.first_name_entry = tk.Entry(master,
@@ -66,18 +60,18 @@ class Registration(main.SetMenu):
         self.admin = tk.BooleanVar()
         self.admin.set(0)
         employee_radiobutton = tk.Radiobutton(master,
-                                              text=_("Employee"),
+                                              text=t("Employee"),
                                               variable=self.admin,
                                               value=0)
         admin_radiobutton = tk.Radiobutton(master,
-                                           text=_("Administration"),
+                                           text=t("Administration"),
                                            variable=self.admin,
                                            value=1)
         password_label = tk.Label(master,
-                                  text=_("*Password will be set as default: ") + DEFAULT,
+                                  text=t("*Password will be set as default: ") + DEFAULT,
                                   font=(FONT, 12))
         confirm_button = tk.Button(master,
-                                   text=_("Confirm"),
+                                   text=t("Confirm"),
                                    width=15,
                                    font=(FONT, 14),
                                    command=self.__confirm)
@@ -113,7 +107,7 @@ class Registration(main.SetMenu):
             self.username_entry.delete(0, "end")
             self.address_entry.delete(0, "end")
             self.email_entry.delete(0, "end")
-            tk.messagebox.showinfo(_("Info"), _("Account Created"))
+            tk.messagebox.showinfo(t("Info"), t("Account Created"))
         except:
             CONNECTION.rollback()
-            tk.messagebox.showwarning(_("Warning"), _("Error: Check details entered."))
+            tk.messagebox.showwarning(t("Warning"), t("Error: Check details entered."))

@@ -8,20 +8,13 @@
 @Software: PyCharm
 """
 
-import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from time import localtime, strftime
-import main
-
-CONNECTION = main.CONNECTION
-CURSOR = main.CURSOR
-CURSOR.execute("USE shop")
-
-FONT = main.FONT
+from main import *
 
 
-class SalespersonBase(main.SetMenu):
+class SalespersonBase(SetMenu):
     def __init__(self, master, username):
         super().__init__(master, username)
         total = tk.StringVar()
@@ -55,19 +48,19 @@ class Info:
         self.staff_code = tk.StringVar()
 
         label_ordernum = tk.Label(master,
-                                  text=_("Order Number: "),
+                                  text=t("Order Number: "),
                                   font=(FONT, 13))
         label_salesperson = tk.Label(master,
-                                     text=_("Salesperson: "),
+                                     text=t("Salesperson: "),
                                      font=(FONT, 13))
         label_staffcode = tk.Label(master,
-                                   text=_("Staff Code: "),
+                                   text=t("Staff Code: "),
                                    font=(FONT, 13))
         label_note = tk.Label(master,
-                              text=_("Note: "),
+                              text=t("Note: "),
                               font=(FONT, 13))
         label_date = tk.Label(master,
-                              text=_("Date: "),
+                              text=t("Date: "),
                               font=(FONT, 13))
         self.date.set(strftime("%d-%m-%Y", localtime()))
         label_date1 = tk.Label(master,
@@ -109,11 +102,11 @@ class Info:
         label_date1.grid(row=0, column=3)
 
 
-class List(main.TreeView):
+class List(TreeView):
     def __init__(self, master, total):
         super().__init__()
         self.total = total
-        heading = (_("Product Description"), _("Product ID"), _("Price"), _("Discount"), _("Quantity"), _("Subtotal"))
+        heading = (t("Product Description"), t("Product ID"), t("Price"), t("Discount"), t("Quantity"), t("Subtotal"))
         col_width = (200, 100, 80, 50, 50, 80)
         self.table = ttk.Treeview(master,
                                   height=40,
@@ -161,12 +154,12 @@ class List(main.TreeView):
         row = self.table.identify_row(event.y)
         if row != "":
             set_window = tk.Toplevel(master)
-            set_window.title(_("Set Quantity"))
+            set_window.title(t("Set Quantity"))
             set_window.geometry("340x50")
             set_window.resizable(False, False)
             set_window.attributes("-topmost", 1)
             set_window.grab_set()
-            label = tk.Label(set_window, text=_("Quantity: "))
+            label = tk.Label(set_window, text=t("Quantity: "))
             entry = tk.Entry(set_window, width=20)
             rn = int(str(row).replace('I', ''))  # 序号
             quantity = self.products["quantity"][rn - 1]  # 原数量
@@ -185,7 +178,7 @@ class List(main.TreeView):
 class Sale:
     def __init__(self, master, total, LST, INFO):
         label_total = tk.Label(master,
-                               text=_("Total:"),
+                               text=t("Total: "),
                                font=(FONT, 20))
 
         total.set("0")
@@ -193,13 +186,13 @@ class Sale:
                                 textvariable=total,
                                 font=(FONT, 20))
         label_pay = tk.Label(master,
-                             text=_("Payment:"),
+                             text=t("Payment: "),
                              font=(FONT, 20))
         entry_pay = tk.Entry(master,
                              width=10,
                              font=(FONT, 20))
         label_change = tk.Label(master,
-                                text=_("Change:"),
+                                text=t("Change: "),
                                 font=(FONT, 20))
         change = tk.StringVar()
         change.set("0")
@@ -207,8 +200,9 @@ class Sale:
                                     textvariable=change,
                                     font=(FONT, 20))
         button_confirm = tk.Button(master,
-                                   text=_("Confirm"),
+                                   text=t("Confirm"),
                                    font=(FONT, 17),
+                                   width=13,
                                    command=lambda: self.__confirm(entry_pay, total, change, LST, INFO))
 
         label_total.grid(row=0, column=0, padx=20, pady=10, sticky="W")
@@ -241,7 +235,7 @@ class Sale:
         if entry_pay.get() == "":
             entry_pay.insert(0, 0)
         if int(total.get()) - int(entry_pay.get()) > 0:
-            tk.messagebox.showwarning(title=_("Warning"), message=_("Payment Failure"))
+            tk.messagebox.showwarning(title=t("Warning"), message=t("Payment Failure"))
         else:
             children = LST.table.get_children()
             try:
@@ -276,10 +270,10 @@ class Sale:
                     CURSOR.execute(query_items[:-2])
                     CONNECTION.commit()
                 INFO.order_number.set(str(int(INFO.order_number.get()) + 1))
-                tk.messagebox.showinfo(_("Info"), _("Success"))
+                tk.messagebox.showinfo(t("Info"), t("Success"))
             except:
                 CONNECTION.rollback()
-                tk.messagebox.showerror(_("Error"), _("Error occur"))
+                tk.messagebox.showerror(t("Error"), t("Error occur"))
 
             entry_pay.delete(0, "end")
             total.set(0)
@@ -297,16 +291,16 @@ class Sale:
 class Entry:
     def __init__(self, master, Good):
         frame_top = tk.Frame(master)
-        label_search = tk.Label(frame_top, text=_("Search："), font=(FONT, 20))
+        label_search = tk.Label(frame_top, text=t("Search："), font=(FONT, 20))
         self.entry_search = tk.Entry(frame_top, font=(FONT, 20))
         self.check = [tk.BooleanVar(), tk.BooleanVar()]
         self.check[0].set(1)
         checkbutton_id = tk.Checkbutton(master,
                                         var=self.check[0],
-                                        text="ID", font=(FONT, 12))
+                                        text=t("ID"), font=(FONT, 12))
         checkbutton_name = tk.Checkbutton(master,
                                           var=self.check[1],
-                                          text=_("Name"), font=(FONT, 12))
+                                          text=t("Name"), font=(FONT, 12))
 
         frame_top.pack(side="top", fill="both", expand=True)
         label_search.pack(side="left", padx=20)
@@ -342,10 +336,10 @@ class Entry:
             Good.add_row(each[1], each[0], each[4], each[8])
 
 
-class Goods(main.TreeView):
+class Goods(TreeView):
     def __init__(self, master, LST):
         super().__init__()
-        heading = (_("Product Description"), _("Product ID"), _("Price"), _("Discount"))
+        heading = (t("Product Description"), t("Product ID"), t("Price"), t("Discount"))
         self.alternative_table = tk.ttk.Treeview(master,
                                                  height=40,
                                                  show="headings",
