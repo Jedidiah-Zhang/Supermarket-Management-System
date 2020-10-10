@@ -11,6 +11,7 @@
 from tkinter import ttk
 from tkinter import messagebox
 from time import localtime, strftime
+from threading import Thread
 from main import *
 
 
@@ -291,6 +292,7 @@ class Sale:
 class Entry:
     def __init__(self, master, Good):
         frame_top = tk.Frame(master)
+
         label_search = tk.Label(frame_top, text=t("Search："), font=(FONT, 20))
         self.entry_search = tk.Entry(frame_top, font=(FONT, 20))
         self.check = [tk.BooleanVar(), tk.BooleanVar()]
@@ -310,30 +312,30 @@ class Entry:
 
         self.entry_search.bind("<KeyRelease>", lambda event: self.__save_search(Good))
 
-    def __save_search(self, Good):
-        Good.clear_list()
-        quest = self.entry_search.get()
-        if self.check[0].get() == 1 and self.check[1].get() == 0:
+    def __save_search(self, GOOD):
+        GOOD.clear_list()
+        quest = '.*{}.*'.format(self.entry_search.get())
+        if self.check[0].get() and self.check[1].get() is False:
             CURSOR.execute("""
             SELECT * 
             FROM shop.goods
-            WHERE `Product ID` like '%{0}%'
+            WHERE `Product ID` RLIKE '{0}'
             """.format(quest))
-        elif self.check[0].get() == 0 and self.check[1].get() == 1:
+        elif self.check[0].get() is False and self.check[1].get():
             CURSOR.execute("""
             SELECT *
             FROM shop.goods
-            WHERE `Product Description` like '%{0}%'
+            WHERE `Product Description` RLIKE '{0}'
             """.format(quest))
-        elif self.check[0].get() == 1 and self.check[1].get() == 1:
+        elif self.check[0].get() and self.check[1].get():
             CURSOR.execute("""
             SELECT *
             FROM shop.goods
-            WHERE `Product ID` like '%{0}%' OR `Product Description` like '%{1}%'
+            WHERE `Product ID` RLIKE '{0}' OR `Product Description` RLIKE '{1}'
             """.format(quest, quest))
         output = CURSOR.fetchall()
-        for each in output:
-            Good.add_row(each[1], each[0], each[4], each[8])
+        for each in output[:20]:
+            GOOD.add_row(each[1], each[0], each[4], each[8])
 
 
 class Goods(TreeView):
