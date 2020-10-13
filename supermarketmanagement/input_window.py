@@ -26,7 +26,7 @@ class Purchase(SetMenu, TreeView):
                                font=(FONT, 16))
         purchase_button = tk.Button(master,
                                     width=25,
-                                    text=t("Purchase Form File"),
+                                    text=t("Purchase from File"),
                                     font=(FONT, 16),
                                     command=self.__read_file)
         confirm_button = tk.Button(master,
