@@ -14,7 +14,7 @@ import hashlib
 from os import popen
 import configparser
 import pymysql
-from supermarcketmanagement import opener
+from supermarketmanagement import opener
 
 # 链接数据库
 CONNECTION = pymysql.connect(host="localhost",

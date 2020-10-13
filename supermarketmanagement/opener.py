@@ -9,7 +9,7 @@
 """
 
 import tkinter as tk
-from supermarcketmanagement import sale_window, login_window, \
+from supermarketmanagement import sale_window, login_window, \
     stock_window, selection_window, registration_window, input_window
 from main import t
 

@@ -11,7 +11,6 @@
 from tkinter import ttk
 from tkinter import messagebox
 from time import localtime, strftime
-from threading import Thread
 from main import *
 
 
@@ -334,7 +333,7 @@ class Entry:
             WHERE `Product ID` RLIKE '{0}' OR `Product Description` RLIKE '{1}'
             """.format(quest, quest))
         output = CURSOR.fetchall()
-        for each in output[:20]:
+        for each in output[:14]:
             GOOD.add_row(each[1], each[0], each[4], each[8])
 
 
