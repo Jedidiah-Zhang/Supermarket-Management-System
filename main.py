@@ -102,47 +102,47 @@ class Account:
     def __init__(self, master, info, root):
         id_label1 = tk.Label(master,
                              text=t("ID: "),
-                             font=(CONFIG["DEFAULT"]["font"], 16))
+                             font=(FONT, 16))
         id_label2 = tk.Label(master,
                              text=info[0],
-                             font=(CONFIG["DEFAULT"]["font"], 16))
+                             font=(FONT, 16))
         name_label1 = tk.Label(master,
                                text=t("Name: "),
-                               font=(CONFIG["DEFAULT"]["font"], 16))
+                               font=(FONT, 16))
         name_label2 = tk.Label(master,
                                text=info[1] + " " + info[2],
-                               font=(CONFIG["DEFAULT"]["font"], 16))
+                               font=(FONT, 16))
         username_label = tk.Label(master,
                                   text=t("Username: "),
-                                  font=(CONFIG["DEFAULT"]["font"], 16))
+                                  font=(FONT, 16))
         self.username_entry = tk.Entry(master,
                                        width=40,
-                                       font=(CONFIG["DEFAULT"]["font"], 16))
+                                       font=(FONT, 16))
         self.username_entry.insert(0, info[3])
         email_label = tk.Label(master,
                                text=t("Email: "),
-                               font=(CONFIG["DEFAULT"]["font"], 16))
+                               font=(FONT, 16))
         self.email_entry = tk.Entry(master,
                                     width=40,
-                                    font=(CONFIG["DEFAULT"]["font"], 16))
+                                    font=(FONT, 16))
         self.email_entry.insert(0, info[6])
         address_label = tk.Label(master,
                                  text=t("Address: "),
-                                 font=(CONFIG["DEFAULT"]["font"], 16))
+                                 font=(FONT, 16))
         self.address_text = tk.Text(master,
                                     width=40,
                                     height=3,
-                                    font=(CONFIG["DEFAULT"]["font"], 16))
+                                    font=(FONT, 16))
         self.address_text.insert("end", info[5])
         password_button = tk.Button(master,
                                     width=15,
                                     text=t("Change Password"),
-                                    font=(CONFIG["DEFAULT"]["font"], 16),
+                                    font=(FONT, 16),
                                     command=lambda: self.__change_pass(info, master, root))
         confirm_button = tk.Button(master,
                                    width=15,
                                    text=t("Confirm Changes"),
-                                   font=(CONFIG["DEFAULT"]["font"], 16),
+                                   font=(FONT, 16),
                                    command=lambda: self.__confirm(info, master, root))
 
         id_label1.grid(row=0, column=0, padx=10, pady=5, sticky="E")
@@ -166,25 +166,25 @@ class Account:
         top.resizable(False, False)
         original_label = tk.Label(top,
                                   text=t("Original Password: "),
-                                  font=(CONFIG["DEFAULT"]["font"], 16))
+                                  font=(FONT, 16))
         original_entry = tk.Entry(top,
                                   width=20,
                                   bd=2,
-                                  font=(CONFIG["DEFAULT"]["font"], 12))
+                                  font=(FONT, 12))
         new_label = tk.Label(top,
                              text=t("New Password: "),
-                             font=(CONFIG["DEFAULT"]["font"], 16))
+                             font=(FONT, 16))
         new_entry = tk.Entry(top,
                              width=20,
                              bd=2,
-                             font=(CONFIG["DEFAULT"]["font"], 12))
+                             font=(FONT, 12))
         confirm_label = tk.Label(top,
                                  text=t("Confirm Password: "),
-                                 font=(CONFIG["DEFAULT"]["font"], 16))
+                                 font=(FONT, 16))
         confirm_entry = tk.Entry(top,
                                  width=20,
                                  bd=2,
-                                 font=(CONFIG["DEFAULT"]["font"], 12))
+                                 font=(FONT, 12))
 
         original_label.grid(row=0, column=0, padx=10, pady=5, sticky="E")
         original_entry.grid(row=0, column=1)
@@ -247,7 +247,7 @@ class TreeView:
     def treeview_sort_column(self, tv, col, reverse):
         L = [(tv.set(k, col), k) for k in tv.get_children('')]
         try:
-            L.sort(key=lambda t: int(t[0]), reverse=reverse)
+            L.sort(key=lambda x: int(x[0]), reverse=reverse)
         except ValueError:
             L.sort(reverse=reverse)
         for index, (val, k) in enumerate(L):
