@@ -333,8 +333,9 @@ class Entry:
             WHERE `Product ID` RLIKE '{0}' OR `Product Description` RLIKE '{1}'
             """.format(quest, quest))
         output = CURSOR.fetchall()
-        for each in output[:14]:
+        for each in output:
             GOOD.add_row(each[1], each[0], each[4], each[8])
+        GOOD.get_table().update()
 
 
 class Goods(TreeView):
@@ -370,6 +371,9 @@ class Goods(TreeView):
             row = self.alternative_table.item(item, "values")
             self.add_to_list(LST, row[0], int(row[1]), float(row[2]), int(row[3]), 1)
 
+    def get_table(self):
+        return self.alternative_table
+
     @staticmethod
     def add_to_list(LST, description, product_id, price, discount, quantity):
         if product_id not in LST.products["id"]:
@@ -396,7 +400,6 @@ class Goods(TreeView):
                                                   self.good_id[-1],
                                                   self.price[-1],
                                                   self.discount[-1]))
-            self.alternative_table.update()
         except:
             pass
 
