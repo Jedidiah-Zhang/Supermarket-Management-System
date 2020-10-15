@@ -67,6 +67,7 @@ class Purchase(SetMenu, TreeView):
             if maximum is None:
                 maximum = 0
             for row in self.data:
+                row[2] = str(row[2]).replace("'", "\\'")
                 CURSOR.execute("""
                 SELECT `Product ID`
                 FROM shop.goods
@@ -83,7 +84,7 @@ class Purchase(SetMenu, TreeView):
                                          values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
                 except:
                     pass
-                self.tree.update()
+            self.tree.update()
 
     def __confirm(self):
         CURSOR.execute("""
@@ -105,7 +106,7 @@ class Purchase(SetMenu, TreeView):
                     maximum += 1
                     CURSOR.execute("""
                     INSERT INTO shop.purchase
-                    (`Product Description`, `Product ID`, `External ID`, `Principal ID`, 
+                    (`Product Description`, `Product ID`, `External ID`, `Agent ID`, 
                     Supplier, Datetime, Amount, Price)
                     VALUE
                     ('{0}', {1}, {2}, {3}, '{4}', '{5}', {6}, {7})
@@ -127,7 +128,7 @@ class Purchase(SetMenu, TreeView):
                 try:
                     CURSOR.execute("""
                     INSERT INTO shop.purchase
-                    (`Product Description`, `Product ID`, `External ID`, `Principal ID`, 
+                    (`Product Description`, `Product ID`, `External ID`, `Agent ID`, 
                     Supplier, Datetime, Amount, Price)
                     VALUE
                     ('{0}', {1}, {2}, {3}, '{4}', '{5}', {6}, {7})
