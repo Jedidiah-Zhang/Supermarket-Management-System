@@ -16,7 +16,7 @@ from main import *
 
 class Purchase(SetMenu, TreeView):
     def __init__(self, master, username):
-        super().__init__(master, username)
+        super().__init__(master, username, "Purchase")
         self.data = None
         name_label = tk.Label(master,
                               text=t("Purchasing Agent: "),

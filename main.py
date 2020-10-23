@@ -11,9 +11,10 @@
 import tkinter as tk
 from tkinter import messagebox
 import hashlib
-from os import popen
+from os import popen, startfile
 import configparser
 import pymysql
+import webbrowser
 from supermarketmanagement import opener
 
 # 链接数据库
@@ -32,22 +33,29 @@ LANGUAGES = ["Chinese", "English"]
 FONTS = ["方正书宋简体", "Adobe Garamond Pro"]
 CUR_LANG = CONFIG["DEFAULT"]["language"]
 FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
-trans = {}
-with open('./lang/{}.lang'.format(CUR_LANG), 'r', encoding='utf-8') as f:
-    for lines in f.readlines()[:-1]:
-        line = lines[:-1].split('=')
-        trans[line[0]] = line[1]
+
+
+def init_language():
+    trans = {}
+    with open('./lang/{}.lang'.format(CUR_LANG), 'r', encoding='utf-8') as f:
+        for lines in f.readlines()[:-1]:
+            line = lines[:-1].split('=')
+            trans[line[0]] = line[1]
+    return trans
+
+
+translation = init_language()
 
 
 def t(msgid: str) -> str:
-    if msgid in trans:
-        return trans[msgid]
+    if msgid in translation:
+        return translation[msgid]
     else:
         return msgid
 
 
 class SetMenu:
-    def __init__(self, master, name):
+    def __init__(self, master, name, window):
         CURSOR.execute("""
         SELECT * 
         FROM shop.members
@@ -55,47 +63,67 @@ class SetMenu:
         """.format(name))
         self.user = CURSOR.fetchall()[0]
 
-        menubar = tk.Menu(master)
-        setting_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label=t("Settings"), menu=setting_menu)
-        lang_menu = tk.Menu(setting_menu, tearoff=0)
-        setting_menu.add_cascade(label=t("Language"), menu=lang_menu)
+        self.menubar = tk.Menu(master)
+        self.action_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label=t("Action"), menu=self.action_menu)
+        lang_menu = tk.Menu(self.action_menu, tearoff=0)
+        self.action_menu.add_cascade(label=t("Language"), menu=lang_menu)
         for each in LANGUAGES:
-            lang_menu.add_command(label=each, command=lambda arg=each: self._set_lang(arg, master))
-        setting_menu.add_command(label=t("Account"), command=lambda: self._account(self.user, master))
-        setting_menu.add_command(label=t("Back"), command=lambda: self._back(master, self.user))
-        setting_menu.add_command(label=t("Logout"), command=lambda: self._logout(master))
-        master.config(menu=menubar)
+            lang_menu.add_command(label=each, command=lambda arg=each: self._set_lang(arg, master, window))
+        self.action_menu.add_command(label=t("Back"), command=lambda: self._back(master))
 
-    @staticmethod
-    def _set_lang(lang: str, master):
+        self.account_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label=t("Account"), menu=self.account_menu)
+        self.account_menu.add_command(label=t("Details"), command=lambda: self._account(master))
+        self.account_menu.add_command(label=t("Logout"), command=lambda: self._logout(master))
+
+        self.edit_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label=t("Edit"), menu=self.edit_menu)
+
+        self.help_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label=t("Help"), menu=self.help_menu)
+        self.help_menu.add_command(label=t("Open Help File"), command=self._open_file)
+        self.help_menu.add_command(label=t("Open GitHub Page"), command=self._open_url)
+
+        master.config(menu=self.menubar)
+
+    def _set_lang(self, lang: str, master, window):
+        global CUR_LANG, FONT, translation
         CONFIG["DEFAULT"]["language"] = lang
         CONFIG["DEFAULT"]["font"] = dict(zip(LANGUAGES, FONTS))[lang]
         CONFIG.write(open(CFG, "w"))
-        popen("python %s/main.py" % CONFIG["DEFAULT"]["path"])
+        CUR_LANG = lang
+        FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
+        translation = init_language()
         master.destroy()
+        opener.WindowFactory(window, self.user[3])
 
-    @staticmethod
-    def _logout(master):
+    def _logout(self, master):
         CONFIG["DEFAULT"]["remember"] = "False"
         CONFIG["ACCOUNTS"]["username"] = ""
         CONFIG.write(open(CFG, "w"))
-        popen("python %s/main.py" % CONFIG["DEFAULT"]["path"])
         master.destroy()
+        opener.WindowFactory("Login", self.user[3])
 
-    @staticmethod
-    def _account(info, master):
+    def _account(self, master):
         root_window = tk.Tk()
         root_window.title(t("Account"))
         root_window.geometry("600x320")
         root_window.resizable(False, False)
-        Account(root_window, info, master)
+        Account(root_window, self.user, master)
         root_window.mainloop()
 
-    @staticmethod
-    def _back(master, info):
+    def _back(self, master):
         master.destroy()
-        opener.SelectionFactory(info[7], info[3])
+        opener.SelectionFactory(self.user[7], self.user[3])
+
+    @staticmethod
+    def _open_file():
+        startfile("README.md")
+
+    @staticmethod
+    def _open_url():
+        webbrowser.open_new_tab("https://github.com/Jedidiah-Zhang/Supermarket-Management-System")
 
 
 class Account:

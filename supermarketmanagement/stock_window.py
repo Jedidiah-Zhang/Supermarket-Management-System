@@ -14,8 +14,7 @@ from main import *
 
 class StockManagement(SetMenu, TreeView):
     def __init__(self, master, username):
-        super().__init__(master, username)
-
+        super().__init__(master, username, "Inventory")
         id_label = tk.Label(master,
                             text=t("Good ID: "),
                             font=(FONT, 16))

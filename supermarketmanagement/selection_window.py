@@ -32,12 +32,12 @@ class Admin:
     @staticmethod
     def __open_stock(master, username):
         master.destroy()
-        opener.stock(username)
+        opener.WindowFactory("Inventory", username)
 
     @staticmethod
     def __open_reg(master, username):
         master.destroy()
-        opener.reg(username)
+        opener.WindowFactory("Registration", username)
 
 
 class Employee:
@@ -60,9 +60,9 @@ class Employee:
     @staticmethod
     def __open_sale(master, username):
         master.destroy()
-        opener.sale(username)
+        opener.WindowFactory("Cashier", username)
 
     @staticmethod
     def __open_input(master, username):
         master.destroy()
-        opener.purchase(username)
+        opener.WindowFactory("Purchase", username)

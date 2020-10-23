@@ -16,7 +16,7 @@ DEFAULT = CONFIG["DEFAULT"]["default_pass"]
 
 class Registration(SetMenu):
     def __init__(self, master, username):
-        super().__init__(master, username)
+        super().__init__(master, username, "Registration")
 
         welcome_label = tk.Label(master,
                                  text=t("Registration"),

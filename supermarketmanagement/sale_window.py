@@ -16,7 +16,7 @@ from main import *
 
 class SalespersonBase(SetMenu):
     def __init__(self, master, username):
-        super().__init__(master, username)
+        super().__init__(master, username, "Cashier")
         total = tk.StringVar()
 
         frame_top = tk.Frame(master)
