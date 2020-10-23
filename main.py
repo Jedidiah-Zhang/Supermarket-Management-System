@@ -98,12 +98,13 @@ class SetMenu:
         master.destroy()
         opener.WindowFactory(window, self.user[3])
 
-    def _logout(self, master):
+    @staticmethod
+    def _logout(master):
         CONFIG["DEFAULT"]["remember"] = "False"
         CONFIG["ACCOUNTS"]["username"] = ""
         CONFIG.write(open(CFG, "w"))
         master.destroy()
-        opener.WindowFactory("Login", self.user[3])
+        opener.WindowFactory("Login")
 
     def _account(self, master):
         root_window = tk.Tk()
@@ -261,11 +262,13 @@ class Account:
             if CONFIG.getboolean("DEFAULT", "REMEMBER"):
                 CONFIG["ACCOUNTS"]["username"] = self.username_entry.get()
                 CONFIG.write(open(CFG, "w"))
+            tk.messagebox.showwarning(t("Warning"), t("Account details have been changed, please login again."))
+            master.destroy()
+            root.destroy()
+            opener.WindowFactory("Login")
         except:
             CONNECTION.rollback()
-        popen("python %s/main.py" % CONFIG["DEFAULT"]["path"])
-        master.destroy()
-        root.destroy()
+            tk.messagebox.showwarning(t("Error"), t("Error occur"))
 
 
 class TreeView:
@@ -285,7 +288,7 @@ class TreeView:
 
 if __name__ == "__main__":
     if not CONFIG.getboolean("DEFAULT", "REMEMBER"):
-        opener.login()
+        opener.WindowFactory("Login")
     else:
         Username = CONFIG["ACCOUNTS"]["username"]
         CURSOR.execute("""

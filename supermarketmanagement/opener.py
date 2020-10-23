@@ -31,7 +31,7 @@ class SelectionFactory:
 
 
 class WindowFactory:
-    def __new__(cls, window, username):
+    def __new__(cls, window, username=None):
         if window == "Purchase":
             root_window = tk.Tk()
             root_window.title(t("Purchase"))
