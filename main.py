@@ -38,7 +38,7 @@ FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
 def init_language():
     trans = {}
     with open('./lang/{}.lang'.format(CUR_LANG), 'r', encoding='utf-8') as f:
-        for lines in f.readlines()[:-1]:
+        for lines in f.readlines():
             line = lines[:-1].split('=')
             trans[line[0]] = line[1]
     return trans
@@ -77,9 +77,6 @@ class SetMenu:
         self.menubar.add_cascade(label=t("Account"), menu=self.account_menu)
         self.account_menu.add_command(label=t("Details"), command=self._account)
         self.account_menu.add_command(label=t("Logout"), command=self._logout)
-
-        self.edit_menu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label=t("Edit"), menu=self.edit_menu)
 
         self.help_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=t("Help"), menu=self.help_menu)

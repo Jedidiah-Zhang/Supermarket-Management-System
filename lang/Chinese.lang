@@ -89,3 +89,6 @@ Details=账户信息
 Open Help File=打开帮助文档
 Open GitHub Page=打开GitHub页面
 Account details have been changed, please login again.=用户信息变更，请重新登录。
+Set Quantity=数量变更
+Delete=删除
+The row will be deleted, there's no way for undo this action!=删除行后，无法撤销操作。

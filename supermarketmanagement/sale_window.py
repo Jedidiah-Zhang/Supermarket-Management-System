@@ -111,6 +111,9 @@ class List(TreeView):
         self.master = master
         self.total = total
 
+        self.popup = tk.Menu(self.master, tearoff=0)
+        self.popup.add_command(label=t("Set Quantity"), command=self.__set_quantity, state="disabled")
+
         heading = (t("Product Description"), t("Product ID"), t("Price"), t("Discount"), t("Quantity"), t("Subtotal"))
         col_width = (200, 100, 80, 50, 50, 80)
         self.table = ttk.Treeview(self.master,
@@ -133,12 +136,20 @@ class List(TreeView):
 
         self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.table.yview)
 
-        self.table.bind("<Double-1>", lambda event: self.__set_quantity(event))
+        def __pop_up(event):
+            self.popup.selection = self.table.identify_row(event.y)
+            if self.popup.selection != "":
+                self.popup.entryconfig(t("Set Quantity"), state='normal')
+            self.popup.post(event.x_root, event.y_root)
+            self.popup.grab_release()
+
+        self.table.bind("<Double-1>", self.__set_quantity)
+        self.table.bind("<Button-3>",  __pop_up)
         self.table.pack(side="top", fill="both", expand=True)
         self.VScroll.place(relx=0.978, rely=0.025, relwidth=0.02, relheight=0.958)
         self.table.configure(yscrollcommand=self.VScroll.set)
 
-    def __set_quantity(self, event):
+    def __set_quantity(self, event=None):
         def __save_edit():
             new_q = int(entry.get())  # 更改的数量
             self.table.set(row, column=4, value=new_q)
@@ -155,8 +166,10 @@ class List(TreeView):
                 int(e.widget.get())
             except ValueError:
                 e.widget.delete(e.widget.index(tk.INSERT) - 1)
-
-        row = self.table.identify_row(event.y)
+        if event is None:
+            row = self.popup.selection
+        else:
+            row = self.table.identify_row(event.y)
         if row != "":
             set_window = tk.Toplevel(self.master)
             set_window.title(t("Set Quantity"))
