@@ -32,14 +32,14 @@ LANGUAGES = ["Chinese", "English"]
 FONTS = ["方正书宋简体", "Adobe Garamond Pro"]
 CUR_LANG = CONFIG["DEFAULT"]["language"]
 FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
+trans = {}
+with open('./lang/{}.lang'.format(CUR_LANG), 'r', encoding='utf-8') as f:
+    for lines in f.readlines()[:-1]:
+        line = lines[:-1].split('=')
+        trans[line[0]] = line[1]
 
 
 def t(msgid: str) -> str:
-    trans = {}
-    with open('./lang/{}.lang'.format(CUR_LANG), 'r', encoding='utf-8') as f:
-        for each in f.readlines()[:-1]:
-            lines = each[:-1].split('=')
-            trans[lines[0]] = lines[1]
     if msgid in trans:
         return trans[msgid]
     else:
