@@ -14,55 +14,57 @@ from main import *
 
 class Admin:
     def __init__(self, master, username):
-        reg_button = tk.Button(master,
+        self.master = master
+        self.username = username
+
+        reg_button = tk.Button(self.master,
                                width=15,
                                text=t("Registration"),
                                font=(FONT, 20),
-                               command=lambda: self.__open_reg(master, username))
+                               command=self.__open_reg)
 
-        stock_button = tk.Button(master,
+        stock_button = tk.Button(self.master,
                                  width=15,
                                  text=t("Inventory"),
                                  font=(FONT, 20),
-                                 command=lambda: self.__open_stock(master, username))
+                                 command=self.__open_stock)
 
         reg_button.pack()
         stock_button.pack()
 
-    @staticmethod
-    def __open_stock(master, username):
-        master.destroy()
-        opener.WindowFactory("Inventory", username)
+    def __open_stock(self):
+        self.master.destroy()
+        opener.WindowFactory("Inventory", self.username)
 
-    @staticmethod
-    def __open_reg(master, username):
-        master.destroy()
-        opener.WindowFactory("Registration", username)
+    def __open_reg(self):
+        self.master.destroy()
+        opener.WindowFactory("Registration", self.username)
 
 
 class Employee:
     def __init__(self, master, username):
-        purchase_button = tk.Button(master,
+        self.master = master
+        self.username = username
+
+        purchase_button = tk.Button(self.master,
                                     width=15,
                                     text=t("Purchase"),
                                     font=(FONT, 20),
-                                    command=lambda: self.__open_input(master, username))
+                                    command=self.__open_input)
 
-        cashier_button = tk.Button(master,
+        cashier_button = tk.Button(self.master,
                                    width=15,
                                    text=t("Cashier"),
                                    font=(FONT, 20),
-                                   command=lambda: self.__open_sale(master, username))
+                                   command=self.__open_sale)
 
         purchase_button.pack()
         cashier_button.pack()
 
-    @staticmethod
-    def __open_sale(master, username):
-        master.destroy()
-        opener.WindowFactory("Cashier", username)
+    def __open_sale(self):
+        self.master.destroy()
+        opener.WindowFactory("Cashier", self.username)
 
-    @staticmethod
-    def __open_input(master, username):
-        master.destroy()
-        opener.WindowFactory("Purchase", username)
+    def __open_input(self):
+        self.master.destroy()
+        opener.WindowFactory("Purchase", self.username)

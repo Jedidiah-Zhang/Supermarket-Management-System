@@ -14,25 +14,26 @@ from main import *
 
 class LoginWindow:
     def __init__(self, master):
-        label_welcome = tk.Label(master,
+        self.master = master
+        label_welcome = tk.Label(self.master,
                                  text=t("Login"),
                                  font=(FONT, 16))
-        label_username = tk.Label(master,
+        label_username = tk.Label(self.master,
                                   text=t("Username: "))
-        label_password = tk.Label(master,
+        label_password = tk.Label(self.master,
                                   text=t("Password: "))
-        self.entry_username = tk.Entry(master,
+        self.entry_username = tk.Entry(self.master,
                                        width=35)
-        self.entry_password = tk.Entry(master,
+        self.entry_password = tk.Entry(self.master,
                                        width=35,
                                        show="*")
-        button_confirm = tk.Button(master,
+        button_confirm = tk.Button(self.master,
                                    width=10,
                                    text=t("LOGIN"),
-                                   command=lambda: self.__login(master))
+                                   command=self.__login)
 
         self.rem = tk.IntVar()
-        checkbutton_remember = tk.Checkbutton(master,
+        checkbutton_remember = tk.Checkbutton(self.master,
                                               text=t("Remember Me"),
                                               variable=self.rem,
                                               onvalue=1,
@@ -47,14 +48,14 @@ class LoginWindow:
         checkbutton_remember.grid(row=3, column=1, sticky="WN")
 
         self.entry_username.bind("<Return>", lambda event: self.__next())
-        self.entry_password.bind("<Return>", lambda event: self.__login(master))
+        self.entry_password.bind("<Return>", lambda event: self.__login())
 
         self.entry_username.focus()
 
     def __next(self):
         self.entry_password.focus()
 
-    def __login(self, master):
+    def __login(self):
         username = self.entry_username.get()
         password_sha = hashlib.sha256(self.entry_password.get().encode('utf-8')).hexdigest()
         CURSOR.execute("""
@@ -70,7 +71,7 @@ class LoginWindow:
                 if self.rem.get() == 1:
                     CONFIG["DEFAULT"]["REMEMBER"] = "True"
                     CONFIG.write(open(CFG, "w"))
-                master.destroy()
+                self.master.destroy()
                 opener.SelectionFactory(user[7], username)
             else:
                 tk.messagebox.showwarning(t("Warning"), t("Password does not match."))

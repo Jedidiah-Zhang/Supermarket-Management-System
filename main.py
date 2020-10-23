@@ -56,6 +56,7 @@ def t(msgid: str) -> str:
 
 class SetMenu:
     def __init__(self, master, name, window):
+        self.master = master
         CURSOR.execute("""
         SELECT * 
         FROM shop.members
@@ -63,19 +64,19 @@ class SetMenu:
         """.format(name))
         self.user = CURSOR.fetchall()[0]
 
-        self.menubar = tk.Menu(master)
+        self.menubar = tk.Menu(self.master)
         self.action_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=t("Action"), menu=self.action_menu)
         lang_menu = tk.Menu(self.action_menu, tearoff=0)
         self.action_menu.add_cascade(label=t("Language"), menu=lang_menu)
         for each in LANGUAGES:
-            lang_menu.add_command(label=each, command=lambda arg=each: self._set_lang(arg, master, window))
-        self.action_menu.add_command(label=t("Back"), command=lambda: self._back(master))
+            lang_menu.add_command(label=each, command=lambda arg=each: self._set_lang(arg, window))
+        self.action_menu.add_command(label=t("Back"), command=self._back)
 
         self.account_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=t("Account"), menu=self.account_menu)
-        self.account_menu.add_command(label=t("Details"), command=lambda: self._account(master))
-        self.account_menu.add_command(label=t("Logout"), command=lambda: self._logout(master))
+        self.account_menu.add_command(label=t("Details"), command=self._account)
+        self.account_menu.add_command(label=t("Logout"), command=self._logout)
 
         self.edit_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=t("Edit"), menu=self.edit_menu)
@@ -85,9 +86,9 @@ class SetMenu:
         self.help_menu.add_command(label=t("Open Help File"), command=self._open_file)
         self.help_menu.add_command(label=t("Open GitHub Page"), command=self._open_url)
 
-        master.config(menu=self.menubar)
+        self.master.config(menu=self.menubar)
 
-    def _set_lang(self, lang: str, master, window):
+    def _set_lang(self, lang: str, window):
         global CUR_LANG, FONT, translation
         CONFIG["DEFAULT"]["language"] = lang
         CONFIG["DEFAULT"]["font"] = dict(zip(LANGUAGES, FONTS))[lang]
@@ -95,27 +96,26 @@ class SetMenu:
         CUR_LANG = lang
         FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
         translation = init_language()
-        master.destroy()
+        self.master.destroy()
         opener.WindowFactory(window, self.user[3])
 
-    @staticmethod
-    def _logout(master):
+    def _logout(self):
         CONFIG["DEFAULT"]["remember"] = "False"
         CONFIG["ACCOUNTS"]["username"] = ""
         CONFIG.write(open(CFG, "w"))
-        master.destroy()
+        self.master.destroy()
         opener.WindowFactory("Login")
 
-    def _account(self, master):
+    def _account(self):
         root_window = tk.Tk()
         root_window.title(t("Account"))
         root_window.geometry("600x320")
         root_window.resizable(False, False)
-        Account(root_window, self.user, master)
+        Account(root_window, self.user, self.master)
         root_window.mainloop()
 
-    def _back(self, master):
-        master.destroy()
+    def _back(self):
+        self.master.destroy()
         opener.SelectionFactory(self.user[7], self.user[3])
 
     @staticmethod
@@ -129,50 +129,53 @@ class SetMenu:
 
 class Account:
     def __init__(self, master, info, root):
-        id_label1 = tk.Label(master,
+        self.master = master
+        self.info = info
+        self.root = root
+        id_label1 = tk.Label(self.master,
                              text=t("ID: "),
                              font=(FONT, 16))
-        id_label2 = tk.Label(master,
+        id_label2 = tk.Label(self.master,
                              text=info[0],
                              font=(FONT, 16))
-        name_label1 = tk.Label(master,
+        name_label1 = tk.Label(self.master,
                                text=t("Name: "),
                                font=(FONT, 16))
-        name_label2 = tk.Label(master,
+        name_label2 = tk.Label(self.master,
                                text=info[1] + " " + info[2],
                                font=(FONT, 16))
-        username_label = tk.Label(master,
+        username_label = tk.Label(self.master,
                                   text=t("Username: "),
                                   font=(FONT, 16))
-        self.username_entry = tk.Entry(master,
+        self.username_entry = tk.Entry(self.master,
                                        width=40,
                                        font=(FONT, 16))
         self.username_entry.insert(0, info[3])
-        email_label = tk.Label(master,
+        email_label = tk.Label(self.master,
                                text=t("Email: "),
                                font=(FONT, 16))
-        self.email_entry = tk.Entry(master,
+        self.email_entry = tk.Entry(self.master,
                                     width=40,
                                     font=(FONT, 16))
         self.email_entry.insert(0, info[6])
-        address_label = tk.Label(master,
+        address_label = tk.Label(self.master,
                                  text=t("Address: "),
                                  font=(FONT, 16))
-        self.address_text = tk.Text(master,
+        self.address_text = tk.Text(self.master,
                                     width=40,
                                     height=3,
                                     font=(FONT, 16))
         self.address_text.insert("end", info[5])
-        password_button = tk.Button(master,
+        password_button = tk.Button(self.master,
                                     width=15,
                                     text=t("Change Password"),
                                     font=(FONT, 16),
-                                    command=lambda: self.__change_pass(info, master, root))
-        confirm_button = tk.Button(master,
+                                    command=self.__change_pass)
+        confirm_button = tk.Button(self.master,
                                    width=15,
                                    text=t("Confirm Changes"),
                                    font=(FONT, 16),
-                                   command=lambda: self.__confirm(info, master, root))
+                                   command=self.__confirm)
 
         id_label1.grid(row=0, column=0, padx=10, pady=5, sticky="E")
         id_label2.grid(row=0, column=1)
@@ -187,8 +190,7 @@ class Account:
         password_button.grid(row=5, column=0, padx=60, columnspan=2, pady=5, sticky="W")
         confirm_button.grid(row=5, column=1, padx=40, sticky="E")
 
-    @staticmethod
-    def __change_pass(info, master, root):
+    def __change_pass(self):
         top = tk.Toplevel()
         top.title(t("Change Password"))
         top.geometry("370x130")
@@ -230,7 +232,7 @@ class Account:
 
         def __save_change():
             original_sha = hashlib.sha256(original_entry.get().encode('utf-8')).hexdigest()
-            if original_sha == info[4]:
+            if original_sha == self.info[4]:
                 if new_entry.get() == confirm_entry.get():
                     new_sha = hashlib.sha256(new_entry.get().encode('utf-8')).hexdigest()
                     try:
@@ -238,11 +240,13 @@ class Account:
                         UPDATE shop.members
                         SET Password_SHA = '{0}'
                         WHERE `Employee ID` = {1}
-                        """.format(new_sha, info[0]))
+                        """.format(new_sha, self.info[0]))
                         CONNECTION.commit()
-                        popen("python %s/main.py" % CONFIG["DEFAULT"]["path"])
-                        master.destroy()
-                        root.destroy()
+                        tk.messagebox.showwarning(t("Warning"),
+                                                  t("Account details have been changed, please login again."))
+                        self.master.destroy()
+                        self.root.destroy()
+                        opener.WindowFactory("Login")
                     except:
                         CONNECTION.rollback()
                         tk.messagebox.showerror(t("Error"), t("Error occur, check the format of password."))
@@ -251,20 +255,21 @@ class Account:
             else:
                 tk.messagebox.showwarning(t("Warning"), t("Password incorrect."))
 
-    def __confirm(self, info, master, root):
+    def __confirm(self):
         try:
             CURSOR.execute("""
             UPDATE shop.members
             SET Username = '{0}' , Email = '{1}', Address = '{2}'
             WHERE `Employee ID` = {3}
-            """.format(self.username_entry.get(), self.email_entry.get(), self.address_text.get("1.0", "end"), info[0]))
+            """.format(self.username_entry.get(), self.email_entry.get(),
+                       self.address_text.get("1.0", "end"), self.info[0]))
             CONNECTION.commit()
             if CONFIG.getboolean("DEFAULT", "REMEMBER"):
                 CONFIG["ACCOUNTS"]["username"] = self.username_entry.get()
                 CONFIG.write(open(CFG, "w"))
             tk.messagebox.showwarning(t("Warning"), t("Account details have been changed, please login again."))
-            master.destroy()
-            root.destroy()
+            self.master.destroy()
+            self.root.destroy()
             opener.WindowFactory("Login")
         except:
             CONNECTION.rollback()

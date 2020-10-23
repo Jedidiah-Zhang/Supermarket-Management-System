@@ -15,36 +15,38 @@ from main import *
 class StockManagement(SetMenu, TreeView):
     def __init__(self, master, username):
         super().__init__(master, username, "Inventory")
-        id_label = tk.Label(master,
+        self.master = master
+
+        id_label = tk.Label(self.master,
                             text=t("Good ID: "),
                             font=(FONT, 16))
-        self.id_entry = tk.Entry(master,
+        self.id_entry = tk.Entry(self.master,
                                  width=40,
                                  font=(FONT, 12))
-        desc_label = tk.Label(master,
+        desc_label = tk.Label(self.master,
                               text=t("Good Name: "),
                               font=(FONT, 16))
-        self.desc_entry = tk.Entry(master,
+        self.desc_entry = tk.Entry(self.master,
                                    width=40,
                                    font=(FONT, 12))
-        ex_id_label = tk.Label(master,
+        ex_id_label = tk.Label(self.master,
                                text=t("External ID: "),
                                font=(FONT, 16))
-        self.ex_id_entry = tk.Entry(master,
+        self.ex_id_entry = tk.Entry(self.master,
                                     width=25,
                                     font=(FONT, 12))
-        supplier_label = tk.Label(master,
+        supplier_label = tk.Label(self.master,
                                   text=t("Supplier: "),
                                   font=(FONT, 16))
-        self.supplier_entry = tk.Entry(master,
+        self.supplier_entry = tk.Entry(self.master,
                                        width=25,
                                        font=(FONT, 12))
-        alter_button = tk.Button(master,
+        alter_button = tk.Button(self.master,
                                  width=12,
                                  text=t("Alter"),
                                  font=(FONT, 16),
-                                 command=lambda: self.__alter_row(self.tree.selection()))
-        analyze_button = tk.Button(master,
+                                 command=self.__alter_row)
+        analyze_button = tk.Button(self.master,
                                    width=12,
                                    text=t("Analyze"),
                                    font=(FONT, 16),
@@ -52,7 +54,7 @@ class StockManagement(SetMenu, TreeView):
         heading = [t("ID"), t("Description"), t("Stock"), t("Buying Price"),
                    t("Selling Price"), t("External ID"), t("Supplier")]
         width = [200, 300, 90, 90, 90, 173, 200]
-        self.tree = ttk.Treeview(master,
+        self.tree = ttk.Treeview(self.master,
                                  height=100,
                                  columns=heading,
                                  show='headings')
@@ -61,7 +63,7 @@ class StockManagement(SetMenu, TreeView):
             self.tree.heading(heading[i], text=heading[i])
         for col in heading:
             self.tree.heading(col, text=col, command=lambda _col=col: self.treeview_sort_column(self.tree, _col, False))
-        self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.tree.yview)
+        self.VScroll = tk.Scrollbar(self.master, orient="vertical", command=self.tree.yview)
 
         id_label.grid(row=0, column=0, sticky="W", padx=5, pady=10)
         self.id_entry.grid(row=0, column=1, sticky="W")
@@ -108,7 +110,8 @@ class StockManagement(SetMenu, TreeView):
             self.tree.insert("", "end", values=each)
         self.tree.update()
 
-    def __alter_row(self, row):
+    def __alter_row(self):
+        row = self.tree.selection()
         if self.A_window is None and row != ():
             self.__create_toplevel(row)
         elif row == ():

@@ -17,14 +17,15 @@ from main import *
 class SalespersonBase(SetMenu):
     def __init__(self, master, username):
         super().__init__(master, username, "Cashier")
+        self.master = master
         total = tk.StringVar()
 
-        frame_top = tk.Frame(master)
+        frame_top = tk.Frame(self.master)
         frame_info = tk.Frame(frame_top)
-        frame_list = tk.Frame(master)
-        frame_sale = tk.LabelFrame(master)
-        frame_entry = tk.LabelFrame(master, text="", font=(FONT, 14))
-        frame_goods = tk.Frame(master)
+        frame_list = tk.Frame(self.master)
+        frame_sale = tk.LabelFrame(self.master)
+        frame_entry = tk.LabelFrame(self.master, text="", font=(FONT, 14))
+        frame_goods = tk.Frame(self.master)
 
         self.INFO = Info(frame_info, self.user)
         self.LST = List(frame_list, total)
@@ -42,28 +43,30 @@ class SalespersonBase(SetMenu):
 
 class Info:
     def __init__(self, master, user):
+        self.master = master
+        self.user = user
         self.date = tk.StringVar()
         self.order_number = tk.StringVar()
         self.name = tk.StringVar()
         self.staff_code = tk.StringVar()
 
-        label_ordernum = tk.Label(master,
+        label_ordernum = tk.Label(self.master,
                                   text=t("Order Number: "),
                                   font=(FONT, 13))
-        label_salesperson = tk.Label(master,
+        label_salesperson = tk.Label(self.master,
                                      text=t("Salesperson: "),
                                      font=(FONT, 13))
-        label_staffcode = tk.Label(master,
+        label_staffcode = tk.Label(self.master,
                                    text=t("Staff Code: "),
                                    font=(FONT, 13))
-        label_note = tk.Label(master,
+        label_note = tk.Label(self.master,
                               text=t("Note: "),
                               font=(FONT, 13))
-        label_date = tk.Label(master,
+        label_date = tk.Label(self.master,
                               text=t("Date: "),
                               font=(FONT, 13))
         self.date.set(strftime("%d-%m-%Y", localtime()))
-        label_date1 = tk.Label(master,
+        label_date1 = tk.Label(self.master,
                                textvariable=self.date,
                                font=(FONT, 13))
         CURSOR.execute("""
@@ -75,18 +78,18 @@ class Info:
             self.order_number.set("1")
         else:
             self.order_number.set(str(num + 1))
-        label_ordernum2 = tk.Label(master,
+        label_ordernum2 = tk.Label(self.master,
                                    textvariable=self.order_number,
                                    font=(FONT, 12))
-        self.name.set(user[1] + " " + user[2])
-        label_salesperson2 = tk.Label(master,
+        self.name.set(self.user[1] + " " + self.user[2])
+        label_salesperson2 = tk.Label(self.master,
                                       textvariable=self.name,
                                       font=(FONT, 12))
-        self.staff_code.set(user[0])
-        label_staffcode2 = tk.Label(master,
+        self.staff_code.set(self.user[0])
+        label_staffcode2 = tk.Label(self.master,
                                     textvariable=self.staff_code,
                                     font=(FONT, 12))
-        entry_note = tk.Entry(master,
+        entry_note = tk.Entry(self.master,
                               width=60,
                               font=(FONT, 12))
 
@@ -105,10 +108,12 @@ class Info:
 class List(TreeView):
     def __init__(self, master, total):
         super().__init__()
+        self.master = master
         self.total = total
+
         heading = (t("Product Description"), t("Product ID"), t("Price"), t("Discount"), t("Quantity"), t("Subtotal"))
         col_width = (200, 100, 80, 50, 50, 80)
-        self.table = ttk.Treeview(master,
+        self.table = ttk.Treeview(self.master,
                                   height=40,
                                   show="headings",
                                   columns=heading)
@@ -128,12 +133,12 @@ class List(TreeView):
 
         self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.table.yview)
 
-        self.table.bind("<Double-1>", lambda event: self.__set_quantity(master, event))
+        self.table.bind("<Double-1>", lambda event: self.__set_quantity(event))
         self.table.pack(side="top", fill="both", expand=True)
         self.VScroll.place(relx=0.978, rely=0.025, relwidth=0.02, relheight=0.958)
         self.table.configure(yscrollcommand=self.VScroll.set)
 
-    def __set_quantity(self, master, event):
+    def __set_quantity(self, event):
         def __save_edit():
             new_q = int(entry.get())  # 更改的数量
             self.table.set(row, column=4, value=new_q)
@@ -153,7 +158,7 @@ class List(TreeView):
 
         row = self.table.identify_row(event.y)
         if row != "":
-            set_window = tk.Toplevel(master)
+            set_window = tk.Toplevel(self.master)
             set_window.title(t("Set Quantity"))
             set_window.geometry("340x50")
             set_window.resizable(False, False)
@@ -177,85 +182,88 @@ class List(TreeView):
 
 class Sale:
     def __init__(self, master, total, LST, INFO):
-        label_total = tk.Label(master,
+        self.master = master
+        self.LST = LST
+        self.INFO = INFO
+        self.total = total
+        self.change = tk.StringVar()
+
+        label_total = tk.Label(self.master,
                                text=t("Total: "),
                                font=(FONT, 20))
 
-        total.set("0")
-        label_number = tk.Label(master,
+        self.total.set("0")
+        label_number = tk.Label(self.master,
                                 textvariable=total,
                                 font=(FONT, 20))
-        label_pay = tk.Label(master,
+        label_pay = tk.Label(self.master,
                              text=t("Payment: "),
                              font=(FONT, 20))
-        entry_pay = tk.Entry(master,
-                             width=10,
-                             font=(FONT, 20))
+        self.entry_pay = tk.Entry(self.master,
+                                  width=10,
+                                  font=(FONT, 20))
         label_change = tk.Label(master,
                                 text=t("Change: "),
                                 font=(FONT, 20))
-        change = tk.StringVar()
-        change.set("0")
-        label_change_num = tk.Label(master,
-                                    textvariable=change,
+        self.change.set("0")
+        label_change_num = tk.Label(self.master,
+                                    textvariable=self.change,
                                     font=(FONT, 20))
-        button_confirm = tk.Button(master,
+        button_confirm = tk.Button(self.master,
                                    text=t("Confirm"),
                                    font=(FONT, 17),
                                    width=13,
-                                   command=lambda: self.__confirm(entry_pay, total, change, LST, INFO))
+                                   command=self.__confirm)
 
         label_total.grid(row=0, column=0, padx=20, pady=10, sticky="W")
         label_number.grid(row=0, column=1, sticky="W")
         label_pay.grid(row=1, column=0, padx=20, sticky="W")
-        entry_pay.grid(row=1, column=1, sticky="W")
+        self.entry_pay.grid(row=1, column=1, sticky="W")
         label_change.grid(row=0, column=2, padx=10, sticky="W")
         label_change_num.grid(row=0, column=3, padx=10, sticky="W")
         button_confirm.grid(row=1, column=3, padx=30, pady=15, sticky="W")
 
-        entry_pay.bind("<KeyRelease>", lambda event: self.__calc_change(event, entry_pay, total, change))
-        entry_pay.bind("<Return>", lambda event: self.__confirm(entry_pay, total, change, LST, INFO))
+        self.entry_pay.bind("<KeyRelease>", lambda event: self.__calc_change(event))
+        self.entry_pay.bind("<Return>", lambda event: self.__confirm())
 
-    @staticmethod
-    def __calc_change(event, entry_pay, total, change):
+    def __calc_change(self, event):
         try:
             int(event.widget.get())
         except ValueError:
             event.widget.delete(event.widget.index(tk.INSERT) - 1)
-        if entry_pay.get() != "":
+        if self.entry_pay.get() != "":
             try:
-                change.set(str(int(entry_pay.get()) - int(total.get())))
+                self.change.set(str(int(self.entry_pay.get()) - int(self.total.get())))
             except ValueError:
                 pass
         else:
-            change.set("")
+            self.change.set("")
 
-    @staticmethod
-    def __confirm(entry_pay, total, change, LST, INFO):
-        if entry_pay.get() == "":
-            entry_pay.insert(0, 0)
-        if int(total.get()) - int(entry_pay.get()) > 0:
+    def __confirm(self):
+        if self.entry_pay.get() == "":
+            self.entry_pay.insert(0, 0)
+        if int(self.total.get()) - int(self.entry_pay.get()) > 0:
             tk.messagebox.showwarning(title=t("Warning"), message=t("Payment Failure"))
         else:
-            children = LST.table.get_children()
+            children = self.LST.table.get_children()
             try:
                 query_bill = """
                 INSERT INTO shop.bills
                 (`Cashier ID`, Total, Datetime) 
                 VALUE
                 ({0}, {1}, '{2}')
-                """.format(INFO.staff_code.get(), total.get(),
+                """.format(self.INFO.staff_code.get(), self.total.get(),
                            strftime("%Y-%m-%d %H:%M:%S", localtime()))
                 CURSOR.execute(query_bill)
                 CONNECTION.commit()
                 for item in children:
-                    row = LST.table.item(item)["values"]
+                    row = self.LST.table.item(item)["values"]
                     query_items = """
                     INSERT INTO shop.items
                     (`Bill ID`, `Product ID`, Quantity, `Selling Price`)
                     VALUES
                     ({0}, {1}, {2}, {3})
-                    """.format(INFO.order_number.get(), row[1], row[4], row[2])
+                    """.format(self.INFO.order_number.get(), row[1], row[4], row[2])
                     CURSOR.execute("""
                     SELECT Stock
                     FROM shop.goods
@@ -269,17 +277,17 @@ class Sale:
                     """.format(stock - row[4], row[1]))
                     CURSOR.execute(query_items[:-2])
                     CONNECTION.commit()
-                INFO.order_number.set(str(int(INFO.order_number.get()) + 1))
+                self.INFO.order_number.set(str(int(self.INFO.order_number.get()) + 1))
                 tk.messagebox.showinfo(t("Info"), t("Success"))
             except:
                 CONNECTION.rollback()
                 tk.messagebox.showerror(t("Error"), t("Error occur"))
 
-            entry_pay.delete(0, "end")
-            total.set(0)
-            change.set("0")
-            LST.table.delete(*LST.table.get_children())
-            LST.products = {
+            self.entry_pay.delete(0, "end")
+            self.total.set(0)
+            self.change.set("0")
+            self.LST.table.delete(*self.LST.table.get_children())
+            self.LST.products = {
                 "description": [],
                 "id": [],
                 "price": [],
@@ -290,16 +298,18 @@ class Sale:
 
 class Entry:
     def __init__(self, master, Good):
-        frame_top = tk.Frame(master)
+        self.master = master
+        self.GOOD = Good
 
+        frame_top = tk.Frame(self.master)
         label_search = tk.Label(frame_top, text=t("Search："), font=(FONT, 20))
         self.entry_search = tk.Entry(frame_top, font=(FONT, 20))
         self.check = [tk.BooleanVar(), tk.BooleanVar()]
         self.check[0].set(1)
-        checkbutton_id = tk.Checkbutton(master,
+        checkbutton_id = tk.Checkbutton(self.master,
                                         var=self.check[0],
                                         text=t("ID"), font=(FONT, 12))
-        checkbutton_name = tk.Checkbutton(master,
+        checkbutton_name = tk.Checkbutton(self.master,
                                           var=self.check[1],
                                           text=t("Name"), font=(FONT, 12))
 
@@ -309,10 +319,10 @@ class Entry:
         checkbutton_id.pack(side="left", padx=200, pady=10)
         checkbutton_name.pack(side="left", padx=20, pady=10)
 
-        self.entry_search.bind("<KeyRelease>", lambda event: self.__save_search(Good))
+        self.entry_search.bind("<KeyRelease>", lambda event: self.__save_search())
 
-    def __save_search(self, GOOD):
-        GOOD.clear_list()
+    def __save_search(self):
+        self.GOOD.clear_list()
         quest = '.*{}.*'.format(self.entry_search.get())
         if self.check[0].get() and self.check[1].get() is False:
             CURSOR.execute("""
@@ -334,15 +344,18 @@ class Entry:
             """.format(quest, quest))
         output = CURSOR.fetchall()
         for each in output:
-            GOOD.add_row(each[1], each[0], each[4], each[8])
-        GOOD.get_table().update()
+            self.GOOD.add_row(each[1], each[0], each[4], each[8])
+        self.GOOD.get_table().update()
 
 
 class Goods(TreeView):
     def __init__(self, master, LST):
         super().__init__()
+        self.master = master
+        self.LST = LST
+
         heading = (t("Product Description"), t("Product ID"), t("Price"), t("Discount"))
-        self.alternative_table = tk.ttk.Treeview(master,
+        self.alternative_table = tk.ttk.Treeview(self.master,
                                                  height=40,
                                                  show="headings",
                                                  columns=heading)
@@ -360,34 +373,33 @@ class Goods(TreeView):
         self.price = []
         self.discount = []
 
-        self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.alternative_table.yview)
+        self.VScroll = tk.Scrollbar(self.master, orient="vertical", command=self.alternative_table.yview)
         self.VScroll.place(relx=0.978, rely=0.025, relwidth=0.02, relheight=0.958)
         self.alternative_table.configure(yscrollcommand=self.VScroll.set)
 
-        self.alternative_table.bind("<Double-1>", lambda event: self.__get_row(LST))
+        self.alternative_table.bind("<Double-1>", lambda event: self.__get_row())
 
-    def __get_row(self, LST):  # 双击行
+    def __get_row(self):  # 双击行
         for item in self.alternative_table.selection():
             row = self.alternative_table.item(item, "values")
-            self.add_to_list(LST, row[0], int(row[1]), float(row[2]), int(row[3]), 1)
+            self.add_to_list(row[0], int(row[1]), float(row[2]), int(row[3]), 1)
 
     def get_table(self):
         return self.alternative_table
 
-    @staticmethod
-    def add_to_list(LST, description, product_id, price, discount, quantity):
-        if product_id not in LST.products["id"]:
-            LST.products["description"].append(description)
-            LST.products["id"].append(product_id)
-            LST.products["price"].append(price)
-            LST.products["discount"].append(discount)
-            LST.products["quantity"].append(quantity)
+    def add_to_list(self, description, product_id, price, discount, quantity):
+        if product_id not in self.LST.products["id"]:
+            self.LST.products["description"].append(description)
+            self.LST.products["id"].append(product_id)
+            self.LST.products["price"].append(price)
+            self.LST.products["discount"].append(discount)
+            self.LST.products["quantity"].append(quantity)
             subtotal = int(price * (1 - (discount / 100)) * quantity)
-            LST.table.insert('', len(LST.products["description"]) - 1,
-                             values=(description, product_id, price,
-                                     discount, quantity, subtotal))
-            LST.table.update()
-            LST.total.set(str(int(LST.total.get()) + subtotal))
+            self.LST.table.insert('', len(self.LST.products["description"]) - 1,
+                                  values=(description, product_id, price,
+                                          discount, quantity, subtotal))
+            self.LST.table.update()
+            self.LST.total.set(str(int(self.LST.total.get()) + subtotal))
 
     def add_row(self, desc, good_id, price, discount):
         self.description.append(desc)
