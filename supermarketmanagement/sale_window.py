@@ -125,7 +125,7 @@ class List(TreeView):
             self.table.heading(each, text=each)
         for col in heading:
             self.table.heading(col, text=col,
-                               command=lambda _col=col: self.treeview_sort_column(self.table, _col, False))
+                               command=lambda _col=col: self.sort_column(self.table, _col, False))
         self.products = {
             "description": [],
             "id": [],
@@ -378,8 +378,8 @@ class Goods(TreeView):
             self.alternative_table.heading(each, text=each)
         for col in heading:
             self.alternative_table.heading(col, text=col,
-                                           command=lambda _col=col: self.treeview_sort_column(self.alternative_table,
-                                                                                              _col, False))
+                                           command=lambda _col=col: self.sort_column(self.alternative_table,
+                                                                                     _col, False))
         self.alternative_table.pack(fill="both")
         self.description = []
         self.good_id = []

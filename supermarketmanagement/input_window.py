@@ -44,7 +44,7 @@ class Purchase(SetMenu, TreeView):
             self.tree.column(heading[i], width=width[i], anchor="center")
             self.tree.heading(heading[i], text=heading[i])
         for col in heading:
-            self.tree.heading(col, text=col, command=lambda _col=col: self.treeview_sort_column(self.tree, _col, False))
+            self.tree.heading(col, text=col, command=lambda _col=col: self.sort_column(self.tree, _col, False))
         self.VScroll = tk.Scrollbar(master, orient="vertical", command=self.tree.yview)
 
         name_label.grid(row=0, column=0, padx=10, sticky="E")

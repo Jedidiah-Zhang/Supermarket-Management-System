@@ -277,7 +277,7 @@ class TreeView:
     def __init__(self):
         pass
 
-    def treeview_sort_column(self, tv, col, reverse):
+    def sort_column(self, tv, col, reverse):
         L = [(tv.set(k, col), k) for k in tv.get_children('')]
         try:
             L.sort(key=lambda x: int(x[0]), reverse=reverse)
@@ -285,7 +285,7 @@ class TreeView:
             L.sort(reverse=reverse)
         for index, (val, k) in enumerate(L):
             tv.move(k, '', index)
-        tv.heading(col, command=lambda: self.treeview_sort_column(tv, col, not reverse))
+        tv.heading(col, command=lambda: self.sort_column(tv, col, not reverse))
 
 
 if __name__ == "__main__":

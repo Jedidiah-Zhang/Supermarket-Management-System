@@ -7,8 +7,8 @@
 @File    : stock_window.py
 @Software: PyCharm
 """
-
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, filedialog
+from tkcalendar import DateEntry
 from main import *
 
 
@@ -21,54 +21,28 @@ class StockManagement(SetMenu, TreeView):
         self.popup.add_command(label=t("Alter"), command=self.__alter_row, state="disabled")
         self.popup.add_command(label=t("Delete"), command=self.__delete, state="disabled")
 
-        id_label = tk.Label(self.master,
-                            text=t("Good ID: "),
-                            font=(FONT, 16))
-        self.id_entry = tk.Entry(self.master,
-                                 width=40,
-                                 font=(FONT, 12))
-        desc_label = tk.Label(self.master,
-                              text=t("Good Name: "),
-                              font=(FONT, 16))
-        self.desc_entry = tk.Entry(self.master,
-                                   width=40,
-                                   font=(FONT, 12))
-        ex_id_label = tk.Label(self.master,
-                               text=t("External ID: "),
-                               font=(FONT, 16))
-        self.ex_id_entry = tk.Entry(self.master,
-                                    width=25,
-                                    font=(FONT, 12))
-        supplier_label = tk.Label(self.master,
-                                  text=t("Supplier: "),
-                                  font=(FONT, 16))
-        self.supplier_entry = tk.Entry(self.master,
-                                       width=25,
-                                       font=(FONT, 12))
-        alter_button = tk.Button(self.master,
-                                 width=12,
-                                 text=t("Alter"),
-                                 font=(FONT, 16),
-                                 command=self.__alter_row)
-        analyze_button = tk.Button(self.master,
-                                   width=12,
-                                   text=t("Analyze"),
-                                   font=(FONT, 16),
-                                   command=self.__analyze)
+        id_label = tk.Label(self.master, text=t("Good ID: "), font=(FONT, 16))
+        self.id_entry = tk.Entry(self.master, width=40, font=(FONT, 12))
+        desc_label = tk.Label(self.master, text=t("Good Name: "), font=(FONT, 16))
+        self.desc_entry = tk.Entry(self.master, width=40, font=(FONT, 12))
+        ex_id_label = tk.Label(self.master, text=t("External ID: "), font=(FONT, 16))
+        self.ex_id_entry = tk.Entry(self.master, width=25, font=(FONT, 12))
+        supplier_label = tk.Label(self.master, text=t("Supplier: "), font=(FONT, 16))
+        self.supplier_entry = tk.Entry(self.master, width=25, font=(FONT, 12))
+        alter_button = tk.Button(self.master, width=12, text=t("Alter"), font=(FONT, 16), command=self.__alter_row)
+        analyze_button = tk.Button(self.master, width=12, text=t("Analyze"), font=(FONT, 16), command=self.__analyze)
 
         heading = [t("ID"), t("Description"), t("Stock"), t("Buying Price"),
                    t("Selling Price"), t("External ID"), t("Supplier")]
         width = [200, 300, 90, 90, 90, 173, 200]
-        self.table = ttk.Treeview(self.master,
-                                  height=100,
-                                  columns=heading,
-                                  show='headings')
+        self.table = ttk.Treeview(self.master, height=100, columns=heading, show='headings')
+
         for i in range(len(heading)):
             self.table.column(heading[i], width=width[i], anchor="center")
             self.table.heading(heading[i], text=heading[i])
         for col in heading:
             self.table.heading(col, text=col,
-                               command=lambda _col=col: self.treeview_sort_column(self.table, _col, False))
+                               command=lambda _col=col: self.sort_column(self.table, _col, False))
         self.VScroll = tk.Scrollbar(self.master, orient="vertical", command=self.table.yview)
 
         id_label.grid(row=0, column=0, sticky="W", padx=5, pady=10)
@@ -101,7 +75,8 @@ class StockManagement(SetMenu, TreeView):
         self.master.bind("<FocusIn>", lambda event: self.search())
 
         self.search()
-        self.A_window = None
+        self.AlterWindow = None
+        self.AnalysisWindow = None
 
     def search(self):
         children = self.table.get_children()
@@ -127,18 +102,18 @@ class StockManagement(SetMenu, TreeView):
 
     def __alter_row(self):
         row = self.table.selection()
-        if self.A_window is None:
-            self.__create_toplevel(row)
+        if self.AlterWindow is None and row != ():
+            self.AlterWindow = Alter(self.table.item(row, "values"))
         elif row == ():
             pass
         else:
             try:
-                if "normal" == self.A_window.state():
-                    self.A_window.set_values(self.table.item(row[0], "values"))
-                    self.A_window.focus_set()
+                if self.AlterWindow.state() == "normal":
+                    self.AlterWindow.set_values(self.table.item(row[0], "values"))
+                    self.AlterWindow.focus_set()
             except tk.TclError:
-                self.A_window = None
-                self.__create_toplevel(row)
+                self.AlterWindow = None
+                self.AlterWindow = Alter(self.table.item(row, "values"))
 
     def __delete(self):
         item = self.table.selection()
@@ -157,11 +132,12 @@ class StockManagement(SetMenu, TreeView):
             self.table.delete(item)
             self.table.update()
 
-    def __create_toplevel(self, row):
-        self.A_window = Alter(self.table.item(row, "values"))
-
     def __analyze(self):
-        pass
+        try:
+            if self.AnalysisWindow.state() == 'normal':
+                self.AnalysisWindow.focus()
+        except:
+            self.AnalysisWindow = Analysis()
 
 
 class Alter(tk.Toplevel):
@@ -169,39 +145,21 @@ class Alter(tk.Toplevel):
         super().__init__(**kw)
         self.title(t("Alter"))
         self.geometry("620x250")
+        self.resizable(False, False)
         self.values = values
 
-        desc_label = tk.Label(self,
-                              text=t("Product Description: "),
-                              font=(FONT, 16))
-        stock_label = tk.Label(self,
-                               text=t("Stock: "),
-                               font=(FONT, 16))
-        sell_label = tk.Label(self,
-                              text=t("Selling Price: "),
-                              font=(FONT, 16))
-        self.desc_entry = tk.Entry(self,
-                                   width=40,
-                                   font=(FONT, 13))
+        desc_label = tk.Label(self, text=t("Product Description: "), font=(FONT, 16))
+        stock_label = tk.Label(self, text=t("Stock: "), font=(FONT, 16))
+        sell_label = tk.Label(self, text=t("Selling Price: "), font=(FONT, 16))
+        self.desc_entry = tk.Entry(self, width=40, font=(FONT, 13))
         self.desc_entry.insert(0, values[1])
-        self.stock_entry = tk.Entry(self,
-                                    width=40,
-                                    font=(FONT, 13))
+        self.stock_entry = tk.Entry(self, width=40, font=(FONT, 13))
         self.stock_entry.insert(0, values[2])
-        self.sell_entry = tk.Entry(self,
-                                   width=40,
-                                   font=(FONT, 13))
+        self.sell_entry = tk.Entry(self, width=40, font=(FONT, 13))
         self.sell_entry.insert(0, values[4])
-        delete_button = tk.Button(self,
-                                  width=15,
-                                  text=t("Delete Row"),
-                                  font=(FONT, 16),
-                                  command=self.__delete)
-        confirm_button = tk.Button(self,
-                                   width=15,
-                                   text=t("Confirm Changes"),
-                                   font=(FONT, 16),
-                                   command=self.__confirm)
+        delete_button = tk.Button(self, width=15, text=t("Delete Row"), font=(FONT, 16), command=self.__delete)
+        confirm_button = tk.Button(self, width=15, text=t("Confirm Changes"), font=(FONT, 16), command=self.__confirm)
+
         desc_label.grid(row=0, column=0, padx=20, pady=20, sticky="E")
         stock_label.grid(row=1, column=0, padx=20, sticky="E")
         sell_label.grid(row=2, column=0, padx=20, pady=20, sticky="E")
@@ -269,3 +227,83 @@ class Alter(tk.Toplevel):
 class Analysis(tk.Toplevel):
     def __init__(self, **kw):
         super().__init__(**kw)
+        self.title(t("Analysis"))
+        self.geometry("650x500")
+        self.resizable(False, False)
+        locale = {"Chinese": "zh_CN", "English": "en_GB"}
+
+        from_label = tk.Label(self, text=t("From: "), font=(FONT, 16))
+        self.from_date = DateEntry(self, width=20, font=(FONT, 16),
+                                   date_pattern="y-mm-dd", locale=locale[CUR_LANG], borderwidth=2)
+        to_label = tk.Label(self, text=t("To: "), font=(FONT, 16))
+        self.to_date = DateEntry(self, width=20, font=(FONT, 16),
+                                 date_pattern="y-mm-dd", locale=locale[CUR_LANG], borderwidth=2)
+        supplier_label = tk.Label(self, text=t("Supplier"), font=(FONT, 16))
+        self.supplier_list = tk.Listbox(self, selectmode="extended", exportselection=0,
+                                        font=("Adobe Garamond Pro", 16), width=25)
+        supplier_scroll = tk.Scrollbar(self.supplier_list, orient="vertical", command=self.supplier_list.yview)
+        self.supplier_list.configure(yscrollcommand=supplier_scroll.set)
+        supplier_scroll.place(relx=0.98, rely=-0.05, relwidth=0.02, relheight=1.1)
+        CURSOR.execute("""
+        SELECT DISTINCT supplier
+        FROM shop.goods
+        """)
+        supplier = CURSOR.fetchall()
+        for item in supplier:
+            self.supplier_list.insert("end", item[0])
+
+        cashier_label = tk.Label(self, text=t("Cashier"), font=(FONT, 16))
+        self.cashier_list = tk.Listbox(self, selectmode="extended", exportselection=0,
+                                       font=("Adobe Garamond Pro", 16), width=25)
+        cashier_scroll = tk.Scrollbar(self.cashier_list, orient="vertical", command=self.cashier_list.yview)
+        self.cashier_list.configure(yscrollcommand=cashier_scroll.set)
+        cashier_scroll.place(relx=0.98, rely=-0.05, relwidth=0.02, relheight=1.1)
+        CURSOR.execute("""
+                SELECT DISTINCT `Cashier ID`
+                FROM shop.bills
+                """)
+        cashier = CURSOR.fetchall()
+        for item in cashier:
+            CURSOR.execute("""
+            SELECT `First Name`, `Last Name`
+            FROM shop.members
+            WHERE `Employee ID` = {}
+            """.format(item[0]))
+            name = CURSOR.fetchone()
+            self.cashier_list.insert("end", "%s %s" % name)
+
+        file_button = tk.Button(self, text=t("Output to File"), font=(FONT, 16), width=20, command=self.__create_file)
+
+        from_label.grid(row=0, column=0, padx=10, pady=10, sticky="E")
+        self.from_date.grid(row=0, column=1)
+        to_label.grid(row=0, column=2, padx=10)
+        self.to_date.grid(row=0, column=3)
+        supplier_label.grid(row=1, column=0, columnspan=2)
+        self.supplier_list.grid(row=2, column=0, columnspan=2)
+        cashier_label.grid(row=1, column=2, columnspan=2)
+        self.cashier_list.grid(row=2, column=2, columnspan=2)
+        file_button.grid(row=3, column=0, columnspan=2, pady=30)
+
+    def __create_file(self):
+        start_date = self.from_date.get()
+        end_date = self.to_date.get()
+        supplier = (self.supplier_list.get(i) for i in self.supplier_list.curselection())
+        cashier = (self.cashier_list.get(i) for i in self.supplier_list.curselection())
+        CURSOR.execute("""
+        SELECT b.`Bill ID`, b.`Cashier ID`, i.`Product ID`, i.Quantity, i.`Selling Price`
+        FROM shop.bills b
+        LEFT JOIN shop.items i
+        ON b.`Bill ID` = i.`Bill ID`
+        WHERE b.Datetime BETWEEN '{0}' AND '{1}'
+        """.format(start_date, end_date))
+        print(CURSOR.fetchall())
+        CURSOR.execute("""
+        CREATE OR REPLACE VIEW all_items AS
+        SELECT b.`Bill ID`, b.`Cashier ID`, b.Datetime, i.`Product ID`, i.Quantity, i.`Selling Price`
+        FROM shop.bills b
+        LEFT JOIN shop.items i
+        ON b.`Bill ID` = i.`Bill ID`
+        """)
+
+        file_name = tk.filedialog.asksaveasfilename(filetypes=[("Excel", ".xlsx")])
+        print(file_name)
