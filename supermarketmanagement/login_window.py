@@ -15,29 +15,15 @@ from main import *
 class LoginWindow:
     def __init__(self, master):
         self.master = master
-        label_welcome = tk.Label(self.master,
-                                 text=t("Login"),
-                                 font=(FONT, 16))
-        label_username = tk.Label(self.master,
-                                  text=t("Username: "))
-        label_password = tk.Label(self.master,
-                                  text=t("Password: "))
-        self.entry_username = tk.Entry(self.master,
-                                       width=35)
-        self.entry_password = tk.Entry(self.master,
-                                       width=35,
-                                       show="*")
-        button_confirm = tk.Button(self.master,
-                                   width=10,
-                                   text=t("LOGIN"),
-                                   command=self.__login)
-
+        label_welcome = tk.Label(self.master, text=t("Login"), font=(FONT, 16))
+        label_username = tk.Label(self.master, text=t("Username: "))
+        label_password = tk.Label(self.master, text=t("Password: "))
+        self.entry_username = tk.Entry(self.master, width=35)
+        self.entry_password = tk.Entry(self.master, width=35, show="*")
+        button_confirm = tk.Button(self.master, width=10, text=t("LOGIN"), command=self.__login)
         self.rem = tk.IntVar()
-        checkbutton_remember = tk.Checkbutton(self.master,
-                                              text=t("Remember Me"),
-                                              variable=self.rem,
-                                              onvalue=1,
-                                              offvalue=0)
+        checkbutton_remember = tk.Checkbutton(self.master, text=t("Remember Me"), variable=self.rem,
+                                              onvalue=1, offvalue=0)
 
         label_welcome.grid(row=0, column=0, padx=10, pady=10)
         label_username.grid(row=1, column=0, padx=10, pady=10)

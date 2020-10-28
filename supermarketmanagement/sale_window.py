@@ -50,25 +50,13 @@ class Info:
         self.name = tk.StringVar()
         self.staff_code = tk.StringVar()
 
-        label_ordernum = tk.Label(self.master,
-                                  text=t("Order Number: "),
-                                  font=(FONT, 13))
-        label_salesperson = tk.Label(self.master,
-                                     text=t("Salesperson: "),
-                                     font=(FONT, 13))
-        label_staffcode = tk.Label(self.master,
-                                   text=t("Staff Code: "),
-                                   font=(FONT, 13))
-        label_note = tk.Label(self.master,
-                              text=t("Note: "),
-                              font=(FONT, 13))
-        label_date = tk.Label(self.master,
-                              text=t("Date: "),
-                              font=(FONT, 13))
+        label_ordernum = tk.Label(self.master, text=t("Order Number: "), font=(FONT, 13))
+        label_salesperson = tk.Label(self.master, text=t("Salesperson: "), font=(FONT, 13))
+        label_staffcode = tk.Label(self.master, text=t("Staff Code: "), font=(FONT, 13))
+        label_note = tk.Label(self.master, text=t("Note: "), font=(FONT, 13))
+        label_date = tk.Label(self.master, text=t("Date: "), font=(FONT, 13))
         self.date.set(strftime("%d-%m-%Y", localtime()))
-        label_date1 = tk.Label(self.master,
-                               textvariable=self.date,
-                               font=(FONT, 13))
+        label_date1 = tk.Label(self.master, textvariable=self.date, font=(FONT, 13))
         CURSOR.execute("""
         SELECT MAX(`Bill ID`) as `Bill ID`
         FROM shop.bills
@@ -78,20 +66,12 @@ class Info:
             self.order_number.set("1")
         else:
             self.order_number.set(str(num + 1))
-        label_ordernum2 = tk.Label(self.master,
-                                   textvariable=self.order_number,
-                                   font=(FONT, 12))
-        self.name.set(self.user[1] + " " + self.user[2])
-        label_salesperson2 = tk.Label(self.master,
-                                      textvariable=self.name,
-                                      font=(FONT, 12))
+        label_ordernum2 = tk.Label(self.master, textvariable=self.order_number, font=(FONT, 12))
+        self.name.set("%s %s" % (self.user[1], self.user[2]))
+        label_salesperson2 = tk.Label(self.master, textvariable=self.name, font=(FONT, 12))
         self.staff_code.set(self.user[0])
-        label_staffcode2 = tk.Label(self.master,
-                                    textvariable=self.staff_code,
-                                    font=(FONT, 12))
-        entry_note = tk.Entry(self.master,
-                              width=60,
-                              font=(FONT, 12))
+        label_staffcode2 = tk.Label(self.master, textvariable=self.staff_code, font=(FONT, 12))
+        entry_note = tk.Entry(self.master, width=60, font=(FONT, 12))
 
         label_ordernum.grid(row=0, column=0, padx=10, pady=10, sticky="W")
         label_salesperson.grid(row=1, column=0, padx=10, pady=5, sticky="W")
@@ -116,16 +96,12 @@ class List(TreeView):
 
         heading = (t("Product Description"), t("Product ID"), t("Price"), t("Discount"), t("Quantity"), t("Subtotal"))
         col_width = (200, 100, 80, 50, 50, 80)
-        self.table = ttk.Treeview(self.master,
-                                  height=40,
-                                  show="headings",
-                                  columns=heading)
+        self.table = ttk.Treeview(self.master, height=40, show="headings", columns=heading)
         for i, each in enumerate(heading):
             self.table.column(each, width=col_width[i], anchor="center")
             self.table.heading(each, text=each)
         for col in heading:
-            self.table.heading(col, text=col,
-                               command=lambda _col=col: self.sort_column(self.table, _col, False))
+            self.table.heading(col, text=col, command=lambda _col=col: self.sort_column(self.table, _col, False))
         self.products = {
             "description": [],
             "id": [],
@@ -201,32 +177,15 @@ class Sale:
         self.total = total
         self.change = tk.StringVar()
 
-        label_total = tk.Label(self.master,
-                               text=t("Total: "),
-                               font=(FONT, 20))
-
+        label_total = tk.Label(self.master, text=t("Total: "), font=(FONT, 20))
         self.total.set("0")
-        label_number = tk.Label(self.master,
-                                textvariable=total,
-                                font=(FONT, 20))
-        label_pay = tk.Label(self.master,
-                             text=t("Payment: "),
-                             font=(FONT, 20))
-        self.entry_pay = tk.Entry(self.master,
-                                  width=10,
-                                  font=(FONT, 20))
-        label_change = tk.Label(master,
-                                text=t("Change: "),
-                                font=(FONT, 20))
+        label_number = tk.Label(self.master, textvariable=total, font=(FONT, 20))
+        label_pay = tk.Label(self.master, text=t("Payment: "), font=(FONT, 20))
+        self.entry_pay = tk.Entry(self.master, width=10, font=(FONT, 20))
+        label_change = tk.Label(master, text=t("Change: "), font=(FONT, 20))
         self.change.set("0")
-        label_change_num = tk.Label(self.master,
-                                    textvariable=self.change,
-                                    font=(FONT, 20))
-        button_confirm = tk.Button(self.master,
-                                   text=t("Confirm"),
-                                   font=(FONT, 17),
-                                   width=13,
-                                   command=self.__confirm)
+        label_change_num = tk.Label(self.master, textvariable=self.change, font=(FONT, 20))
+        button_confirm = tk.Button(self.master, text=t("Confirm"), font=(FONT, 17), width=13, command=self.__confirm)
 
         label_total.grid(row=0, column=0, padx=20, pady=10, sticky="W")
         label_number.grid(row=0, column=1, sticky="W")
@@ -319,12 +278,8 @@ class Entry:
         self.entry_search = tk.Entry(frame_top, font=(FONT, 20))
         self.check = [tk.BooleanVar(), tk.BooleanVar()]
         self.check[0].set(1)
-        checkbutton_id = tk.Checkbutton(self.master,
-                                        var=self.check[0],
-                                        text=t("ID"), font=(FONT, 12))
-        checkbutton_name = tk.Checkbutton(self.master,
-                                          var=self.check[1],
-                                          text=t("Name"), font=(FONT, 12))
+        checkbutton_id = tk.Checkbutton(self.master, var=self.check[0], text=t("ID"), font=(FONT, 12))
+        checkbutton_name = tk.Checkbutton(self.master, var=self.check[1], text=t("Name"), font=(FONT, 12))
 
         frame_top.pack(side="top", fill="both", expand=True)
         label_search.pack(side="left", padx=20)
@@ -368,10 +323,7 @@ class Goods(TreeView):
         self.LST = LST
 
         heading = (t("Product Description"), t("Product ID"), t("Price"), t("Discount"))
-        self.alternative_table = tk.ttk.Treeview(self.master,
-                                                 height=40,
-                                                 show="headings",
-                                                 columns=heading)
+        self.alternative_table = tk.ttk.Treeview(self.master, height=40, show="headings", columns=heading)
         width = (200, 100, 80, 50)
         for i, each in enumerate(heading):
             self.alternative_table.column(each, width=width[i], anchor="center")

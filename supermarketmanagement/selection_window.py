@@ -17,16 +17,9 @@ class Admin:
         self.master = master
         self.username = username
 
-        reg_button = tk.Button(self.master,
-                               width=15,
-                               text=t("Registration"),
-                               font=(FONT, 20),
+        reg_button = tk.Button(self.master, width=15, text=t("Registration"), font=(FONT, 20),
                                command=self.__open_reg)
-
-        stock_button = tk.Button(self.master,
-                                 width=15,
-                                 text=t("Inventory"),
-                                 font=(FONT, 20),
+        stock_button = tk.Button(self.master, width=15, text=t("Inventory"), font=(FONT, 20),
                                  command=self.__open_stock)
 
         reg_button.pack()
@@ -46,16 +39,9 @@ class Employee:
         self.master = master
         self.username = username
 
-        purchase_button = tk.Button(self.master,
-                                    width=15,
-                                    text=t("Purchase"),
-                                    font=(FONT, 20),
+        purchase_button = tk.Button(self.master, width=15, text=t("Purchase"), font=(FONT, 20),
                                     command=self.__open_input)
-
-        cashier_button = tk.Button(self.master,
-                                   width=15,
-                                   text=t("Cashier"),
-                                   font=(FONT, 20),
+        cashier_button = tk.Button(self.master, width=15, text=t("Cashier"), font=(FONT, 20),
                                    command=self.__open_sale)
 
         purchase_button.pack()

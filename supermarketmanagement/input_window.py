@@ -18,28 +18,14 @@ class Purchase(SetMenu, TreeView):
     def __init__(self, master, username):
         super().__init__(master, username, "Purchase")
         self.data = None
-        name_label = tk.Label(master,
-                              text=t("Purchasing Agent: "),
-                              font=(FONT, 16))
-        name_label2 = tk.Label(master,
-                               text=self.user[1] + " " + self.user[2],
-                               font=(FONT, 16))
-        purchase_button = tk.Button(master,
-                                    width=25,
-                                    text=t("Purchase from File"),
-                                    font=(FONT, 16),
+        name_label = tk.Label(master, text=t("Purchasing Agent: "), font=(FONT, 16))
+        name_label2 = tk.Label(master, text="%s %s" % (self.user[1], self.user[2]), font=(FONT, 16))
+        purchase_button = tk.Button(master, width=25, text=t("Purchase from File"), font=(FONT, 16),
                                     command=self.__read_file)
-        confirm_button = tk.Button(master,
-                                   width=10,
-                                   text=t("Confirm"),
-                                   font=(FONT, 16),
-                                   command=self.__confirm)
+        confirm_button = tk.Button(master, width=10, text=t("Confirm"), font=(FONT, 16), command=self.__confirm)
         heading = [t("Product Description"), t("Product ID"), t("External ID"), t("Amount"), t("Supplier"), t("Price")]
         width = [240, 140, 140, 80, 140, 100]
-        self.tree = ttk.Treeview(master,
-                                 height=100,
-                                 columns=heading,
-                                 show='headings')
+        self.tree = ttk.Treeview(master, height=100, columns=heading, show='headings')
         for i in range(len(heading)):
             self.tree.column(heading[i], width=width[i], anchor="center")
             self.tree.heading(heading[i], text=heading[i])
@@ -76,21 +62,19 @@ class Purchase(SetMenu, TreeView):
                 ID = CURSOR.fetchall()
                 try:
                     if ID == ():
-                        self.tree.insert("", "end",
-                                         values=(row[1], maximum + 1, row[0], row[5], row[2], row[3]))
+                        self.tree.insert("", "end", values=(row[1], maximum + 1, row[0], row[5], row[2], row[3]))
                         maximum += 1
                     else:
-                        self.tree.insert("", "end",
-                                         values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
+                        self.tree.insert("", "end", values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
                 except:
                     pass
             self.tree.update()
 
     def __confirm(self):
         CURSOR.execute("""
-                    SELECT MAX(`Product ID`)
-                    FROM shop.purchase
-                    """)
+        SELECT MAX(`Product ID`)
+        FROM shop.purchase
+        """)
         maximum = CURSOR.fetchall()[0][0]
         if maximum is None:
             maximum = 0

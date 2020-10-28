@@ -19,63 +19,24 @@ class Registration(SetMenu):
         super().__init__(master, username, "Registration")
         self.master = master
 
-        welcome_label = tk.Label(self.master,
-                                 text=t("Registration"),
-                                 font=(FONT, 20))
-        first_name_label = tk.Label(self.master,
-                                    text=t("First Name: "),
-                                    font=(FONT, 14))
-        last_name_label = tk.Label(self.master,
-                                   text=t("Last Name: "),
-                                   font=(FONT, 14))
-        username_label = tk.Label(self.master,
-                                  text=t("Username: "),
-                                  font=(FONT, 14))
-        address_label = tk.Label(self.master,
-                                 text=t("Address: "),
-                                 font=(FONT, 14))
-        email_label = tk.Label(self.master,
-                               text=t("Email: "),
-                               font=(FONT, 14))
+        welcome_label = tk.Label(self.master, text=t("Registration"), font=(FONT, 20))
+        first_name_label = tk.Label(self.master, text=t("First Name: "), font=(FONT, 14))
+        last_name_label = tk.Label(self.master, text=t("Last Name: "), font=(FONT, 14))
+        username_label = tk.Label(self.master,text=t("Username: "),font=(FONT, 14))
+        address_label = tk.Label(self.master, text=t("Address: "), font=(FONT, 14))
+        email_label = tk.Label(self.master, text=t("Email: "), font=(FONT, 14))
 
-        self.first_name_entry = tk.Entry(self.master,
-                                         width=50,
-                                         bd=1,
-                                         font=(FONT, 14))
-        self.last_name_entry = tk.Entry(self.master,
-                                        width=50,
-                                        bd=1,
-                                        font=(FONT, 14))
-        self.username_entry = tk.Entry(self.master,
-                                       width=50,
-                                       bd=1,
-                                       font=(FONT, 14))
-        self.address_entry = tk.Entry(self.master,
-                                      width=50,
-                                      bd=1,
-                                      font=(FONT, 14))
-        self.email_entry = tk.Entry(self.master,
-                                    width=50,
-                                    bd=1,
-                                    font=(FONT, 14))
+        self.first_name_entry = tk.Entry(self.master, width=50, bd=1, font=(FONT, 14))
+        self.last_name_entry = tk.Entry(self.master, width=50, bd=1, font=(FONT, 14))
+        self.username_entry = tk.Entry(self.master, width=50, bd=1, font=(FONT, 14))
+        self.address_entry = tk.Entry(self.master, width=50, bd=1, font=(FONT, 14))
+        self.email_entry = tk.Entry(self.master, width=50, bd=1, font=(FONT, 14))
         self.admin = tk.BooleanVar()
         self.admin.set(0)
-        employee_radiobutton = tk.Radiobutton(self.master,
-                                              text=t("Employee"),
-                                              variable=self.admin,
-                                              value=0)
-        admin_radiobutton = tk.Radiobutton(self.master,
-                                           text=t("Administration"),
-                                           variable=self.admin,
-                                           value=1)
-        password_label = tk.Label(self.master,
-                                  text=t("*Password will be set as default: ") + DEFAULT,
-                                  font=(FONT, 12))
-        confirm_button = tk.Button(self.master,
-                                   text=t("Confirm"),
-                                   width=15,
-                                   font=(FONT, 14),
-                                   command=self.__confirm)
+        employee_radiobutton = tk.Radiobutton(self.master, text=t("Employee"), variable=self.admin, value=0)
+        admin_radiobutton = tk.Radiobutton(self.master, text=t("Administration"), variable=self.admin, value=1)
+        password_label = tk.Label(self.master, text=t("*Password will be set as default: ") + DEFAULT, font=(FONT, 12))
+        confirm_button = tk.Button(self.master, text=t("Confirm"), width=15, font=(FONT, 14), command=self.__confirm)
 
         welcome_label.grid(row=0, column=0, padx=10, pady=10)
         first_name_label.grid(row=1, column=0, padx=20, pady=10, sticky="E")

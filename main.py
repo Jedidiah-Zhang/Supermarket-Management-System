@@ -18,11 +18,7 @@ import webbrowser
 from supermarketmanagement import opener
 
 # 链接数据库
-CONNECTION = pymysql.connect(host="localhost",
-                             port=3306,
-                             user="root",
-                             password="fdc45ba2",
-                             db="shop")
+CONNECTION = pymysql.connect(host="localhost", port=3306, user="root", password="fdc45ba2", db="shop")
 CURSOR = CONNECTION.cursor()
 
 CFG = "./docs/default.ini"
@@ -129,49 +125,22 @@ class Account:
         self.master = master
         self.info = info
         self.root = root
-        id_label1 = tk.Label(self.master,
-                             text=t("ID: "),
-                             font=(FONT, 16))
-        id_label2 = tk.Label(self.master,
-                             text=info[0],
-                             font=(FONT, 16))
-        name_label1 = tk.Label(self.master,
-                               text=t("Name: "),
-                               font=(FONT, 16))
-        name_label2 = tk.Label(self.master,
-                               text=info[1] + " " + info[2],
-                               font=(FONT, 16))
-        username_label = tk.Label(self.master,
-                                  text=t("Username: "),
-                                  font=(FONT, 16))
-        self.username_entry = tk.Entry(self.master,
-                                       width=40,
-                                       font=(FONT, 16))
+        id_label1 = tk.Label(self.master, text=t("ID: "), font=(FONT, 16))
+        id_label2 = tk.Label(self.master, text=info[0], font=(FONT, 16))
+        name_label1 = tk.Label(self.master, text=t("Name: "), font=(FONT, 16))
+        name_label2 = tk.Label(self.master, text="%s %s" % (info[1], info[2]), font=(FONT, 16))
+        username_label = tk.Label(self.master, text=t("Username: "), font=(FONT, 16))
+        self.username_entry = tk.Entry(self.master, width=40, font=(FONT, 16))
         self.username_entry.insert(0, info[3])
-        email_label = tk.Label(self.master,
-                               text=t("Email: "),
-                               font=(FONT, 16))
-        self.email_entry = tk.Entry(self.master,
-                                    width=40,
-                                    font=(FONT, 16))
+        email_label = tk.Label(self.master, text=t("Email: "), font=(FONT, 16))
+        self.email_entry = tk.Entry(self.master, width=40, font=(FONT, 16))
         self.email_entry.insert(0, info[6])
-        address_label = tk.Label(self.master,
-                                 text=t("Address: "),
-                                 font=(FONT, 16))
-        self.address_text = tk.Text(self.master,
-                                    width=40,
-                                    height=3,
-                                    font=(FONT, 16))
+        address_label = tk.Label(self.master, text=t("Address: "), font=(FONT, 16))
+        self.address_text = tk.Text(self.master, width=40, height=3, font=(FONT, 16))
         self.address_text.insert("end", info[5])
-        password_button = tk.Button(self.master,
-                                    width=15,
-                                    text=t("Change Password"),
-                                    font=(FONT, 16),
+        password_button = tk.Button(self.master, width=15, text=t("Change Password"), font=(FONT, 16),
                                     command=self.__change_pass)
-        confirm_button = tk.Button(self.master,
-                                   width=15,
-                                   text=t("Confirm Changes"),
-                                   font=(FONT, 16),
+        confirm_button = tk.Button(self.master, width=15, text=t("Confirm Changes"), font=(FONT, 16),
                                    command=self.__confirm)
 
         id_label1.grid(row=0, column=0, padx=10, pady=5, sticky="E")
@@ -192,27 +161,12 @@ class Account:
         top.title(t("Change Password"))
         top.geometry("370x130")
         top.resizable(False, False)
-        original_label = tk.Label(top,
-                                  text=t("Original Password: "),
-                                  font=(FONT, 16))
-        original_entry = tk.Entry(top,
-                                  width=20,
-                                  bd=2,
-                                  font=(FONT, 12))
-        new_label = tk.Label(top,
-                             text=t("New Password: "),
-                             font=(FONT, 16))
-        new_entry = tk.Entry(top,
-                             width=20,
-                             bd=2,
-                             font=(FONT, 12))
-        confirm_label = tk.Label(top,
-                                 text=t("Confirm Password: "),
-                                 font=(FONT, 16))
-        confirm_entry = tk.Entry(top,
-                                 width=20,
-                                 bd=2,
-                                 font=(FONT, 12))
+        original_label = tk.Label(top, text=t("Original Password: "), font=(FONT, 16))
+        original_entry = tk.Entry(top, width=20, bd=2, font=(FONT, 12))
+        new_label = tk.Label(top, text=t("New Password: "), font=(FONT, 16))
+        new_entry = tk.Entry(top, width=20, bd=2, font=(FONT, 12))
+        confirm_label = tk.Label(top, text=t("Confirm Password: "), font=(FONT, 16))
+        confirm_entry = tk.Entry(top, width=20, bd=2, font=(FONT, 12))
 
         original_label.grid(row=0, column=0, padx=10, pady=5, sticky="E")
         original_entry.grid(row=0, column=1)
