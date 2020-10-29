@@ -248,9 +248,9 @@ class Analysis(tk.Toplevel):
         SELECT DISTINCT supplier
         FROM shop.goods
         """)
-        supplier = CURSOR.fetchall()
-        for item in supplier:
-            self.supplier_list.insert("end", item[0])
+        self.supplier = [i[0] for i in CURSOR.fetchall()]
+        for item in self.supplier:
+            self.supplier_list.insert("end", item)
 
         cashier_label = tk.Label(self, text=t("Cashier"), font=(FONT, 16))
         self.cashier_list = tk.Listbox(self, selectmode="extended", exportselection=0,
@@ -259,18 +259,20 @@ class Analysis(tk.Toplevel):
         self.cashier_list.configure(yscrollcommand=cashier_scroll.set)
         cashier_scroll.place(relx=0.98, rely=-0.05, relwidth=0.02, relheight=1.1)
         CURSOR.execute("""
-                SELECT DISTINCT `Cashier ID`
-                FROM shop.bills
-                """)
-        cashier = CURSOR.fetchall()
-        for item in cashier:
+        SELECT DISTINCT `Cashier ID`
+        FROM shop.bills
+        """)
+        cashier_id = [i[0] for i in CURSOR.fetchall()]
+        self.cashier = []
+        for item in cashier_id:
             CURSOR.execute("""
             SELECT `First Name`, `Last Name`
             FROM shop.members
             WHERE `Employee ID` = {}
-            """.format(item[0]))
-            name = CURSOR.fetchone()
-            self.cashier_list.insert("end", "%s %s" % name)
+            """.format(item))
+            name = "%s %s" % CURSOR.fetchone()
+            self.cashier_list.insert("end", name)
+            self.cashier.append(name)
 
         file_button = tk.Button(self, text=t("Output to File"), font=(FONT, 16), width=20, command=self.__create_file)
 
@@ -287,23 +289,38 @@ class Analysis(tk.Toplevel):
     def __create_file(self):
         start_date = self.from_date.get()
         end_date = self.to_date.get()
-        supplier = (self.supplier_list.get(i) for i in self.supplier_list.curselection())
-        cashier = (self.cashier_list.get(i) for i in self.supplier_list.curselection())
+        supplier = [self.supplier_list.get(i) for i in self.supplier_list.curselection()]
+        cashier = [self.cashier_list.get(i) for i in self.supplier_list.curselection()]
+        if not supplier:
+            supplier = self.supplier
+            print("T")
+        if not cashier:
+            cashier = self.cashier
+        for i in range(len(supplier)):
+            supplier[i] = supplier[i].replace("'", "\\'")
+        for i in range(len(cashier)):
+            cashier[i] = cashier[i].replace("'", "\\'")
+        print(supplier, cashier)
         CURSOR.execute("""
-        SELECT b.`Bill ID`, b.`Cashier ID`, i.`Product ID`, i.Quantity, i.`Selling Price`
+        SELECT i.`Product ID`, g.`Product Description`, g.Stock, sum(i.Quantity) AS quantity, i.`Selling Price`, 
+        i.`Selling Price`-g.`Buying Price` AS profit, b.`Bill ID`, 
+        CONCAT(m.`First Name`, ' ', m.`Last Name`), g.Supplier
         FROM shop.bills b
         LEFT JOIN shop.items i
         ON b.`Bill ID` = i.`Bill ID`
+        LEFT JOIN shop.goods g
+        ON i.`Product ID` = g.`Product ID`
+        LEFT JOIN shop.members m
+        ON b.`Cashier ID` = m.`Employee ID`
         WHERE b.Datetime BETWEEN '{0}' AND '{1}'
-        """.format(start_date, end_date))
-        print(CURSOR.fetchall())
-        CURSOR.execute("""
-        CREATE OR REPLACE VIEW all_items AS
-        SELECT b.`Bill ID`, b.`Cashier ID`, b.Datetime, i.`Product ID`, i.Quantity, i.`Selling Price`
-        FROM shop.bills b
-        LEFT JOIN shop.items i
-        ON b.`Bill ID` = i.`Bill ID`
-        """)
+        AND g.Supplier IN ('{2}')
+        AND CONCAT(m.`First Name`, ' ', m.`Last Name`) IN ('{3}')
+        GROUP BY i.`Product ID`
+        """.format(start_date, end_date, "', '".join(supplier), "', '".join(cashier)))
+        result = CURSOR.fetchall()
 
-        file_name = tk.filedialog.asksaveasfilename(filetypes=[("Excel", ".xlsx")])
-        print(file_name)
+        if result != ():
+            file_name = tk.filedialog.asksaveasfilename(filetypes=[("Excel", ".xlsx")])
+            print(file_name)
+        else:
+            tk.messagebox.showinfo("No Result Found", "There's no result found based on current restrictions.")

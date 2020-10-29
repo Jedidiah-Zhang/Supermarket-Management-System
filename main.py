@@ -11,7 +11,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import hashlib
-from os import popen, startfile
+from os import startfile
 import configparser
 import pymysql
 import webbrowser
