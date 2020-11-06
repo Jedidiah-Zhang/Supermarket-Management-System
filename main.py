@@ -25,8 +25,8 @@ CFG = "./docs/default.ini"
 CONFIG = configparser.ConfigParser()
 CONFIG.read(CFG)
 
-LANGUAGES = ["Chinese", "English"]
-FONTS = ["方正书宋简体", "Adobe Garamond Pro"]
+LANGUAGES = CONFIG["LANGUAGE"]["languages"].split(", ")
+FONTS = CONFIG["LANGUAGE"]["fonts"].split(", ")
 CUR_LANG = CONFIG["DEFAULT"]["language"]
 FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
 
@@ -40,12 +40,12 @@ def init_language():
     return trans
 
 
-translation = init_language()
+TRANSLATION = init_language()
 
 
 def t(msgid: str) -> str:
-    if msgid in translation:
-        return translation[msgid]
+    if msgid in TRANSLATION:
+        return TRANSLATION[msgid]
     else:
         return msgid
 
@@ -82,13 +82,13 @@ class SetMenu:
         self.master.config(menu=self.menubar)
 
     def _set_lang(self, lang: str, window):
-        global CUR_LANG, FONT, translation
+        global CUR_LANG, FONT, TRANSLATION
         CONFIG["DEFAULT"]["language"] = lang
         CONFIG["DEFAULT"]["font"] = dict(zip(LANGUAGES, FONTS))[lang]
         CONFIG.write(open(CFG, "w"))
         CUR_LANG = lang
         FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
-        translation = init_language()
+        TRANSLATION = init_language()
         self.master.destroy()
         opener.WindowFactory(window, self.user[3])
 
@@ -109,7 +109,10 @@ class SetMenu:
 
     def _back(self):
         self.master.destroy()
-        opener.SelectionFactory(self.user[7], self.user[3])
+        if self.user[7] == 1:
+            opener.WindowFactory("Admin", username=self.user[3])
+        else:
+            opener.WindowFactory("Employee", username=self.user[3])
 
     @staticmethod
     def _open_file():
@@ -253,4 +256,7 @@ if __name__ == "__main__":
         WHERE `Username` = '{0}'
         """.format(Username))
         User = CURSOR.fetchall()[0]
-        opener.SelectionFactory(User[7], Username)
+        if User[7] == 1:
+            opener.WindowFactory("Admin", Username)
+        else:
+            opener.WindowFactory("Employee", Username)

@@ -62,10 +62,10 @@ class Purchase(SetMenu, TreeView):
                 ID = CURSOR.fetchall()
                 try:
                     if ID == ():
-                        self.tree.insert("", "end", values=(row[1], maximum + 1, row[0], row[5], row[2], row[3]))
+                        self.tree.insert("", "end", values=(row[1], maximum + 1, row[0], row[4], row[2], row[3]))
                         maximum += 1
                     else:
-                        self.tree.insert("", "end", values=(row[1], ID[0][0], row[0], row[5], row[2], [row[3]]))
+                        self.tree.insert("", "end", values=(row[1], ID[0][0], row[0], row[4], row[2], [row[3]]))
                 except:
                     pass
             self.tree.update()
@@ -95,7 +95,7 @@ class Purchase(SetMenu, TreeView):
                     VALUE
                     ('{0}', {1}, {2}, {3}, '{4}', '{5}', {6}, {7})
                     """.format(row[1], maximum, row[0], self.user[0], row[2],
-                               strftime("%Y-%m-%d %H:%M:%S", localtime()), row[5], row[3]))
+                               strftime("%Y-%m-%d %H:%M:%S", localtime()), row[4], row[3]))
                     CONNECTION.commit()
                     CURSOR.execute("""
                     INSERT INTO shop.goods
@@ -103,7 +103,7 @@ class Purchase(SetMenu, TreeView):
                     `Selling Price`, `external id`, supplier)
                     VALUE
                     ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}')
-                    """.format(maximum, row[1], row[5], row[3], round(row[3] * 1.25, 2), row[0], row[2]))
+                    """.format(maximum, row[1], row[4], row[3], round(row[3] * 1.25, 2), row[0], row[2]))
                     CONNECTION.commit()
                 except:
                     CONNECTION.rollback()
@@ -117,7 +117,7 @@ class Purchase(SetMenu, TreeView):
                     VALUE
                     ('{0}', {1}, {2}, {3}, '{4}', '{5}', {6}, {7})
                     """.format(row[1], ID, row[0], self.user[0], row[2],
-                               strftime("%Y-%m-%d %H:%M:%S", localtime()), row[5], row[3]))
+                               strftime("%Y-%m-%d %H:%M:%S", localtime()), row[4], row[3]))
                     CONNECTION.commit()
                     CURSOR.execute("""
                     SELECT Stock
@@ -129,7 +129,7 @@ class Purchase(SetMenu, TreeView):
                     UPDATE shop.goods
                     SET Stock = {0}
                     WHERE `Product ID` = {1}
-                    """.format(stock + row[5], ID))
+                    """.format(stock + row[4], ID))
                     CONNECTION.commit()
                 except:
                     CONNECTION.rollback()

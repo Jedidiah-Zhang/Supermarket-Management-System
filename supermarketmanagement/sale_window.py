@@ -230,24 +230,25 @@ class Sale:
                 CONNECTION.commit()
                 for item in children:
                     row = self.LST.table.item(item)["values"]
-                    query_items = """
-                    INSERT INTO shop.items
-                    (`Bill ID`, `Product ID`, Quantity, `Selling Price`)
-                    VALUES
-                    ({0}, {1}, {2}, {3})
-                    """.format(self.INFO.order_number.get(), row[1], row[4], row[2])
                     CURSOR.execute("""
                     SELECT Stock
                     FROM shop.goods
                     WHERE `Product ID` = {0}
                     """.format(row[1]))
                     stock = CURSOR.fetchall()[0][0]
+
                     CURSOR.execute("""
                     UPDATE shop.goods
                     SET Stock = {0}
                     WHERE `Product ID` = {1}
                     """.format(stock - row[4], row[1]))
-                    CURSOR.execute(query_items[:-2])
+
+                    CURSOR.execute("""
+                    INSERT INTO shop.items
+                    (`Bill ID`, `Product ID`, Quantity, `Selling Price`)
+                    VALUES
+                    ({0}, {1}, {2}, {3})
+                    """.format(self.INFO.order_number.get(), row[1], row[4], row[2]))
                     CONNECTION.commit()
                 self.INFO.order_number.set(str(int(self.INFO.order_number.get()) + 1))
                 tk.messagebox.showinfo(t("Info"), t("Success"))
@@ -344,7 +345,7 @@ class Goods(TreeView):
 
         self.alternative_table.bind("<Double-1>", lambda event: self.__get_row())
 
-    def __get_row(self):  # 双击行
+    def __get_row(self):
         for item in self.alternative_table.selection():
             row = self.alternative_table.item(item, "values")
             self.add_to_list(row[0], int(row[1]), float(row[2]), int(row[3]), 1)

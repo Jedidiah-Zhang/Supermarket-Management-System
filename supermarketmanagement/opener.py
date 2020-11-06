@@ -14,24 +14,8 @@ from supermarketmanagement import sale_window, login_window, \
 from main import t
 
 
-class SelectionFactory:
-    def __new__(cls, Authorization, username):
-        if Authorization:
-            root_window = tk.Tk()
-            root_window.title(t("Select"))
-            root_window.resizable(False, False)
-            selection_window.Admin(root_window, username)
-            root_window.mainloop()
-        else:
-            root_window = tk.Tk()
-            root_window.title(t("Select"))
-            root_window.resizable(False, False)
-            selection_window.Employee(root_window, username)
-            root_window.mainloop()
-
-
 class WindowFactory:
-    def __new__(cls, window, username=None):
+    def __new__(cls, window: str, username=None):
         if window == "Purchase":
             root_window = tk.Tk()
             root_window.title(t("Purchase"))
@@ -49,7 +33,7 @@ class WindowFactory:
         elif window == "Registration":
             root_window = tk.Tk()
             root_window.title(t("Registration"))
-            root_window.geometry("700x380")
+            root_window.geometry("700x430")
             root_window.resizable(False, False)
             registration_window.Registration(root_window, username)
             root_window.mainloop()
@@ -62,11 +46,22 @@ class WindowFactory:
         elif window == "Login":
             root_window = tk.Tk()
             root_window.title(t("Login"))
-            x = 380
-            y = 190
+            x, y = 380, 190
             w = root_window.winfo_screenwidth() / 2 - x / 2
             h = root_window.winfo_screenheight() / 2 - y / 2
             root_window.geometry("%dx%d+%d+%d" % (x, y, w, h))
             root_window.resizable(False, False)
             login_window.LoginWindow(root_window)
+            root_window.mainloop()
+        elif window == "Admin":
+            root_window = tk.Tk()
+            root_window.title(t("Select"))
+            root_window.resizable(False, False)
+            selection_window.Admin(root_window, username)
+            root_window.mainloop()
+        elif window == "Employee":
+            root_window = tk.Tk()
+            root_window.title(t("Select"))
+            root_window.resizable(False, False)
+            selection_window.Employee(root_window, username)
             root_window.mainloop()
