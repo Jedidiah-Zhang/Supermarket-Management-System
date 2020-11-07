@@ -9,6 +9,7 @@
 """
 from tkinter import ttk, messagebox, filedialog
 from tkcalendar import DateEntry
+import pandas as pd
 from main import *
 
 
@@ -292,19 +293,16 @@ class Analysis(tk.Toplevel):
         supplier = [self.supplier_list.get(i) for i in self.supplier_list.curselection()]
         cashier = [self.cashier_list.get(i) for i in self.supplier_list.curselection()]
         if not supplier:
-            supplier = self.supplier
-            print("T")
+            supplier = self.supplier.copy()
         if not cashier:
-            cashier = self.cashier
+            cashier = self.cashier.copy()
         for i in range(len(supplier)):
             supplier[i] = supplier[i].replace("'", "\\'")
         for i in range(len(cashier)):
             cashier[i] = cashier[i].replace("'", "\\'")
-        print(supplier, cashier)
         CURSOR.execute("""
-        SELECT i.`Product ID`, g.`Product Description`, g.Stock, sum(i.Quantity) AS quantity, i.`Selling Price`, 
-        i.`Selling Price`-g.`Buying Price` AS profit, b.`Bill ID`, 
-        CONCAT(m.`First Name`, ' ', m.`Last Name`), g.Supplier
+        SELECT i.`Product ID`, g.`Product Description`, g.Stock, SUM(i.Quantity), AVG(i.`Selling Price`), 
+        (AVG(i.`Selling Price`)-g.`Buying Price`) * SUM(i.Quantity), g.Supplier
         FROM shop.bills b
         LEFT JOIN shop.items i
         ON b.`Bill ID` = i.`Bill ID`
@@ -320,7 +318,15 @@ class Analysis(tk.Toplevel):
         result = CURSOR.fetchall()
 
         if result != ():
-            file_name = tk.filedialog.asksaveasfilename(filetypes=[("Excel", ".xlsx")])
-            print(file_name)
+            file_name = tk.filedialog.asksaveasfilename(filetypes=[("Excel", ".xlsx")],
+                                                        defaultextension=".xlsx")
+            result = list(map(list, zip(*sorted(result, key=lambda x: x[5], reverse=True))))
+            headers = ["Product ID", "Description", "Quantity Left", "Quantity Sold",
+                       "Selling Price", "Profit", "Supplier"]
+            df = pd.DataFrame(dict(zip(headers, result)))
+            df.to_excel(file_name)
+
         else:
-            tk.messagebox.showinfo("No Result Found", "There's no result found based on current restrictions.")
+            if tk.messagebox.showinfo("No Result Found",
+                                      "There's no result found based on current restrictions.") == "ok":
+                self.focus_set()
