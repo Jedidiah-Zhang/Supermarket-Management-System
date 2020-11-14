@@ -11,15 +11,19 @@
 import tkinter as tk
 from tkinter import messagebox
 import hashlib
-from os import startfile
+from os import startfile, system, environ
 import configparser
 import pymysql
 import webbrowser
 from supermarketmanagement import opener
+import pyglet as pl
+
+pl.font.add_file(".\\fonts\\AGaramondPro-Regular.otf")
+pl.font.add_file(".\\fonts\\FangZhengShuSongJianTi-1.ttf")
 
 CFG = "./docs/default.ini"
 CONFIG = configparser.ConfigParser()
-CONFIG.read(CFG)
+CONFIG.read(CFG, encoding="utf-8")
 
 LANGUAGES = CONFIG["LANGUAGE"]["languages"].split(", ")
 FONTS = CONFIG["LANGUAGE"]["fonts"].split(", ")
@@ -36,26 +40,34 @@ def init_language():
     return trans
 
 
-TRANSLATION = init_language()
-
-# 链接数据库
-try:
-    CONNECTION = pymysql.connect(host=CONFIG["DATABASE"]["host"],
-                                 port=int(CONFIG["DATABASE"]["port"]),
-                                 user=CONFIG["DATABASE"]["user"],
-                                 password=CONFIG["DATABASE"]["password"])
-    CURSOR = CONNECTION.cursor()
-except pymysql.err.OperationalError:
-    CURSOR = None
-    tk.messagebox.showerror("Error", "Cannot find database, check database information in the config file.")
-    quit()
-
-
 def t(msgid: str) -> str:
     if msgid in TRANSLATION:
         return TRANSLATION[msgid]
     else:
         return msgid
+
+
+TRANSLATION = init_language()
+
+db_name = CONFIG["DATABASE"]["user"]
+db_pass = CONFIG["DATABASE"]["password"]
+try:
+    CONNECTION = pymysql.connect(host=CONFIG["DATABASE"]["host"],
+                                 port=int(CONFIG["DATABASE"]["port"]),
+                                 user=db_name,
+                                 password=db_pass)
+    CURSOR = CONNECTION.cursor()
+except pymysql.err.OperationalError:
+    CURSOR = None
+    tk.messagebox.showerror(t("Error"), t("Cannot find database, check database information in the config file."))
+    quit()
+try:
+    CURSOR.execute("USE shop")
+except pymysql.err.OperationalError:
+    path = environ["path"].split(';')
+    if CONFIG["DATABASE"]["mysql path"] not in path:
+        environ["path"] = environ["path"] + ';' + CONFIG["DATABASE"]["mysql path"]
+    system("mysql -u" + db_name + " -p" + db_pass + " < .\\sql.sql")
 
 
 class SetMenu:
@@ -93,7 +105,7 @@ class SetMenu:
         global CUR_LANG, FONT, TRANSLATION
         CONFIG["DEFAULT"]["language"] = lang
         CONFIG["DEFAULT"]["font"] = dict(zip(LANGUAGES, FONTS))[lang]
-        CONFIG.write(open(CFG, "w"))
+        CONFIG.write(open(CFG, "w", encoding="utf-8"))
         CUR_LANG = lang
         FONT = dict(zip(LANGUAGES, FONTS))[CUR_LANG]
         TRANSLATION = init_language()
@@ -103,7 +115,7 @@ class SetMenu:
     def _logout(self):
         CONFIG["DEFAULT"]["remember"] = "False"
         CONFIG["ACCOUNTS"]["username"] = ""
-        CONFIG.write(open(CFG, "w"))
+        CONFIG.write(open(CFG, "w", encoding="utf-8"))
         self.master.destroy()
         opener.WindowFactory("Login")
 
@@ -124,11 +136,15 @@ class SetMenu:
 
     @staticmethod
     def _open_file():
-        startfile("README.md")
+        startfile("README.txt")
 
     @staticmethod
     def _open_url():
         webbrowser.open_new_tab("https://github.com/Jedidiah-Zhang/Supermarket-Management-System")
+
+    @staticmethod
+    def _get_font():
+        return FONT
 
 
 class Account:
@@ -228,7 +244,7 @@ class Account:
             CONNECTION.commit()
             if CONFIG.getboolean("DEFAULT", "REMEMBER"):
                 CONFIG["ACCOUNTS"]["username"] = self.username_entry.get()
-                CONFIG.write(open(CFG, "w"))
+                CONFIG.write(open(CFG, "w", encoding="utf-8"))
             tk.messagebox.showwarning(t("Warning"), t("Account details have been changed, please login again."))
             self.master.destroy()
             self.root.destroy()

@@ -17,6 +17,7 @@ class StockManagement(SetMenu, TreeView):
     def __init__(self, master, username):
         super().__init__(master, username, "Inventory")
         self.master = master
+        FONT = self._get_font()
 
         self.popup = tk.Menu(self.master, tearoff=0)
         self.popup.add_command(label=t("Alter"), command=self.__alter_row, state="disabled")
@@ -34,8 +35,8 @@ class StockManagement(SetMenu, TreeView):
         analyze_button = tk.Button(self.master, width=12, text=t("Analyze"), font=(FONT, 16), command=self.__analyze)
 
         heading = [t("ID"), t("Description"), t("Stock"), t("Buying Price"),
-                   t("Selling Price"), t("External ID"), t("Supplier")]
-        width = [200, 300, 90, 90, 90, 173, 200]
+                   t("Selling Price"), t("Discount"), t("External ID"), t("Supplier")]
+        width = [200, 300, 80, 80, 80, 73, 150, 180]
         self.table = ttk.Treeview(self.master, height=100, columns=heading, show='headings')
 
         for i in range(len(heading)):
@@ -86,7 +87,7 @@ class StockManagement(SetMenu, TreeView):
         quests = [self.id_entry.get(), self.desc_entry.get(), self.ex_id_entry.get(), self.supplier_entry.get()]
         CURSOR.execute("""
         SELECT `Product ID`, `Product Description`, Stock, 
-        `Buying Price`, `Selling Price`, `External ID`, Supplier
+        `Buying Price`, `Selling Price`, Discount, `External ID`, Supplier
         FROM shop.goods
         WHERE `Product ID` LIKE '{0}'
         AND `Product Description` LIKE '{1}'
@@ -145,30 +146,35 @@ class Alter(tk.Toplevel):
     def __init__(self, values, **kw):
         super().__init__(**kw)
         self.title(t("Alter"))
-        self.geometry("620x250")
+        self.geometry("620x300")
         self.resizable(False, False)
         self.values = values
 
         desc_label = tk.Label(self, text=t("Product Description: "), font=(FONT, 16))
         stock_label = tk.Label(self, text=t("Stock: "), font=(FONT, 16))
         sell_label = tk.Label(self, text=t("Selling Price: "), font=(FONT, 16))
+        discount_label = tk.Label(self, text=t("Discount"), font=(FONT, 16))
         self.desc_entry = tk.Entry(self, width=40, font=(FONT, 13))
         self.desc_entry.insert(0, values[1])
         self.stock_entry = tk.Entry(self, width=40, font=(FONT, 13))
         self.stock_entry.insert(0, values[2])
         self.sell_entry = tk.Entry(self, width=40, font=(FONT, 13))
         self.sell_entry.insert(0, values[4])
+        self.discount_entry = tk.Entry(self, width=40, font=(FONT, 13))
+        self.discount_entry.insert(0, values[5])
         delete_button = tk.Button(self, width=15, text=t("Delete Row"), font=(FONT, 16), command=self.__delete)
         confirm_button = tk.Button(self, width=15, text=t("Confirm Changes"), font=(FONT, 16), command=self.__confirm)
 
         desc_label.grid(row=0, column=0, padx=20, pady=20, sticky="E")
         stock_label.grid(row=1, column=0, padx=20, sticky="E")
         sell_label.grid(row=2, column=0, padx=20, pady=20, sticky="E")
+        discount_label.grid(row=3, column=0, padx=20, sticky="E")
         self.desc_entry.grid(row=0, column=1)
         self.stock_entry.grid(row=1, column=1)
         self.sell_entry.grid(row=2, column=1)
-        delete_button.grid(row=3, column=0, columnspan=2, padx=80, sticky="W")
-        confirm_button.grid(row=3, column=1, padx=40, sticky="E")
+        self.discount_entry.grid(row=3, column=1)
+        delete_button.grid(row=4, column=0, columnspan=2, padx=80, pady=20, sticky="W")
+        confirm_button.grid(row=4, column=1, padx=40, sticky="E")
 
         self.desc_entry.bind("<Button-3>", self.__entry_clear)
         self.stock_entry.bind("<Button-3>", self.__entry_clear)
@@ -184,6 +190,8 @@ class Alter(tk.Toplevel):
         self.stock_entry.insert(0, values[2])
         self.sell_entry.delete(0, "end")
         self.sell_entry.insert(0, values[4])
+        self.discount_entry.delete(0, "end")
+        self.discount_entry.insert(0, values[5])
 
     @staticmethod
     def __num_only(event):
@@ -207,6 +215,7 @@ class Alter(tk.Toplevel):
             self.desc_entry.delete(0, "end")
             self.stock_entry.delete(0, "end")
             self.sell_entry.delete(0, "end")
+            self.discount_entry.delete(0, "end")
         except:
             CONNECTION.rollback()
 
@@ -214,13 +223,15 @@ class Alter(tk.Toplevel):
         try:
             CURSOR.execute("""
             UPDATE shop.goods
-            SET `Product Description` = '{0}', Stock = {1}, `Selling Price` = {2}
-            WHERE `Product ID` = {3}
-            """.format(self.desc_entry.get(), self.stock_entry.get(), self.sell_entry.get(), self.values[0]))
+            SET `Product Description` = '{0}', Stock = {1}, `Selling Price` = {2}, Discount = {3}
+            WHERE `Product ID` = {4}
+            """.format(self.desc_entry.get(), self.stock_entry.get(), self.sell_entry.get(),
+                       self.discount_entry.get(), self.values[0]))
             CONNECTION.commit()
             self.desc_entry.delete(0, "end")
             self.stock_entry.delete(0, "end")
             self.sell_entry.delete(0, "end")
+            self.discount_entry.delete(0, "end")
         except:
             CONNECTION.rollback()
 

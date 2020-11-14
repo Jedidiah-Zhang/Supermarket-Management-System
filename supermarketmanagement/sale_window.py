@@ -17,8 +17,9 @@ from main import *
 class SalespersonBase(SetMenu):
     def __init__(self, master, username):
         super().__init__(master, username, "Cashier")
+        FONT = self._get_font()
         self.master = master
-        total = tk.StringVar()
+        self.total = tk.StringVar()
 
         frame_top = tk.Frame(self.master)
         frame_info = tk.Frame(frame_top)
@@ -28,8 +29,8 @@ class SalespersonBase(SetMenu):
         frame_goods = tk.Frame(self.master)
 
         self.INFO = Info(frame_info, self.user)
-        self.LST = List(frame_list, total)
-        self.SALE = Sale(frame_sale, total, self.LST, self.INFO)
+        self.LST = List(frame_list, self.total)
+        self.SALE = Sale(frame_sale, self.total, self.LST, self.INFO)
         self.GOOD = Goods(frame_goods, self.LST)
         self.ENTRY = Entry(frame_entry, self.GOOD)
 
@@ -131,10 +132,10 @@ class List(TreeView):
             self.table.set(row, column=4, value=new_q)
             self.table.set(row, column=5, value=each * new_q)
             self.products["quantity"][rn - 1] = new_q
-            total = int(self.total.get())
-            total -= quantity * each
-            total += int(entry.get()) * each
-            self.total.set(total)
+            total = float(self.total.get())
+            total -= float(quantity * each)
+            total += float(int(entry.get()) * each)
+            self.total.set("%.2f" % total)
             set_window.destroy()
 
         def __num_only(e):
@@ -157,7 +158,7 @@ class List(TreeView):
             entry = tk.Entry(set_window, width=20)
             rn = int(str(row).replace('I', ''))  # 序号
             quantity = self.products["quantity"][rn - 1]  # 原数量
-            each = int(self.products["price"][rn - 1] * (1 - self.products["discount"][rn - 1] / 100))  # 原单价
+            each = self.products["price"][rn - 1] * (1 - self.products["discount"][rn - 1] / 100)  # 原单价
             button = tk.Button(set_window, text="OK", width=10, command=lambda: __save_edit())
             label.pack(side="left", padx=10)
             entry.insert(0, quantity)
@@ -178,12 +179,12 @@ class Sale:
         self.change = tk.StringVar()
 
         label_total = tk.Label(self.master, text=t("Total: "), font=(FONT, 20))
-        self.total.set("0")
+        self.total.set("0.00")
         label_number = tk.Label(self.master, textvariable=total, font=(FONT, 20))
         label_pay = tk.Label(self.master, text=t("Payment: "), font=(FONT, 20))
         self.entry_pay = tk.Entry(self.master, width=10, font=(FONT, 20))
         label_change = tk.Label(master, text=t("Change: "), font=(FONT, 20))
-        self.change.set("0")
+        self.change.set("0.00")
         label_change_num = tk.Label(self.master, textvariable=self.change, font=(FONT, 20))
         button_confirm = tk.Button(self.master, text=t("Confirm"), font=(FONT, 17), width=13, command=self.__confirm)
 
@@ -205,16 +206,16 @@ class Sale:
             event.widget.delete(event.widget.index(tk.INSERT) - 1)
         if self.entry_pay.get() != "":
             try:
-                self.change.set(str(int(self.entry_pay.get()) - int(self.total.get())))
+                self.change.set("%.2f" % (float(self.entry_pay.get()) - float(self.total.get())))
             except ValueError:
                 pass
         else:
-            self.change.set("")
+            self.change.set("0.00")
 
     def __confirm(self):
         if self.entry_pay.get() == "":
             self.entry_pay.insert(0, 0)
-        if int(self.total.get()) - int(self.entry_pay.get()) > 0:
+        if float(self.total.get()) - float(self.entry_pay.get()) > 0:
             tk.messagebox.showwarning(title=t("Warning"), message=t("Payment Failure"))
         else:
             children = self.LST.table.get_children()
@@ -257,8 +258,8 @@ class Sale:
                 tk.messagebox.showerror(t("Error"), t("Error occur"))
 
             self.entry_pay.delete(0, "end")
-            self.total.set(0)
-            self.change.set("0")
+            self.total.set("0.00")
+            self.change.set("0.00")
             self.LST.table.delete(*self.LST.table.get_children())
             self.LST.products = {
                 "description": [],
@@ -360,12 +361,12 @@ class Goods(TreeView):
             self.LST.products["price"].append(price)
             self.LST.products["discount"].append(discount)
             self.LST.products["quantity"].append(quantity)
-            subtotal = int(price * (1 - (discount / 100)) * quantity)
+            subtotal = float(price * (1 - (discount / 100)) * quantity)
             self.LST.table.insert('', len(self.LST.products["description"]) - 1,
                                   values=(description, product_id, price,
                                           discount, quantity, subtotal))
             self.LST.table.update()
-            self.LST.total.set(str(int(self.LST.total.get()) + subtotal))
+            self.LST.total.set("%.2f" % (float(self.LST.total.get()) + subtotal))
 
     def add_row(self, desc, good_id, price, discount):
         self.description.append(desc)

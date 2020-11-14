@@ -18,6 +18,7 @@ DEFAULT = CONFIG["DEFAULT"]["default password"]
 class Registration(SetMenu):
     def __init__(self, master, username):
         super().__init__(master, username, "Registration")
+        FONT = self._get_font()
         self.master = master
 
         welcome_label = tk.Label(self.master, text=t("Registration"), font=(FONT, 20))
@@ -35,7 +36,7 @@ class Registration(SetMenu):
         self.admin = tk.BooleanVar()
         self.admin.set(0)
         employee_radiobutton = tk.Radiobutton(self.master, text=t("Employee"), variable=self.admin, value=0)
-        admin_radiobutton = tk.Radiobutton(self.master, text=t("Administration"), variable=self.admin, value=1)
+        admin_radiobutton = tk.Radiobutton(self.master, text=t("Administrator"), variable=self.admin, value=1)
         password_label = tk.Label(self.master, text=t("*Password will be set as default: ") + DEFAULT, font=(FONT, 12))
         confirm_button = tk.Button(self.master, text=t("Confirm"), width=15, font=(FONT, 14), command=self.__confirm)
 
