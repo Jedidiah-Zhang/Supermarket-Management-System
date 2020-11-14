@@ -17,10 +17,6 @@ import pymysql
 import webbrowser
 from supermarketmanagement import opener
 
-# 链接数据库
-CONNECTION = pymysql.connect(host="localhost", port=3306, user="root", password="fdc45ba2", db="shop")
-CURSOR = CONNECTION.cursor()
-
 CFG = "./docs/default.ini"
 CONFIG = configparser.ConfigParser()
 CONFIG.read(CFG)
@@ -41,6 +37,18 @@ def init_language():
 
 
 TRANSLATION = init_language()
+
+# 链接数据库
+try:
+    CONNECTION = pymysql.connect(host=CONFIG["DATABASE"]["host"],
+                                 port=int(CONFIG["DATABASE"]["port"]),
+                                 user=CONFIG["DATABASE"]["user"],
+                                 password=CONFIG["DATABASE"]["password"])
+    CURSOR = CONNECTION.cursor()
+except pymysql.err.OperationalError:
+    CURSOR = None
+    tk.messagebox.showerror("Error", "Cannot find database, check database information in the config file.")
+    quit()
 
 
 def t(msgid: str) -> str:
