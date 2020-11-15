@@ -17,7 +17,7 @@ from main import *
 class SalespersonBase(SetMenu):
     def __init__(self, master, username):
         super().__init__(master, username, "Cashier")
-        FONT = self._get_font()
+        FONT = get_font()
         self.master = master
         self.total = tk.StringVar()
 

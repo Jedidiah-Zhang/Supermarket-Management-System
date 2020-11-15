@@ -17,7 +17,7 @@ from main import *
 class Purchase(SetMenu, TreeView):
     def __init__(self, master, username):
         super().__init__(master, username, "Purchase")
-        FONT = self._get_font()
+        FONT = get_font()
         self.data = None
         name_label = tk.Label(master, text=t("Purchasing Agent: "), font=(FONT, 16))
         name_label2 = tk.Label(master, text="%s %s" % (self.user[1], self.user[2]), font=(FONT, 16))

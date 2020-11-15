@@ -15,6 +15,8 @@ from main import *
 class LoginWindow:
     def __init__(self, master):
         self.master = master
+        FONT = get_font()
+
         label_welcome = tk.Label(self.master, text=t("Login"), font=(FONT, 16))
         label_username = tk.Label(self.master, text=t("Username: "))
         label_password = tk.Label(self.master, text=t("Password: "))
@@ -56,7 +58,7 @@ class LoginWindow:
                 CONFIG["ACCOUNTS"]["USERNAME"] = username
                 if self.rem.get() == 1:
                     CONFIG["DEFAULT"]["REMEMBER"] = "True"
-                    CONFIG.write(open(CFG, "w"))
+                    CONFIG.write(open(CFG, "w", encoding="utf-8"))
                 self.master.destroy()
                 if user[7] == 1:
                     opener.WindowFactory("Admin", username)

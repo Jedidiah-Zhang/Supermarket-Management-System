@@ -47,6 +47,10 @@ def t(msgid: str) -> str:
         return msgid
 
 
+def get_font():
+    return FONT
+
+
 TRANSLATION = init_language()
 
 db_name = CONFIG["DATABASE"]["user"]
@@ -141,10 +145,6 @@ class SetMenu:
     @staticmethod
     def _open_url():
         webbrowser.open_new_tab("https://github.com/Jedidiah-Zhang/Supermarket-Management-System")
-
-    @staticmethod
-    def _get_font():
-        return FONT
 
 
 class Account:
