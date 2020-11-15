@@ -18,13 +18,13 @@ class LoginWindow:
         FONT = get_font()
 
         label_welcome = tk.Label(self.master, text=t("Login"), font=(FONT, 16))
-        label_username = tk.Label(self.master, text=t("Username: "), font=("Segoe UI", 9))
-        label_password = tk.Label(self.master, text=t("Password: "), font=("Segoe UI", 9))
+        label_username = tk.Label(self.master, text=t("Username: "), font=(FONT, 10))
+        label_password = tk.Label(self.master, text=t("Password: "), font=(FONT, 10))
         self.entry_username = tk.Entry(self.master, width=35)
         self.entry_password = tk.Entry(self.master, width=35, show="*")
-        button_confirm = tk.Button(self.master, width=10, text=t("LOGIN"), command=self.__login)
+        button_confirm = tk.Button(self.master, width=10, text=t("Login"), font=(FONT, 16), command=self.__login)
         self.rem = tk.IntVar()
-        checkbutton_remember = tk.Checkbutton(self.master, text=t("Remember Me"), variable=self.rem,
+        checkbutton_remember = tk.Checkbutton(self.master, text=t("Remember Me"), font=(FONT, 10), variable=self.rem,
                                               onvalue=1, offvalue=0)
 
         label_welcome.grid(row=0, column=0, padx=10, pady=10)

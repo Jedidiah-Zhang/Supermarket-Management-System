@@ -46,7 +46,7 @@ class WindowFactory:
         elif window == "Login":
             root_window = tk.Tk()
             root_window.title(t("Login"))
-            x, y = 380, 190
+            x, y = 380, 200
             w = root_window.winfo_screenwidth() / 2 - x / 2
             h = root_window.winfo_screenheight() / 2 - y / 2
             root_window.geometry("%dx%d+%d+%d" % (x, y, w, h))
