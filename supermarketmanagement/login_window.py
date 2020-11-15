@@ -18,8 +18,8 @@ class LoginWindow:
         FONT = get_font()
 
         label_welcome = tk.Label(self.master, text=t("Login"), font=(FONT, 16))
-        label_username = tk.Label(self.master, text=t("Username: "))
-        label_password = tk.Label(self.master, text=t("Password: "))
+        label_username = tk.Label(self.master, text=t("Username: "), font=("Segoe UI", 9))
+        label_password = tk.Label(self.master, text=t("Password: "), font=("Segoe UI", 9))
         self.entry_username = tk.Entry(self.master, width=35)
         self.entry_password = tk.Entry(self.master, width=35, show="*")
         button_confirm = tk.Button(self.master, width=10, text=t("LOGIN"), command=self.__login)

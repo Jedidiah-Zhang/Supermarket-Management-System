@@ -71,7 +71,7 @@ except pymysql.err.OperationalError:
     path = environ["path"].split(';')
     if CONFIG["DATABASE"]["mysql path"] not in path:
         environ["path"] = environ["path"] + ';' + CONFIG["DATABASE"]["mysql path"]
-    system("mysql -u" + db_name + " -p" + db_pass + " < .\\sql.sql")
+    system("mysql -u" + db_name + " -p" + db_pass + " < .\\sql.sql 2>/dev/null")
 
 
 class SetMenu:
@@ -279,8 +279,14 @@ if __name__ == "__main__":
         FROM shop.members
         WHERE `Username` = '{0}'
         """.format(Username))
-        User = CURSOR.fetchall()[0]
-        if User[7] == 1:
-            opener.WindowFactory("Admin", Username)
-        else:
-            opener.WindowFactory("Employee", Username)
+        try:
+            User = CURSOR.fetchall()[0]
+            if User[7] == 1:
+                opener.WindowFactory("Admin", Username)
+            else:
+                opener.WindowFactory("Employee", Username)
+        except IndexError:
+            CONFIG["DEFAULT"]["remember"] = "False"
+            CONFIG["ACCOUNTS"]["username"] = ""
+            CONFIG.write(open(CFG, "w", encoding="utf-8"))
+            opener.WindowFactory("Login")
