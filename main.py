@@ -18,13 +18,12 @@ import webbrowser
 from supermarketmanagement import opener
 import pyglet as pl
 
-pl.font.add_file(".\\fonts\\AGaramondPro-Regular.otf")
-pl.font.add_file(".\\fonts\\FangZhengShuSongJianTi-1.ttf")
-
 CFG = "./docs/default.ini"
 CONFIG = configparser.ConfigParser()
 CONFIG.read(CFG, encoding="utf-8")
 
+for each in CONFIG["LANGUAGE"]["fonts path"].split(", "):
+    pl.font.add_file(each)
 LANGUAGES = CONFIG["LANGUAGE"]["languages"].split(", ")
 FONTS = CONFIG["LANGUAGE"]["fonts"].split(", ")
 CUR_LANG = CONFIG["DEFAULT"]["language"]
