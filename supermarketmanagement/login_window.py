@@ -15,7 +15,6 @@ from main import *
 class LoginWindow:
     def __init__(self, master):
         self.master = master
-        FONT = get_font()
 
         label_welcome = tk.Label(self.master, text=t("Login"), font=(FONT, 16))
         label_username = tk.Label(self.master, text=t("Username: "), font=(FONT, 10))

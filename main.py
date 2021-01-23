@@ -46,10 +46,6 @@ def t(msgid: str) -> str:
         return msgid
 
 
-def get_font():
-    return FONT
-
-
 TRANSLATION = init_language()
 
 db_name = CONFIG["DATABASE"]["user"]

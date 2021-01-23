@@ -18,7 +18,6 @@ DEFAULT = CONFIG["DEFAULT"]["default password"]
 class Registration(SetMenu):
     def __init__(self, master, username):
         super().__init__(master, username, "Registration")
-        FONT = get_font()
         self.master = master
 
         welcome_label = tk.Label(self.master, text=t("Registration"), font=(FONT, 20))

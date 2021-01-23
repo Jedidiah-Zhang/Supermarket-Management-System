@@ -17,7 +17,6 @@ class StockManagement(SetMenu, TreeView):
     def __init__(self, master, username):
         super().__init__(master, username, "Inventory")
         self.master = master
-        FONT = self._get_font()
 
         self.popup = tk.Menu(self.master, tearoff=0)
         self.popup.add_command(label=t("Alter"), command=self.__alter_row, state="disabled")
@@ -149,7 +148,6 @@ class Alter(tk.Toplevel):
         self.geometry("620x300")
         self.resizable(False, False)
         self.values = values
-        FONT = get_font()
 
         desc_label = tk.Label(self, text=t("Product Description: "), font=(FONT, 16))
         stock_label = tk.Label(self, text=t("Stock: "), font=(FONT, 16))
@@ -243,7 +241,6 @@ class Analysis(tk.Toplevel):
         self.title(t("Analysis"))
         self.geometry("650x500")
         self.resizable(False, False)
-        FONT = get_font()
         locale = {"Chinese": "zh_CN", "English": "en_GB"}
 
         from_label = tk.Label(self, text=t("From: "), font=(FONT, 16))

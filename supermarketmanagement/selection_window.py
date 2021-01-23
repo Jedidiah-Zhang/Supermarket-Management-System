@@ -16,7 +16,6 @@ class Admin:
     def __init__(self, master, username):
         self.master = master
         self.username = username
-        FONT = get_font()
 
         reg_button = tk.Button(self.master, width=15, text=t("Registration"), font=(FONT, 20),
                                command=self.__open_reg)
@@ -39,7 +38,6 @@ class Employee:
     def __init__(self, master, username):
         self.master = master
         self.username = username
-        FONT = get_font()
 
         purchase_button = tk.Button(self.master, width=15, text=t("Purchase"), font=(FONT, 20),
                                     command=self.__open_input)
