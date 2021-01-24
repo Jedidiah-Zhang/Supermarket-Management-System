@@ -34,7 +34,7 @@ class SalespersonBase(SetMenu):
         self.ENTRY = Entry(frame_entry, self.GOOD)
 
         frame_list.pack(side="right", fill="both", expand=True)
-        frame_top.pack(expand=True, fill="both")
+        frame_top.pack(fill="both", expand=True)
         frame_info.pack(side="right", fill="both", expand=True)
         frame_sale.pack(side="bottom", fill="both", expand=True)
         frame_entry.pack(side="bottom", fill="both", expand=True)
