@@ -11,7 +11,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import hashlib
-from os import startfile, system, environ
+from os import system, environ
 import configparser
 import pymysql
 import webbrowser
@@ -135,7 +135,7 @@ class SetMenu:
 
     @staticmethod
     def _open_file():
-        startfile("README.txt")
+        webbrowser.open_new_tab("https://github.com/Jedidiah-Zhang/Supermarket-Management-System/blob/master/README.md")
 
     @staticmethod
     def _open_url():
