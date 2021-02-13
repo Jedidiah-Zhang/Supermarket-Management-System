@@ -1,4 +1,4 @@
-# README
+# Computer Science Internal Assessment
 _This is a management system for supermarket._
 
 ## Setup MySQL Environment
