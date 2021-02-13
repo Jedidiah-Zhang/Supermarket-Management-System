@@ -4,3 +4,4 @@ build
 dist
 supermarketmanagement/__pycache__
 main.spec
+docs/test.xlsx
