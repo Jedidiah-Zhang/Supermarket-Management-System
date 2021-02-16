@@ -66,7 +66,7 @@ except pymysql.err.OperationalError:
     path = environ["path"].split(';')
     if CONFIG["DATABASE"]["mysql path"] not in path:
         environ["path"] = environ["path"] + ';' + CONFIG["DATABASE"]["mysql path"]
-    system("mysql -u" + db_name + " -p" + db_pass + " < .\\sql.sql 2>/dev/null")
+    system("mysql -u" + db_name + " -p" + db_pass + " < .\\sql.sql")
 
 
 class SetMenu:
