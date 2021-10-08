@@ -84,8 +84,8 @@ class SetMenu:
         self.menubar.add_cascade(label=t("Action"), menu=self.action_menu)
         lang_menu = tk.Menu(self.action_menu, tearoff=0)
         self.action_menu.add_cascade(label=t("Language"), menu=lang_menu)
-        for each in LANGUAGES:
-            lang_menu.add_command(label=each, command=lambda arg=each: self._set_lang(arg, window))
+        for i in LANGUAGES:
+            lang_menu.add_command(label=i, command=lambda arg=i: self._set_lang(arg, window))
         self.action_menu.add_command(label=t("Back"), command=self._back)
 
         self.account_menu = tk.Menu(self.menubar, tearoff=0)
@@ -254,12 +254,12 @@ class TreeView:
         pass
 
     def sort_column(self, tv, col, reverse):
-        L = [(tv.set(k, col), k) for k in tv.get_children('')]
+        lst = [(tv.set(k, col), k) for k in tv.get_children('')]
         try:
-            L.sort(key=lambda x: int(x[0]), reverse=reverse)
+            lst.sort(key=lambda x: int(x[0]), reverse=reverse)
         except ValueError:
-            L.sort(reverse=reverse)
-        for index, (val, k) in enumerate(L):
+            lst.sort(reverse=reverse)
+        for index, (val, k) in enumerate(lst):
             tv.move(k, '', index)
         tv.heading(col, command=lambda: self.sort_column(tv, col, not reverse))
 
